@@ -1,0 +1,11 @@
+SIGACOR 
+Usuario: katherinne-silva
+Contraseña: KathSilv2020++
+Diseño: https://xd.adobe.com/view/a54559d0-af4a-4711-8912-e90d7b11f16d-f016/
+Diagrama: https://dbdiagram.io/d/60479d46fcdcb6230b235111
+Git: https://github.com/eguarnizo77/Sigacor
+
+
+Comdepndncs
+
+COMDEPNDNC

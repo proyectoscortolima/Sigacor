@@ -1,0 +1,179 @@
+CREATE TABLE [profiles] (
+  [id] int PRIMARY KEY IDENTITY(1, 1),
+  [user_id] nvarchar(255),
+  [rol_id] nvarchar(255),
+  [address] nvarchar(255),
+  [movil] nvarchar(50),
+  [state] nvarchar(255)
+)
+GO
+
+insert into profiles(user_id, rol_id, address, movil, state) values ('katherinne-silva','ADM', 'katherinne.silva@cortolima.gov.co', '3107712363',	'A');
+insert into profiles(user_id, rol_id, address, movil, state) values ('katherinne-silva1','ADM', 'katherinne.silva@cortolima.gov.co', '3107712363',	'A');
+
+CREATE TABLE [menu] (
+  [name] nvarchar(255),
+  [route] nvarchar(255),
+  [icon] nvarchar(255),
+  [orden] int,
+  [state] nvarchar(255)
+)
+GO
+
+insert into menu(name, route,	icon, orden, state) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A')
+insert into menu (name, route, icon, orden, state) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A');
+
+CREATE TABLE [submenu] (
+  [menu] nvarchar(255),
+  [name] nvarchar(255),
+  [route] nvarchar(255),
+  [orden] int,
+  [state] nvarchar(255)
+)
+GO
+
+CREATE TABLE [estsubmenu] (
+  [name] nvarchar(255),
+  [submenu] nvarchar(255),
+  [rol] nvarchar(255),
+  [state] nvarchar(255)
+)
+GO
+
+CREATE TABLE [roles] (
+  [name] nvarchar(255),
+  [description] nvarchar(255),
+  [state] nvarchar(255)
+)
+GO
+
+insert into roles(name, description,	state) values ('ADM',	'ADMINISTRADOR',	'A');
+
+
+CREATE TABLE [states] (
+  [name] nvarchar(255),
+  [description] nvarchar(255)
+)
+GO
+
+insert into states(name, description) values ('A', 'Activo');
+insert into states(name, description) values ('I', 'Inactivo');
+
+CREATE TABLE pac (
+  id int PRIMARY KEY IDENTITY(1, 1),
+  name nvarchar(255),
+  slogan nvarchar(255),
+  initial_year int, 
+  final_year int, 
+  number_years int, 
+  state nvarchar(255)
+)
+
+CREATE TABLE levels (
+  id int PRIMARY KEY IDENTITY(1, 1),
+  name nvarchar(255),
+  pac_id int,
+  hierarchy int, 
+  weigth decimal, 
+  state nvarchar(255)
+)
+
+CREATE TABLE contents (
+  id int PRIMARY KEY IDENTITY(1, 1),
+  pac_id int,
+  level_id int,
+  code nvarchar(255)
+  name_level nvarchar(255), 
+  sublevel nvarchar(255)
+  name nvarchar(255),
+  weigth decimal, 
+  state nvarchar(255)
+)
+
+create table goal_type (
+	name nvarchar(255),
+	description nvarchar(255),
+	state nvarchar(255)
+);
+
+
+insert into goal_type(name, description, state) values ('M', 'Mantenimiento', 'A' );
+
+  insert into goal_type(name, description, state) values ('R', 'Reducción', 'A' );
+
+  insert into goal_type(name, description, state) values ('I', 'Incremento', 'A' );
+
+create table goals (
+	id int PRIMARY KEY IDENTITY(1, 1),
+	pac_id int,
+	name nvarchar(255),
+	type_goal nvarchar(255),
+	subactivity nvarchar(255),		
+	line_base int,
+	value_one_year int,
+	value_two_year int,
+	value_three_year int,
+        value_four_year int,
+        responsable_id nvarchar(255),
+	feeder_id nvarchar(255),
+	state nvarchar(255)
+);
+
+
+create table curriculum (
+	id int PRIMARY KEY IDENTITY(1, 1),
+	goal_id int,
+	initials text,
+	description text,
+	definition text, 
+	method text,
+	formulas text,
+	variables text,
+	observations text,
+	geographic text,
+	periodicity text,
+	state nvarchar(255)
+);
+
+
+create table periodicity(
+
+	name nvarchar(255),
+	description nvarchar(255),
+	state nvarchar(255)
+);
+
+insert into periodicity(name, description, state) values ('D', 'Diario', 'A');
+insert into periodicity(name, description, state) values ('M',  'Mensual', 'A');
+insert into periodicity(name, description, state) values ('S', 'Semanal ', 'A');
+
+
+create table report (
+	id int PRIMARY KEY IDENTITY(1, 1),
+	goal_id int,
+	year_current int,
+	value_progress decimal,
+	activities_developed text,
+	date_reg date,
+	array_archivos text,
+	array_imagenes text,
+	array_link text,
+	state nvarchar(255)
+);
+
+ alter table goals add value_progress decimal default 0;
+update goals set value_progress = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
