@@ -2014,10 +2014,12 @@
     <Content Include="Parametrizacion\NuevoRegistro.aspx" />
     <Content Include="Parametrizacion\Parametrizacion.aspx" />
     <Content Include="Parametrizacion\Seguimiento.aspx" />
+    <Content Include="Reportes\Pac.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\clParametrizacion.vb" />
+    <Compile Include="App_Code\clReportPac.vb" />
     <Compile Include="App_Code\Conexion.vb" />
     <Compile Include="App_Code\Data.vb" />
     <Compile Include="App_Code\clLogin.vb" />
@@ -2097,6 +2099,13 @@
     <Compile Include="Principal.Master.vb">
       <DependentUpon>Principal.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Pac.aspx.designer.vb">
+      <DependentUpon>Pac.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Pac.aspx.vb">
+      <DependentUpon>Pac.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

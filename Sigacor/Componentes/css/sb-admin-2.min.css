@@ -12653,3 +12653,59 @@ body.sidebar-toggled footer.sticky-footer {
 .MnuActive i {
     color: white !important;
 }
+
+.header-report {
+    position: absolute;
+    top: 30px;
+    left: 100px;
+    right: 100px;
+    z-index: 100;
+    height: 100px;
+    -moz-transition: all .5s ease 0s;
+    -o-transition: all .5s ease 0s;
+    transition: all .5s ease 0s;
+    box-shadow: 6px 8px 15px -7px #5c588b;
+    border-radius: 30px;
+    background: #ffffff6e;
+}
+
+.card-report {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border-radius: 30px;
+    box-shadow: 6px 8px 15px -7px #5c588b;
+    background: #ffffff6e;
+}
+
+.icon-report {
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    box-shadow: 0px 7px 8px -3px #009688;
+}
+
+
+.card-header-report {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    box-shadow: 6px 8px 15px -7px #5c588b;
+    border-radius: 30px !important;
+}
+
+.card-report-2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #ffffffa6;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-radius: 30px;
+}

@@ -28,7 +28,7 @@
                         </a>
                     </div>
                     <div class="form-group text-center">
-                        <a href="#">
+                        <a href="Reportes/Pac.aspx">
                             <img src="Componentes/img/Artboard7.png" height="90" width="80" /><br />
                             <label class="tlPanel">PAC</label>
                         </a>

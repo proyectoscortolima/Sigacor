@@ -52,6 +52,14 @@ Public Class clParametrizacion
         Return Data.OpenData(QRY)
     End Function
 
+    Public Function selectPacTodos() As DataTable
+
+        QRY = "select id, name, slogan, initial_year, final_year, number_years, state from pac where state <> 'I' 
+               order by id desc"
+
+        Return Data.OpenData(QRY)
+    End Function
+
     Public Function selectPac(ByVal id As String) As DataRow
 
         QRY = "select id, name, slogan, initial_year, final_year, number_years, state from pac where id = " & id
