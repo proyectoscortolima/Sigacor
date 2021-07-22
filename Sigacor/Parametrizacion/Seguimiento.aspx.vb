@@ -17,6 +17,7 @@ Public Class Seguimiento
                 pnlNiv2.Visible = False
                 pnlNiv3.Visible = False
                 pnlNiv4.Visible = False
+                pnlNiv5.Visible = False
                 cargarLineas()
 
                 Session("dataImagenes") = Nothing
@@ -63,7 +64,7 @@ Public Class Seguimiento
                     cmbNiv2.DataValueField = "code"
                     cmbNiv2.DataSource = DataT
                     cmbNiv2.DataBind()
-                    cmbNiv2.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                    cmbNiv2.Items.Insert(0, New ListItem("Todos", ""))
                     lblNiv2.Text = DataT(0)(2)
                     pnlNiv2.Visible = True
                 Else
@@ -92,7 +93,7 @@ Public Class Seguimiento
                     cmbNiv3.DataValueField = "code"
                     cmbNiv3.DataSource = DataT
                     cmbNiv3.DataBind()
-                    cmbNiv3.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                    cmbNiv3.Items.Insert(0, New ListItem("Todos", ""))
                     lblNiv3.Text = DataT(0)(2)
                     pnlNiv3.Visible = True
                 Else
@@ -121,7 +122,7 @@ Public Class Seguimiento
                     cmbNiv4.DataValueField = "code"
                     cmbNiv4.DataSource = DataT
                     cmbNiv4.DataBind()
-                    cmbNiv4.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                    cmbNiv4.Items.Insert(0, New ListItem("Todos", ""))
                     lblNiv4.Text = DataT(0)(2)
                     pnlNiv4.Visible = True
                 Else
@@ -136,6 +137,34 @@ Public Class Seguimiento
         End Try
     End Sub
 
+    Private Sub cmbNiv4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv4.SelectedIndexChanged
+        Try
+            DataT = Nothing
+            If cmbNiv4.SelectedIndex = 0 Then
+                cmbNiv5.Items.Clear()
+                pnlNiv5.Visible = False
+            Else
+                DataT = parametrizacion.selectNiveles(pac.Text.Trim, cmbNiv4.SelectedValue)
+                If DataT.Rows.Count > 0 Then
+                    cmbNiv5.Items.Clear()
+                    cmbNiv5.DataTextField = "name"
+                    cmbNiv5.DataValueField = "code"
+                    cmbNiv5.DataSource = DataT
+                    cmbNiv5.DataBind()
+                    cmbNiv5.Items.Insert(0, New ListItem("Todos", ""))
+                    lblNiv5.Text = DataT(0)(2)
+                    pnlNiv5.Visible = True
+                Else
+                    cmbNiv5.Items.Clear()
+                    pnlNiv5.Visible = False
+                    alerta("Advertencia", "No se han encontrado sub actividades", "info")
+                End If
+            End If
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
 #End Region
 
 #Region "TextChanged"
@@ -354,12 +383,16 @@ Public Class Seguimiento
     Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
         Try
             DataT = Nothing
-            Dim code As String
+            Dim code, level_id As String
             If cmbLineas.SelectedIndex > 0 Then
                 If cmbNiv2.SelectedIndex > 0 Then
                     If cmbNiv3.SelectedIndex > 0 Then
                         If cmbNiv4.SelectedIndex > 0 Then
-                            code = cmbNiv4.SelectedValue
+                            If cmbNiv5.SelectedIndex > 0 Then
+                                code = cmbNiv5.SelectedValue
+                            Else
+                                code = cmbNiv4.SelectedValue
+                            End If
                         Else
                             code = cmbNiv3.SelectedValue
                         End If
@@ -671,7 +704,13 @@ Public Class Seguimiento
                     cmbLineas.DataValueField = "code"
                     cmbLineas.DataSource = DataT
                     cmbLineas.DataBind()
-                    cmbLineas.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                    cmbLineas.Items.Insert(0, New ListItem("Todos", ""))
+                    If DataT(0)(3) = "1" Then
+                        lblLineas.Text = DataT(0)(4)
+                    Else
+                        lblLineas.Text = "No hay lineas"
+                    End If
+
                 End If
             End If
 

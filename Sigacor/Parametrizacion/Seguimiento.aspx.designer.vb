@@ -185,6 +185,33 @@ Partial Public Class Seguimiento
     Protected WithEvents cmbNiv4 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control pnlNiv5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlNiv5 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control lblNiv5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblNiv5 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control cmbNiv5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cmbNiv5 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Control btnConsultar.
     '''</summary>
     '''<remarks>

@@ -9,6 +9,7 @@
         Try
             If Not IsPostBack Then
                 lblError.Visible = False
+                actualizarStatePac()
                 cargarPac()
             End If
 
@@ -148,6 +149,18 @@
                 tblPac.DataBind()
             End If
 
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
+
+    Public Sub actualizarStatePac()
+        Try
+            Fila = parametrizacion.selectPacYear(Now.Year)
+            If Fila IsNot Nothing Then
+                parametrizacion.updateStatePac(Fila("id"))
+            End If
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True

@@ -208,7 +208,7 @@
                         </div>
                         <div class="col-3 mt-2">
                             <div class="form-group">
-                                <asp:Label ID="lblLineas" runat="server" Text="Lineas"></asp:Label>
+                                <asp:Label ID="lblLineas" runat="server"></asp:Label>
                                 <asp:DropDownList ID="cmbLineas" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                             </div>
                         </div>
@@ -227,7 +227,13 @@
                         <div class="col-3 mt-2">
                             <div class="form-group" id="pnlNiv4" runat="server">
                                 <asp:Label ID="lblNiv4" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv4" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                                <asp:DropDownList ID="cmbNiv4" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-3 mt-2">
+                            <div class="form-group" id="pnlNiv5" runat="server">
+                                <asp:Label ID="lblNiv5" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off" ></asp:DropDownList>
                             </div>
                         </div>
 
@@ -423,7 +429,13 @@
                         <div class="col-3 mt-2">
                             <div class="form-group" id="pnlNiv4Meta" runat="server">
                                 <asp:Label ID="lblNiv4Meta" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv4Meta" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                                <asp:DropDownList ID="cmbNiv4Meta" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-3 mt-2">
+                            <div class="form-group" id="pnlNiv5Meta" runat="server">
+                                <asp:Label ID="lblNiv5Meta" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNiv5Meta" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
 

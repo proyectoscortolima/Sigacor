@@ -158,6 +158,33 @@ Partial Public Class Pac
     Protected WithEvents cmbNiv4 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control pnlNiv5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlNiv5 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control lblNiv5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblNiv5 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control cmbNiv5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cmbNiv5 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Control btnConsultar.
     '''</summary>
     '''<remarks>
@@ -167,22 +194,22 @@ Partial Public Class Pac
     Protected WithEvents btnConsultar As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''Control txtNombreMeta.
+    '''Control txtPalabraClave.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtNombreMeta As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtPalabraClave As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control LinkButton1.
+    '''Control btnConsultarPalabraClave.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents LinkButton1 As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnConsultarPalabraClave As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''Control pnlResultados.

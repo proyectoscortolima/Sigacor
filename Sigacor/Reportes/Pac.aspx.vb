@@ -13,6 +13,7 @@
                 pnlNiv2.Visible = False
                 pnlNiv3.Visible = False
                 pnlNiv4.Visible = False
+                pnlNiv5.Visible = False
                 DataT = Nothing
                 DataT = parametrizacion.selectPacTodos()
                 If DataT.Rows.Count > 0 Then
@@ -95,7 +96,7 @@
                                                                        </a>
                                                                    </div>
                                                                    <div class=""col-12"">
-                                                                       <div class=""collapse"" id=""rpt-" & Fila("code") & """>
+                                                                       <div class=""collapse show"" id=""rpt-" & Fila("code") & """>
                                                                            <div class=""card-report card-body mb-3"" style=""margin-top: 0.4rem;"">
                                                                                <div class=""card-body"">
                                                                                    <div class=""row"">
@@ -270,10 +271,16 @@
                         level_id = "3"
                         If cmbNiv4.SelectedIndex > 0 Then
                             level_id = "4"
-                            code = cmbNiv4.SelectedValue
+                            If cmbNiv5.SelectedIndex > 0 Then
+                                level_id = "5"
+                                code = cmbNiv5.SelectedValue
+                            Else
+                                level_id = "5"
+                                code = cmbNiv4.SelectedValue
+                            End If
                         Else
-                            code = cmbNiv3.SelectedValue
                             level_id = "4"
+                            code = cmbNiv3.SelectedValue
                         End If
                     Else
                         level_id = "3"
@@ -307,7 +314,7 @@
                                                                        </a>
                                                                    </div>
                                                                    <div class=""col-12"">
-                                                                       <div class=""collapse"" id=""rpt-" & row("code") & """>
+                                                                       <div class=""collapse show"" id=""rpt-" & row("code") & """>
                                                                            <div class=""card-report card-body mb-3"" style=""margin-top: 0.4rem;"">
                                                                                <div class=""card-body"">
                                                                                    <div class=""row"">
@@ -346,7 +353,7 @@
 
                             End If
 
-                                i = 0
+                            i = 0
                             jerarquia = String.Empty
                             subLevel = String.Empty
 
@@ -439,6 +446,213 @@
                                                                    </div>
                                                                        </div>"))
             'pnlResultados.Controls.Add(New LiteralControl("<li class=""nav-item"">"))
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
+    Private Sub btnConsultarPalabraClave_Click(sender As Object, e As EventArgs) Handles btnConsultarPalabraClave.Click
+        Try
+            Dim dataT2 As DataTable
+            Dim arrayCode, jerarquia, subLevel, script As String
+            Dim i As Integer = 0
+            Dim i2 As Integer = 0
+            Dim array() As Char
+
+            If cmbPac.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione el periodo", "info", "cmbPac")
+                Exit Sub
+            End If
+            If txtPalabraClave.Text = String.Empty Then
+                alerta("Advertencia", "Ingrese una palabra clave", "info", "txtPalabraClave")
+                Exit Sub
+            End If
+
+            pnlResultados.Controls.Clear()
+            pnlResultados.Controls.Add(New LiteralControl("<div Class=""col-xs-12 col-md-12"">
+                                                               <div class=""card-report"">
+                                                                   <div class=""card-body"">
+                                                                       <div class=""row"">
+                                                                           <div class=""col-xs-6 col-md-2"">
+                                                                               <h3>Resultados</h3>
+                                                                           </div>
+                                                                           <div class=""col-xs-6 col-md-10"">
+                                                                               <hr style=""border-top: 3px solid rgba(0, 0, 0, .1);"" />
+                                                                           </div>                                                                        
+                                                          "))
+
+            Dim codeLinea, nombreLinea, arrayCodeLinea, lineaGlobal As String
+            Dim contador As Integer = 0
+            DataT = Nothing
+            DataT = reportPac.selectPalabraClave(txtPalabraClave.Text.Trim, cmbPac.SelectedValue)
+            If DataT.Rows.Count > 0 Then
+                For Each row As DataRow In DataT.Rows
+
+                    codeLinea = CStr(row("code")).Replace(".", "")
+                    arrayCodeLinea = codeLinea.ToCharArray
+                    Fila = reportPac.selectLineasFila(arrayCodeLinea(0), cmbPac.SelectedValue)
+
+                    If Fila IsNot Nothing Then
+                        If contador = 0 Then
+                            lineaGlobal = Fila("code")
+                        End If
+                        codeLinea = Fila("code")
+                        nombreLinea = Fila("name")
+                    End If
+
+                    If lineaGlobal <> codeLinea Or contador = 0 Then
+                        lineaGlobal = codeLinea
+                        pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
+                                                                       <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & codeLinea & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
+                                                                           <div class=""card-header-report"" id=""headingOne"">
+                                                                               <div class=""row"">
+                                                                                   <div class=""col-12"">
+                                                                                       <h5 class=""mb-0"">
+                                                                                           <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
+                                                                                               " & codeLinea & " - " & nombreLinea & " <i class=""fa fa-arrow-down ml-3""></i>
+                                                                                           </button>
+                                                                                       </h5>
+                                                                                   </div>
+                                                                               </div>
+                                                                           </div>
+                                                                       </a>
+                                                                   </div>
+                                                                   <div class=""col-12"">
+                                                                       <div class=""collapse show"" id=""rpt-" & codeLinea & """>
+                                                                           <div class=""card-report card-body mb-3"" style=""margin-top: 0.4rem;"">
+                                                                               <div class=""card-body"">
+                                                                                   <div class=""row"">
+
+                                                                   "))
+
+
+
+                        Dim code As String
+                        dataT2 = reportPac.selectPalabraClave(cmbPac.SelectedValue, codeLinea, txtPalabraClave.Text.Trim)
+                        If dataT2.Rows.Count > 0 Then
+                            For Each row2 As DataRow In dataT2.Rows
+                                arrayCode = CStr(row2("code")).Replace(".", "")
+                                array = arrayCode.ToCharArray
+
+                                script = String.Empty
+                                If arrayCode <> String.Empty Then
+                                    For Each valor In array
+                                        If i = 0 Then
+                                            jerarquia = valor
+                                            subLevel = String.Empty
+                                        Else
+                                            jerarquia &= "." & valor
+                                            subLevel = jerarquia
+                                            subLevel = Mid(subLevel, 1, Len(subLevel) - 2)
+                                        End If
+                                        Fila = Nothing
+                                        Fila = reportPac.selectContentsReport(cmbPac.SelectedValue, jerarquia, subLevel)
+                                        If Fila IsNot Nothing Then
+                                            script &= "<b>" & Fila("name_level") & ": </b>" & Fila("name") & " <br/>"
+                                        End If
+                                        i += 1
+                                    Next
+                                Else
+                                    If row("code") = row2("code") Then
+                                        script &= "<b>" & row2("name_level") & ": </b>" & row2("name") & " <br/>"
+                                    End If
+
+                                End If
+
+                                i = 0
+                                jerarquia = String.Empty
+                                subLevel = String.Empty
+
+                                If arrayCode <> String.Empty Then
+                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                                                               <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
+                                                                                   <div class=""card-header-report"" id=""headingOne"">
+                                                                                       <div class=""row"">
+                                                                                           <div class=""col-12 text-center"">
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <h5 class=""mb-0"">
+                                                                                                   <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
+                                                                                                       <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
+                                                                                                   </button>
+                                                                                               </h5>
+                                                                                           </div>
+                                                                                           <div class=""col-12"">
+                                                                                               <div class=""collapse"" id=""rptSub-" & i2 & """>
+                                                                                                   <div class=""card-report mb-3"" style=""margin-top: 0.4rem;"">
+                                                                                                       <div class=""card-body"">
+                                                                                                           <div class=""row""> 
+                                                                                                                <div class=""col-12"">
+                                                                                                                    " & script & "
+                                                                                                                    <br/>
+                                                                                                                    <label>Ver más</label>
+                                                                                                                </div> 
+                                                                                                           </div>
+                                                                                                       </div>
+                                                                                                   </div>                                                                        
+                                                                                               </div>
+                                                                                           </div><br/>
+                                                                                       </div>
+                                                                                   </div>
+                                                                               </a>                                                                                                                                                           
+                                                                           </div>
+                                                                           "))
+                                Else
+                                    If row("code") = row2("code") Then
+                                        pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                                                               <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
+                                                                                   <div class=""card-header-report"" id=""headingOne"">
+                                                                                       <div class=""row"">
+                                                                                           <div class=""col-12 text-center"">
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <h5 class=""mb-0"">
+                                                                                                   <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
+                                                                                                       <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
+                                                                                                   </button>
+                                                                                               </h5>
+                                                                                           </div>
+                                                                                           <div class=""col-12"">
+                                                                                               <div class=""collapse"" id=""rptSub-" & i2 & """>
+                                                                                                   <div class=""card-report mb-3"" style=""margin-top: 0.4rem;"">
+                                                                                                       <div class=""card-body"">
+                                                                                                           <div class=""row""> 
+                                                                                                               <div class=""col-12"">
+                                                                                                                    " & script & "
+                                                                                                                    <br/>
+                                                                                                                    <label>Ver más</label>
+                                                                                                               </div>                                                                                                                                                                                                                        
+                                                                                                           </div>
+                                                                                                       </div>
+                                                                                                   </div>                                                                        
+                                                                                               </div>
+                                                                                           </div><br/>
+                                                                                       </div>
+                                                                                   </div>
+                                                                               </a>                                                                                                                                                           
+                                                                           </div>
+                                                                           "))
+                                    End If
+                                End If
+
+
+                                i2 += 1
+                            Next
+                        Else
+                            pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
+                        End If
+
+                        pnlResultados.Controls.Add(New LiteralControl("</div>
+                                                                       </div>
+                                                                           </div>                                                                        
+                                                                               </div>
+                                                                                   </div><br/>"))
+                    End If
+                    contador += 1
+                Next
+            End If
+            pnlResultados.Controls.Add(New LiteralControl("</div>
+                                                               </div>
+                                                                   </div>
+                                                                       </div>"))
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True
@@ -548,6 +762,35 @@
             lblError.Visible = True
         End Try
     End Sub
+
+    Private Sub cmbNiv4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv4.SelectedIndexChanged
+        Try
+            DataT = Nothing
+            If cmbNiv4.SelectedIndex = 0 Then
+                cmbNiv5.Items.Clear()
+                pnlNiv5.Visible = False
+            Else
+                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv4.SelectedValue)
+                If DataT.Rows.Count > 0 Then
+                    cmbNiv5.Items.Clear()
+                    cmbNiv5.DataTextField = "name"
+                    cmbNiv5.DataValueField = "code"
+                    cmbNiv5.DataSource = DataT
+                    cmbNiv5.DataBind()
+                    cmbNiv5.Items.Insert(0, New ListItem("Todos", ""))
+                    lblNiv5.Text = DataT(0)(2)
+                    pnlNiv5.Visible = True
+                Else
+                    cmbNiv5.Items.Clear()
+                    pnlNiv5.Visible = False
+                    alerta("Advertencia", "No se han encontrado sub actividades", "info")
+                End If
+            End If
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
 #End Region
 
 #Region "Metodos - Funciones"
@@ -565,7 +808,12 @@
                 cmbLineas.DataValueField = "code"
                 cmbLineas.DataSource = DataT
                 cmbLineas.DataBind()
-                cmbLineas.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                cmbLineas.Items.Insert(0, New ListItem("Todos", ""))
+                If DataT(0)(3) = "1" Then
+                    lblLineas.Text = DataT(0)(4)
+                Else
+                    lblLineas.Text = "No hay lineas"
+                End If
             Else
                 cmbLineas.Items.Clear()
             End If
@@ -609,10 +857,6 @@
         Script &= " </script>"
         ScriptManager.RegisterStartupScript(Me, GetType(Page), "swal", Script, False)
     End Sub
-
-
-
-
 
 #End Region
 

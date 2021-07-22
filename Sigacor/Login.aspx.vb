@@ -5,7 +5,15 @@ Public Class Login
 
     Dim login As New clLogin
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        txtUsuario.Focus()
+
+        If Not IsPostBack Then
+            txtUsuario.Focus()
+            Session("CodUsuario") = Nothing
+            Session("NomUsuario") = Nothing
+            Session("Rol") = Nothing
+            Session("NomRol") = Nothing
+        End If
+
     End Sub
 
 #Region "Click"

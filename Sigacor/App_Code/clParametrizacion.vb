@@ -74,6 +74,20 @@ Public Class clParametrizacion
         Return Data.OpenRow(QRY)
     End Function
 
+    Public Function selectPacYear(ByVal final_year As String) As DataRow
+
+        QRY = "select id from pac where state = 'A' and final_year = " & final_year
+
+        Return Data.OpenRow(QRY)
+    End Function
+
+    Public Function updateStatePac(ByVal id As String) As Integer
+
+        QRY = "update pac set state = 'C' where id = " & id
+
+        Return Data.Execute(QRY)
+    End Function
+
 #End Region
 
 #Region "Levels"
@@ -125,7 +139,7 @@ Public Class clParametrizacion
 
     Public Function selectNiveles(ByVal pac_id As String, Optional ByVal sublevel As String = "") As DataTable
 
-        QRY = "select c.code, c.name, l.name from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where 
+        QRY = "select c.code, c.name, l.name,  l.hierarchy, l.name from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where 
                c.state = 'A' and  c.pac_id = " & pac_id & " and c.sublevel = '" & sublevel & "'"
 
         Return Data.OpenData(QRY)
@@ -165,9 +179,10 @@ Public Class clParametrizacion
 
         Return Data.OpenData(QRY)
     End Function
-    Public Function selectContentsFiltro(ByVal pac_id As String, ByVal code As String) As DataTable
+    Public Function selectContentsFiltro(ByVal pac_id As String, ByVal code As String, ByVal level_id As String) As DataTable
 
-        QRY = "select * from contents where pac_id = " & pac_id & " and state = 'A' and code like '" & code & "%' order by code"
+        QRY = "select * from contents where pac_id = " & pac_id & " and state = 'A' and code like '" & code & "%' and 
+               level_id = " & level_id & " order by code"
 
         Return Data.OpenData(QRY)
     End Function
@@ -277,6 +292,13 @@ Public Class clParametrizacion
         QRY = "update goals set value_progress = (value_progress + " & value_progress & ") where id = " & id
 
         Return Data.OpenRow(QRY)
+    End Function
+
+    Public Function selectComdepndnc() As DataTable
+
+        QRY = "select codg_depndnc, nombr_depndnc from COMDEPNDNC order by nombr_depndnc"
+
+        Return Data.OpenData(QRY)
     End Function
 
 #End Region
