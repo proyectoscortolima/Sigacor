@@ -10,7 +10,7 @@
         Dim Menu As New Sigacor.clLogin
         Dim DataT1 As New DataTable()
         Dim DataT2 As New DataTable()
-        DataT1 = Menu.selectMenu
+        DataT1 = Menu.selectMenu(Session("Rol"))
         If DataT1 IsNot Nothing Then
             For Each row As DataRow In DataT1.Rows
                 pnlMenu.Controls.Add(New LiteralControl("<li class=""nav-item"">"))

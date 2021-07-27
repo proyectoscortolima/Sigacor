@@ -27,9 +27,9 @@ Public Class clLogin
         Return Data.OpenData(QRY)
     End Function
 
-    Public Function selectMenu() As DataTable
+    Public Function selectMenu(ByVal rol As String) As DataTable
 
-        QRY = "select * from menu where state = 'A'"
+        QRY = "select * from menu where state = 'A' and rol = '" & rol & "'"
 
         Return Data.OpenData(QRY)
     End Function

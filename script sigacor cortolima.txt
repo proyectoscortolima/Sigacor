@@ -20,8 +20,13 @@ CREATE TABLE [menu] (
 )
 GO
 
-insert into menu(name, route,	icon, orden, state) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A')
-insert into menu (name, route, icon, orden, state) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A');
+alter table menu  add rol nvarchar(255);
+insert into menu(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A', 'ADM');
+insert into menu (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'ADM');
+insert into menu (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'ADM');
+insert into menu(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A', 'AUX')
+insert into menu (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'AUX');
+insert into menu (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'AUX');
 
 CREATE TABLE [submenu] (
   [menu] nvarchar(255),
@@ -48,7 +53,7 @@ CREATE TABLE [roles] (
 GO
 
 insert into roles(name, description,	state) values ('ADM',	'ADMINISTRADOR',	'A');
-
+insert into roles(name, description, state) values('AUX', 'AUXILIAR', 'A');
 
 CREATE TABLE [states] (
   [name] nvarchar(255),

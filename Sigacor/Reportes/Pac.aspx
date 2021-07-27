@@ -24,7 +24,7 @@
         <div class="container-fluid">
             <nav class="navbar header-report">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="../Index.aspx">
                         <img src="../Componentes/img/sigaporverde.png" alt="" width="250" height="80" class="d-inline-block align-text-top" />
                     </a>
                 </div>
@@ -210,11 +210,11 @@
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
                                     <img src="../Componentes/img/nvl5.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">Se ha ejecutado del 75% al 94%</label>
+                                    <label class="mt-3">Se ha ejecutado del 75% al 99.9%</label>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
                                     <img src="../Componentes/img/nvl6.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">Se ha ejecutado mas del 95%</label>
+                                    <label class="mt-3">Se ha ejecutado mas del 100%</label>
                                 </div>
                             </div>
                         </div>

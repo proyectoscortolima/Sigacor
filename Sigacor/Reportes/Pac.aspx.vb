@@ -765,12 +765,13 @@
 
     Private Sub cmbNiv4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv4.SelectedIndexChanged
         Try
+            ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'", True)
             DataT = Nothing
             If cmbNiv4.SelectedIndex = 0 Then
                 cmbNiv5.Items.Clear()
                 pnlNiv5.Visible = False
             Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv4.SelectedValue)
+                DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue, cmbNiv4.SelectedValue)
                 If DataT.Rows.Count > 0 Then
                     cmbNiv5.Items.Clear()
                     cmbNiv5.DataTextField = "name"

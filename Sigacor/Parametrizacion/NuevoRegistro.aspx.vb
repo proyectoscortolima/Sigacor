@@ -30,6 +30,7 @@
             btnFiltroMeta.Visible = False
             lblLineas.Text = "No hay niveles"
             lblLineasMeta.Text = "No hay lineas"
+            Session("Actualizar") = "N"
 
             DataT = Nothing
             DataT = users.selectUsuario
@@ -743,12 +744,12 @@
                 DataT = Nothing
                 DataT = parametrizacion.selectPac
                 If DataT.Rows.Count > 0 Then
-                    alerta("Advertencia", "No se puede grabar el pac, existe pac activo.", "info", "")
+                    alerta("Advertencia", "No se puede grabar el pac, periodo ya existente.", "info", "")
                     Exit Sub
                 End If
             End If
 
-            Session("Actualizar") = ""
+            Session("Actualizar") = "N"
 
             If txtNomPac.Text = String.Empty Then
                 alerta("Advertencia", "Ingrese el nombre el PAC", "info", "contenedor2_txtNomPac")
