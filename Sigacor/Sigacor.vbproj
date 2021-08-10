@@ -2014,6 +2014,7 @@
     <Content Include="Parametrizacion\NuevoRegistro.aspx" />
     <Content Include="Parametrizacion\Parametrizacion.aspx" />
     <Content Include="Parametrizacion\Seguimiento.aspx" />
+    <Content Include="Reportes\DetallePac.aspx" />
     <Content Include="Reportes\Pac.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -2099,6 +2100,13 @@
     <Compile Include="Principal.Master.vb">
       <DependentUpon>Principal.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\DetallePac.aspx.designer.vb">
+      <DependentUpon>DetallePac.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\DetallePac.aspx.vb">
+      <DependentUpon>DetallePac.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Reportes\Pac.aspx.designer.vb">
       <DependentUpon>Pac.aspx</DependentUpon>

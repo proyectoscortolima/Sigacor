@@ -84,4 +84,11 @@ Public Class clReportPac
         Return Data.OpenData(QRY)
     End Function
 
+    Public Function selectGoals(ByVal pac_id As String) As DataTable
+
+        QRY = "select id, name, subactivity as sublevel from goals where pac_id = " & pac_id & " and state = 'A' "
+
+        Return Data.OpenData(QRY)
+    End Function
+
 End Class

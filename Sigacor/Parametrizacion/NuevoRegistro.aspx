@@ -161,6 +161,46 @@
                                 <asp:DropDownList ID="cmbNiveles" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                             </div>
                         </div>
+
+
+                        <div class="col-4 mt-2" id="pnlNvl1Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl1Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl1Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl2Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl2Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl2Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl3Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl3Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl3Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl4Reg" runat="server">
+                            <div class="form-group" >
+                                <asp:Label ID="lblNvl4Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl4Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl5Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl5Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl5Reg" class="form-control" runat="server" AutoComplete="Off" ></asp:DropDownList>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
                         <div class="col-4" id="pnlSubNivel" runat="server">
                             <div class="form-group">
                                 <asp:Label ID="lblSubNivel" runat="server" CssClass="labelAccionCua"></asp:Label>

@@ -27,6 +27,13 @@ Public Class clLogin
         Return Data.OpenData(QRY)
     End Function
 
+    Public Function selectEmpleados() As DataTable
+
+        QRY = "select cedl_empld, concat(nombr_empld, aplld_empld) nombre from RHMHOJVI "
+
+        Return Data.OpenData(QRY)
+    End Function
+
     Public Function selectMenu(ByVal rol As String) As DataTable
 
         QRY = "select * from menu where state = 'A' and rol = '" & rol & "'"

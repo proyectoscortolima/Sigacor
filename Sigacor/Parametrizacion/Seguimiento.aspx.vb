@@ -5,6 +5,7 @@ Public Class Seguimiento
 
     Dim parametrizacion As New clParametrizacion
     Dim fun As New Funciones
+    Dim users As New clLogin
 
 #Region "Load"
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -36,6 +37,17 @@ Public Class Seguimiento
                     cmbPeriodicidad.DataSource = DataT
                     cmbPeriodicidad.DataBind()
                     cmbPeriodicidad.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                End If
+
+                DataT = Nothing
+                DataT = users.selectEmpleados
+                If DataT.Rows.Count > 0 Then
+                    cmbQuienReporta.Items.Clear()
+                    cmbQuienReporta.DataTextField = "nombre"
+                    cmbQuienReporta.DataValueField = "cedl_empld"
+                    cmbQuienReporta.DataSource = DataT
+                    cmbQuienReporta.DataBind()
+                    cmbQuienReporta.Items.Insert(0, New ListItem("---Seleccione---", ""))
                 End If
 
                 lblYearActual.Text = "Año actual(" & Date.Now.Year & ")"
@@ -424,9 +436,9 @@ Public Class Seguimiento
 
     Private Sub btnVisualizarHojaVida_Click(sender As Object, e As EventArgs) Handles btnVisualizarHojaVida.Click
         Try
-            If Request.QueryString("idMeta") <> String.Empty Then
+            If meta.Text <> String.Empty Then
                 Fila = Nothing
-                Fila = parametrizacion.selectCurriculum(Request.QueryString("idMeta"))
+                Fila = parametrizacion.selectCurriculum(meta.Text)
                 If Fila IsNot Nothing Then
                     txtSiglaHojaVida.Text = Fila("initials")
                     txtDescripHojaVida.Text = Fila("description")
@@ -477,9 +489,14 @@ Public Class Seguimiento
                 alerta("Advertencia", "Ingrese el valor físico", "info", "contenedor2_txtValorFisico")
                 Exit Sub
             End If
+            If cmbQuienReporta.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione el usuario que realizo las actividades", "info", "contenedor2_cmbUserAct")
+                Exit Sub
+            End If
 
             idReport.Text = parametrizacion.insertReport(meta.Text.Trim, txtYearActual.Text.Trim, txtValorFisico.Text.Trim,
-                                                         txtActividades.Text.Trim, Date.Now.ToString("yyyy-MM-dd"), "A")
+                                                         txtActividades.Text.Trim, Date.Now.ToString("yyyy-MM-dd"), "A",
+                                                         Session("CodUsuario"), cmbQuienReporta.SelectedValue)
             parametrizacion.updateValue_progress(meta.Text.Trim, txtValorFisico.Text.Trim)
             alerta("Se ha grabado el seguimiento correctamente", "Ya puedes agregar las evidencias", "success")
             navEvidencias_Click(Nothing, Nothing)
@@ -704,7 +721,7 @@ Public Class Seguimiento
                     cmbLineas.DataValueField = "code"
                     cmbLineas.DataSource = DataT
                     cmbLineas.DataBind()
-                    cmbLineas.Items.Insert(0, New ListItem("Todos", ""))
+                    cmbLineas.Items.Insert(0, New ListItem("---Seleccione---", ""))
                     If DataT(0)(3) = "1" Then
                         lblLineas.Text = DataT(0)(4)
                     Else
@@ -755,6 +772,10 @@ Public Class Seguimiento
                         End If
                         year_initial += 1
                     Next
+                    lblPriYear.Text = Fila("initial_year")
+                    lblSegYear.Text = CInt(Fila("initial_year") + 1)
+                    lblTercYear.Text = CInt(Fila("initial_year") + 2)
+                    lblCuartYear.Text = Fila("final_year")
                     If index = 1 Then txtYearActual.Text = txtPriYear.Text
                     If index = 2 Then txtYearActual.Text = txtSegYear.Text
                     If index = 3 Then txtYearActual.Text = txtTercYear.Text

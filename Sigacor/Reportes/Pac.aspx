@@ -126,10 +126,9 @@
                                                     <div class="col-12 mt-2">
                                                         <div class="form-group" id="pnlNiv5" runat="server">
                                                             <asp:Label ID="lblNiv5" runat="server"></asp:Label>
-                                                            <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                                                            <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
-                                                    </div>
-
+                                                    </div>     
                                                     <div class="col-12 mt-2 text-center">
                                                         <asp:LinkButton ID="btnConsultar" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
                                                     </div>

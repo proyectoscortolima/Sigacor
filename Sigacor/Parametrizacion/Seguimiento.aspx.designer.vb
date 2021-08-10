@@ -266,6 +266,15 @@ Partial Public Class Seguimiento
     Protected WithEvents txtLineaBase As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control lblPriYear.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblPriYear As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control txtPriYear.
     '''</summary>
     '''<remarks>
@@ -273,6 +282,15 @@ Partial Public Class Seguimiento
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtPriYear As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblSegYear.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblSegYear As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control txtSegYear.
@@ -284,6 +302,15 @@ Partial Public Class Seguimiento
     Protected WithEvents txtSegYear As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control lblTercYear.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTercYear As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control txtTercYear.
     '''</summary>
     '''<remarks>
@@ -291,6 +318,15 @@ Partial Public Class Seguimiento
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtTercYear As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblCuartYear.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCuartYear As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control txtCuartYear.
@@ -354,6 +390,15 @@ Partial Public Class Seguimiento
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtValorFisico As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control cmbQuienReporta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cmbQuienReporta As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control btnVisualizarHojaVida.

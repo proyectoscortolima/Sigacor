@@ -24,7 +24,7 @@ alter table menu  add rol nvarchar(255);
 insert into menu(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A', 'ADM');
 insert into menu (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'ADM');
 insert into menu (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'ADM');
-insert into menu(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A', 'AUX')
+insert into menu(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'I', 'AUX')
 insert into menu (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'AUX');
 insert into menu (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'AUX');
 
@@ -165,6 +165,9 @@ create table report (
 	array_link text,
 	state nvarchar(255)
 );
+
+alter table report add user_reg nvarchar(255);
+alter table report add who_report nvarchar(255);
 
  alter table goals add value_progress decimal default 0;
 update goals set value_progress = 0;

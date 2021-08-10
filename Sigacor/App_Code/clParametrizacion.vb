@@ -179,9 +179,17 @@ Public Class clParametrizacion
 
         Return Data.OpenData(QRY)
     End Function
+
     Public Function selectContentsFiltro(ByVal pac_id As String, ByVal code As String, ByVal level_id As String) As DataTable
 
         QRY = "select * from contents where pac_id = " & pac_id & " and state = 'A' and code like '" & code & "%' and 
+               level_id = " & level_id & " order by code"
+
+        Return Data.OpenData(QRY)
+    End Function
+    Public Function selectContentsFiltroReg(ByVal pac_id As String, ByVal code As String, ByVal level_id As String) As DataTable
+
+        QRY = "select code, name, from contents where pac_id = " & pac_id & " and state = 'A' and code like '" & code & "%' and 
                level_id = " & level_id & " order by code"
 
         Return Data.OpenData(QRY)
@@ -287,6 +295,13 @@ Public Class clParametrizacion
 
         Return Data.OpenRow(QRY)
     End Function
+    Public Function selectGoalsData(ByVal id As String) As DataTable
+
+        QRY = "select * from goals where  id = " & id & " and state = 'A' "
+
+        Return Data.OpenData(QRY)
+    End Function
+
     Public Function updateValue_progress(ByVal id As String, ByVal value_progress As String) As DataRow
 
         QRY = "update goals set value_progress = (value_progress + " & value_progress & ") where id = " & id
@@ -350,12 +365,14 @@ Public Class clParametrizacion
 
 #Region "report"
     Public Function insertReport(ByVal id_goal As String, ByVal year_current As String, ByVal value_progress As String,
-                                 ByVal activities_developed As String, ByVal date_reg As String, ByVal state As String) As Integer
+                                 ByVal activities_developed As String, ByVal date_reg As String, ByVal state As String,
+                                 ByVal user_reg As String, ByVal who_report As String) As Integer
         Dim row As DataRow
 
         QRY = "insert into report(goal_id, year_current, value_progress, activities_developed, 
-               date_reg, state) values (" & id_goal & "," & year_current & ",
-               " & value_progress & ", '" & activities_developed & "', '" & date_reg & "', '" & state & "')"
+               date_reg, state, user_reg, who_report) values (" & id_goal & "," & year_current & ",
+               " & value_progress & ", '" & activities_developed & "', '" & date_reg & "', '" & state & "',
+               '" & user_reg & "', '" & who_report & "')"
 
         Data.Execute(QRY)
 

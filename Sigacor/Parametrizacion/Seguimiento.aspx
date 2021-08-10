@@ -173,26 +173,26 @@
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Primer año</label>
-                                        <asp:TextBox ID="txtPriYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblPriYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtPriYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Segundo año</label>
-                                        <asp:TextBox ID="txtSegYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblSegYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtSegYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Tercer año</label>
-                                        <asp:TextBox ID="txtTercYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblTercYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtTercYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Cuarto año</label>
-                                        <asp:TextBox ID="txtCuartYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblCuartYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtCuartYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -239,7 +239,13 @@
                                 <asp:TextBox ID="txtValorFisico" class="form-control" runat="server" AutoComplete="Off" onkeyup="validarNumero(this)"></asp:TextBox>
                             </div>
                         </div>
-                        <div class="col-5 mt-4">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label>Quien reporta</label>
+                                <asp:DropDownList ID="cmbQuienReporta" CssClass="form-control" runat="server"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-4">
                             <asp:LinkButton ID="btnVisualizarHojaVida" runat="server" class="btn btn-primary">Visualizar hoja de vida</asp:LinkButton>
                         </div>
                     </div>

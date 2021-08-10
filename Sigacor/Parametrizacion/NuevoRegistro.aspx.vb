@@ -2,6 +2,7 @@
     Inherits System.Web.UI.Page
 
     Dim parametrizacion As New clParametrizacion
+    Dim report As New clReportPac
     Dim users As New clLogin
     Dim fun As New Funciones
 
@@ -28,6 +29,13 @@
             pnlNiv5Meta.Visible = False
             pnlMetaNuevo.Visible = False
             btnFiltroMeta.Visible = False
+
+            pnlNvl1Reg.Visible = False
+            pnlNvl2Reg.Visible = False
+            pnlNvl3Reg.Visible = False
+            pnlNvl4Reg.Visible = False
+            pnlNvl5Reg.Visible = False
+
             lblLineas.Text = "No hay niveles"
             lblLineasMeta.Text = "No hay lineas"
             Session("Actualizar") = "N"
@@ -124,28 +132,45 @@
 #End Region
 
 #Region "SelectedIndexChanged"
+
     Private Sub cmbNiveles_SelectedIndexChsanged(sender As Object, e As EventArgs) Handles cmbNiveles.SelectedIndexChanged
         Try
-            If cmbNiveles.SelectedValue = "1" Then
-                pnlSubNivel.Visible = False
-                cmbSubNivel.Items.Clear()
-            Else
+
+            If cmbNiveles.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione el nivel que desea ingresar", "info", "contenedor2_cmbNiveles")
+                Exit Sub
+            End If
+
+            cmbNvl1Reg.Items.Clear()
+            pnlNvl1Reg.Visible = False
+            cmbNvl2Reg.Items.Clear()
+            pnlNvl2Reg.Visible = False
+            cmbNvl3Reg.Items.Clear()
+            pnlNvl3Reg.Visible = False
+            cmbNvl4Reg.Items.Clear()
+            pnlNvl4Reg.Visible = False
+            cmbNvl5Reg.Items.Clear()
+            pnlNvl5Reg.Visible = False
+
+            If CInt(1 < cmbNiveles.SelectedValue) Then
                 DataT = Nothing
-                DataT = parametrizacion.selectContents(lblPac.Text.Trim, CInt(cmbNiveles.SelectedValue.Trim) - 1, "", "")
+                DataT = report.selectContentsFiltro(lblPac.Text.Trim, "", "1")
                 If DataT.Rows.Count > 0 Then
-                    lblSubNivel.Text = "¿A que " & DataT(0)(4) & " pertenece?"
-                    pnlSubNivel.Visible = True
-                    cmbSubNivel.Items.Clear()
-                    cmbSubNivel.DataTextField = "name"
-                    cmbSubNivel.DataValueField = "code"
-                    cmbSubNivel.DataSource = DataT
-                    cmbSubNivel.DataBind()
-                    cmbSubNivel.Items.Insert(0, New ListItem("Todos", ""))
-                    cmbSubNivel.Focus()
+                    lblNvl1Reg.Text = "¿A que " & DataT(0)(3) & " pertenece?"
+                    pnlNvl1Reg.Visible = True
+
+                    cmbNvl1Reg.Items.Clear()
+                    cmbNvl1Reg.DataTextField = "name"
+                    cmbNvl1Reg.DataValueField = "code"
+                    cmbNvl1Reg.DataSource = DataT
+                    cmbNvl1Reg.DataBind()
+                    cmbNvl1Reg.Items.Insert(0, New ListItem("---Seleccione--", ""))
+                    cmbNvl1Reg.Focus()
                 Else
                     txtNombrePlanAcc.Focus()
                 End If
             End If
+
             lblCodigo.Text = "Código de " & cmbNiveles.SelectedItem.ToString
             lblNombre.Text = "Nombre de " & cmbNiveles.SelectedItem.ToString
         Catch ex As Exception
@@ -153,6 +178,173 @@
             lblError.Visible = True
         End Try
     End Sub
+
+    'Private Sub cmbNiveles_SelectedIndexChsanged(sender As Object, e As EventArgs) Handles cmbNiveles.SelectedIndexChanged
+    '    Try
+    '        If cmbNiveles.SelectedValue = "1" Then
+    '            pnlSubNivel.Visible = False
+    '            cmbSubNivel.Items.Clear()
+    '        Else
+    '            DataT = Nothing
+    '            DataT = parametrizacion.selectContents(lblPac.Text.Trim, CInt(cmbNiveles.SelectedValue.Trim) - 1, "", "")
+    '            If DataT.Rows.Count > 0 Then
+    '                lblSubNivel.Text = "¿A que " & DataT(0)(4) & " pertenece?"
+    '                pnlSubNivel.Visible = True
+    '                cmbSubNivel.Items.Clear()
+    '                cmbSubNivel.DataTextField = "name"
+    '                cmbSubNivel.DataValueField = "code"
+    '                cmbSubNivel.DataSource = DataT
+    '                cmbSubNivel.DataBind()
+    '                cmbSubNivel.Items.Insert(0, New ListItem("Todos", ""))
+    '                cmbSubNivel.Focus()
+    '            Else
+    '                txtNombrePlanAcc.Focus()
+    '            End If
+    '        End If
+    '        lblCodigo.Text = "Código de " & cmbNiveles.SelectedItem.ToString
+    '        lblNombre.Text = "Nombre de " & cmbNiveles.SelectedItem.ToString
+    '    Catch ex As Exception
+    '        lblError.Text = ex.Message
+    '        lblError.Visible = True
+    '    End Try
+    'End Sub
+
+    Private Sub cmbNvl1Reg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNvl1Reg.SelectedIndexChanged
+        Try
+
+            DataT = Nothing
+            If CInt(2 < cmbNiveles.SelectedValue) Then
+                If cmbNvl1Reg.SelectedIndex = 0 Then
+                    cmbNvl2Reg.Items.Clear()
+                    pnlNvl2Reg.Visible = False
+                Else
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNvl1Reg.SelectedValue)
+                    If DataT.Rows.Count > 0 Then
+                        cmbNvl2Reg.Items.Clear()
+                        cmbNvl2Reg.DataTextField = "name"
+                        cmbNvl2Reg.DataValueField = "code"
+                        cmbNvl2Reg.DataSource = DataT
+                        cmbNvl2Reg.DataBind()
+                        cmbNvl2Reg.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                        lblNvl2Reg.Text = DataT(0)(2)
+                        pnlNvl2Reg.Visible = True
+                        cmbNvl2Reg.Focus()
+                    Else
+                        cmbNvl2Reg.Items.Clear()
+                        pnlNvl2Reg.Visible = False
+                        alerta("Advertencia", "No se han encontrado programas", "info")
+                    End If
+                End If
+            End If
+
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
+
+    Private Sub cmbNvl2Reg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNvl2Reg.SelectedIndexChanged
+        Try
+
+            DataT = Nothing
+            If CInt(3 < cmbNiveles.SelectedValue) Then
+                If cmbNvl2Reg.SelectedIndex = 0 Then
+                    cmbNvl3Reg.Items.Clear()
+                    pnlNvl3Reg.Visible = False
+                Else
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNvl2Reg.SelectedValue)
+                    If DataT.Rows.Count > 0 Then
+                        cmbNvl3Reg.Items.Clear()
+                        cmbNvl3Reg.DataTextField = "name"
+                        cmbNvl3Reg.DataValueField = "code"
+                        cmbNvl3Reg.DataSource = DataT
+                        cmbNvl3Reg.DataBind()
+                        cmbNvl3Reg.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                        lblNvl3Reg.Text = DataT(0)(2)
+                        pnlNvl3Reg.Visible = True
+                        cmbNvl3Reg.Focus()
+                    Else
+                        cmbNvl3Reg.Items.Clear()
+                        pnlNvl3Reg.Visible = False
+                        alerta("Advertencia", "No se han encontrado Proyectos", "info")
+                    End If
+                End If
+            End If
+
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
+    Private Sub cmbNvl3Reg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNvl3Reg.SelectedIndexChanged
+        Try
+
+            DataT = Nothing
+            If CInt(4 < cmbNiveles.SelectedValue) Then
+                If cmbNvl3Reg.SelectedIndex = 0 Then
+                    cmbNvl4Reg.Items.Clear()
+                    pnlNvl4Reg.Visible = False
+                Else
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNvl3Reg.SelectedValue)
+                    If DataT.Rows.Count > 0 Then
+                        cmbNvl4Reg.Items.Clear()
+                        cmbNvl4Reg.DataTextField = "name"
+                        cmbNvl4Reg.DataValueField = "code"
+                        cmbNvl4Reg.DataSource = DataT
+                        cmbNvl4Reg.DataBind()
+                        cmbNvl4Reg.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                        lblNvl4Reg.Text = DataT(0)(2)
+                        pnlNvl4Reg.Visible = True
+                        cmbNvl4Reg.Focus()
+                    Else
+                        cmbNvl4Reg.Items.Clear()
+                        pnlNvl4Reg.Visible = False
+                        alerta("Advertencia", "No se han encontrado Actividades", "info")
+                    End If
+                End If
+            End If
+
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
+
+    Private Sub cmbNvl4Reg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNvl4Reg.SelectedIndexChanged
+        Try
+
+            DataT = Nothing
+            If CInt(5 < cmbNiveles.SelectedValue) Then
+                If cmbNvl4Reg.SelectedIndex = 0 Then
+                    cmbNvl5Reg.Items.Clear()
+                    pnlNvl5Reg.Visible = False
+                Else
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNvl4Reg.SelectedValue)
+                    If DataT.Rows.Count > 0 Then
+                        cmbNvl5Reg.Items.Clear()
+                        cmbNvl5Reg.DataTextField = "name"
+                        cmbNvl5Reg.DataValueField = "code"
+                        cmbNvl5Reg.DataSource = DataT
+                        cmbNvl5Reg.DataBind()
+                        cmbNvl5Reg.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                        lblNvl5Reg.Text = DataT(0)(2)
+                        pnlNvl5Reg.Visible = True
+                        cmbNvl5Reg.Focus()
+                    Else
+                        cmbNvl5Reg.Items.Clear()
+                        pnlNvl5Reg.Visible = False
+                        alerta("Advertencia", "No se han encontrado Actividades", "info")
+                    End If
+                End If
+            End If
+
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
+
+
 
     Private Sub cmbLineas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLineas.SelectedIndexChanged
         Try
@@ -895,11 +1087,54 @@
 
     Private Sub btnAgregarPlanAcc_Click(sender As Object, e As EventArgs) Handles btnAgregarPlanAcc.Click
         Try
+            Dim code, array As String
+            Dim subNivel, name As String
 
             If cmbNiveles.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione un nivel", "info", "contenedor2_cmbNiveles")
                 Exit Sub
             End If
+            If pnlNvl1Reg.Visible = True And cmbNvl1Reg.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione la " & lblNvl1Reg.Text, "info", "contenedor2_cmbNvl1Reg")
+                Exit Sub
+            Else
+                If cmbNvl1Reg.SelectedIndex > 0 Then
+                    subNivel = cmbNvl1Reg.SelectedValue
+                End If
+            End If
+            If pnlNvl2Reg.Visible = True And cmbNvl2Reg.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione el " & lblNvl2Reg.Text, "info", "contenedor2_cmbNvl2Reg")
+                Exit Sub
+            Else
+                If cmbNvl2Reg.SelectedIndex > 0 Then
+                    subNivel = cmbNvl2Reg.SelectedValue
+                End If
+            End If
+            If pnlNvl3Reg.Visible = True And cmbNvl3Reg.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione el " & lblNvl3Reg.Text, "info", "contenedor2_cmbNvl3Reg")
+                Exit Sub
+            Else
+                If cmbNvl3Reg.SelectedIndex > 0 Then
+                    subNivel = cmbNvl3Reg.SelectedValue
+                End If
+            End If
+            If pnlNvl4Reg.Visible = True And cmbNvl4Reg.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione la " & lblNvl4Reg.Text, "info", "contenedor2_cmbNvl4Reg")
+                Exit Sub
+            Else
+                If cmbNvl4Reg.SelectedIndex > 0 Then
+                    subNivel = cmbNvl4Reg.SelectedValue
+                End If
+            End If
+            If pnlNvl5Reg.Visible = True And cmbNvl5Reg.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione la " & lblNvl5Reg.Text, "info", "contenedor2_cmbNvl5Reg")
+                Exit Sub
+            Else
+                If cmbNvl5Reg.SelectedIndex > 0 Then
+                    subNivel = cmbNvl5Reg.SelectedValue
+                End If
+            End If
+
             If txtCodigo.Text = String.Empty Then
                 alerta("Advertencia", "Ingrese un codigo código", "info", "contenedor2_cmbNiveles")
                 Exit Sub
@@ -913,26 +1148,26 @@
                 Exit Sub
             End If
 
-            Dim subNivel, name As String
-            If cmbSubNivel.Items.Count > 0 Then
-                subNivel = cmbSubNivel.SelectedValue.Trim
-                name = cmbSubNivel.SelectedItem.ToString.Trim
-            Else
-                subNivel = String.Empty
-            End If
 
-            Dim code, array As String
+            'If cmbSubNivel.Items.Count > 0 Then
+            '    subNivel = cmbSubNivel.SelectedValue.Trim
+            '    name = cmbSubNivel.SelectedItem.ToString.Trim
+            'Else
+            '    subNivel = String.Empty
+            'End If
 
-            DataT = parametrizacion.selectContents(lblPac.Text.Trim, cmbNiveles.SelectedValue.Trim - 1, "", subNivel)
-            If DataT.Rows.Count > 0 Then
-                code = DataT(0)(3) & "." & txtCodigo.Text.Trim
-                DataT(0)(9) = CStr(DataT(0)(9)).Substring(0, CStr(DataT(0)(9)).Length - 1)
-                array = CStr(DataT(0)(9)) & ", " & cmbNiveles.SelectedItem.ToString & ":" & txtCodigo.Text.Trim & "]"
-            Else
-                code = txtCodigo.Text.Trim
-                array = "[" & cmbNiveles.SelectedItem.ToString() & ":" & txtCodigo.Text.Trim & "]"
-            End If
-            DataT = Nothing
+            'DataT = parametrizacion.selectContents(lblPac.Text.Trim, cmbNiveles.SelectedValue.Trim - 1, "", subNivel)
+            'If DataT.Rows.Count > 0 Then
+            '    code = DataT(0)(3) & "." & txtCodigo.Text.Trim
+            '    DataT(0)(9) = CStr(DataT(0)(9)).Substring(0, CStr(DataT(0)(9)).Length - 1)
+            '    array = CStr(DataT(0)(9)) & ", " & cmbNiveles.SelectedItem.ToString & ":" & txtCodigo.Text.Trim & "]"
+            'Else
+            '    code = txtCodigo.Text.Trim
+            '    array = "[" & cmbNiveles.SelectedItem.ToString() & ":" & txtCodigo.Text.Trim & "]"
+            'End If
+            'DataT = Nothing
+
+            code = subNivel & "." & txtCodigo.Text.Trim
             DataT = parametrizacion.selectContents(lblPac.Text.Trim, code)
             If DataT.Rows.Count > 0 Then
                 alerta("Advertencia", "Jerarquia " & code & " ya existe", "info")
@@ -947,6 +1182,7 @@
                 txtNombrePlanAcc.Text = String.Empty
                 txtPesoPlanAcc.Text = String.Empty
 
+                limiarFiltroRegistro()
                 cargarLineas()
                 btnConsultar_Click(Nothing, Nothing)
                 'cargarPlanAccion(lblPac.Text.Trim)
@@ -1291,7 +1527,7 @@
                 cmbNiveles.DataValueField = "hierarchy"
                 cmbNiveles.DataSource = DataT
                 cmbNiveles.DataBind()
-                cmbNiveles.Items.Insert(0, New ListItem("Todos", ""))
+                cmbNiveles.Items.Insert(0, New ListItem("---Seleccione---", ""))
                 If DataT(0)(3) = "1" Then
                     lblLineas.Text = DataT(0)(1)
                     lblLineasMeta.Text = DataT(0)(1)
@@ -1480,13 +1716,13 @@
                     cmbLineas.DataValueField = "code"
                     cmbLineas.DataSource = DataT
                     cmbLineas.DataBind()
-                    cmbLineas.Items.Insert(0, New ListItem("Todos", ""))
+                    cmbLineas.Items.Insert(0, New ListItem("---Seleccione---", ""))
                     cmbLineasMeta.Items.Clear()
                     cmbLineasMeta.DataTextField = "name"
                     cmbLineasMeta.DataValueField = "code"
                     cmbLineasMeta.DataSource = DataT
                     cmbLineasMeta.DataBind()
-                    cmbLineasMeta.Items.Insert(0, New ListItem("Todos", ""))
+                    cmbLineasMeta.Items.Insert(0, New ListItem("---Seleccione---", ""))
                 End If
             End If
 
@@ -1564,6 +1800,21 @@
             lblError.Visible = True
         End Try
     End Sub
+
+
+    Public Sub limiarFiltroRegistro()
+        pnlNvl1Reg.Visible = False
+        pnlNvl2Reg.Visible = False
+        pnlNvl3Reg.Visible = False
+        pnlNvl4Reg.Visible = False
+        pnlNvl5Reg.Visible = False
+        cmbNvl1Reg.Items.Clear()
+        cmbNvl2Reg.Items.Clear()
+        cmbNvl3Reg.Items.Clear()
+        cmbNvl4Reg.Items.Clear()
+        cmbNvl5Reg.Items.Clear()
+    End Sub
+
 
 
 

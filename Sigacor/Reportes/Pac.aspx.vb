@@ -74,7 +74,6 @@
             Else
                 DataT = reportPac.selectLineasFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue)
             End If
-
             If DataT.Rows.Count > 0 Then
                 For Each row As DataRow In DataT.Rows
                     Fila = Nothing
@@ -163,15 +162,15 @@
                                                                                                            <div class=""row""> 
                                                                                                                 <div class=""col-12"">
                                                                                                                     " & script & "
-                                                                                                                    <br/>
-                                                                                                                    <label>Ver más</label>
-                                                                                                                </div> 
-                                                                                                           </div>
-                                                                                                       </div>
-                                                                                                   </div>                                                                        
-                                                                                               </div>
-                                                                                           </div><br/>
-                                                                                       </div>
+                                                                                                                    <br/>                                                                                                                    
+                                                                                                                </div>                                                                                                                 
+                                                                                                           </div>                                                                                                                 
+                                                                                                       </div>                                                                                                    
+                                                                                                   </div>                                                                                                    
+                                                                                               </div> 
+                                                                                               <a href=""DetallePac.aspx"">Ver mas</a>
+                                                                                           </div>                                                                                           
+                                                                                       </div>                                                                                                              
                                                                                    </div>
                                                                                </a>                                                                                                                                                           
                                                                            </div>
@@ -179,7 +178,7 @@
                             Else
                                 If row("code") = row2("code") Then
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
-                                                                               <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
+                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
@@ -204,7 +203,7 @@
                                                                                                        </div>
                                                                                                    </div>                                                                        
                                                                                                </div>
-                                                                                           </div><br/>
+                                                                                           </div>                                                                                              
                                                                                        </div>
                                                                                    </div>
                                                                                </a>                                                                                                                                                           
