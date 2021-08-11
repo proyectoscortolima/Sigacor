@@ -117,18 +117,24 @@
                                                             <asp:DropDownList ID="cmbNiv3" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 mt-2">
-                                                        <div class="form-group" id="pnlNiv4" runat="server">
+                                                    <div class="col-12 mt-2" id="pnlNiv4" runat="server">
+                                                        <div class="form-group">
                                                             <asp:Label ID="lblNiv4" runat="server"></asp:Label>
                                                             <asp:DropDownList ID="cmbNiv4" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 mt-2">
-                                                        <div class="form-group" id="pnlNiv5" runat="server">
+                                                    <div class="col-12 mt-2" id="pnlNiv5" runat="server">
+                                                        <div class="form-group">
                                                             <asp:Label ID="lblNiv5" runat="server"></asp:Label>
                                                             <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
-                                                    </div>     
+                                                    </div>   
+                                                    <div class="col-12 mt-2" id="pnlNiv6" runat="server">
+                                                        <div class="form-group">
+                                                            <asp:Label ID="lblNiv6" runat="server"></asp:Label>
+                                                            <asp:DropDownList ID="cmbNiv6" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                                                        </div>
+                                                    </div>   
                                                     <div class="col-12 mt-2 text-center">
                                                         <asp:LinkButton ID="btnConsultar" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
                                                     </div>

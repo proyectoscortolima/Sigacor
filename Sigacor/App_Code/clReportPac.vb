@@ -27,7 +27,17 @@ Public Class clReportPac
 
         Return Data.OpenRow(QRY)
     End Function
+    Public Function selectLineasFiltroGeneralMetas(ByVal pac_id As String, ByVal arrayLineas As String()) As DataTable
+        Dim codLineas As String
+        Dim i As Integer
+        For Each row In arrayLineas
+            codLineas &= "'" & arrayLineas(i) & "',"
+        Next
+        codLineas = Mid(codLineas, 1, Len(codLineas) - 1)
+        QRY = "select * from contents where pac_id = " & pac_id & " and code IN (" & codLineas & ")"
 
+        Return Data.OpenData(QRY)
+    End Function
     Public Function selectLineasFiltroGeneral(ByVal pac_id As String, ByVal level_id As String, Optional ByVal indicador As String = "") As DataTable
 
         If indicador = String.Empty Then
@@ -86,7 +96,22 @@ Public Class clReportPac
 
     Public Function selectGoals(ByVal pac_id As String) As DataTable
 
-        QRY = "select id, name, subactivity as sublevel from goals where pac_id = " & pac_id & " and state = 'A' "
+        QRY = "select id, name, subactivity as sublevel from goals where pac_id = " & pac_id & " and state = 'A' order by  subactivity "
+
+        Return Data.OpenData(QRY)
+    End Function
+    Public Function selectGoalsFiltroGeneral(ByVal pac_id As String, ByVal subactivity As String) As DataTable
+
+        QRY = "select id, name, subactivity as code, 'Metas' as name_level from goals where pac_id = " & pac_id & " and 
+               subactivity like '" & subactivity & "%' and state = 'A' order by  subactivity"
+
+        Return Data.OpenData(QRY)
+    End Function
+
+    Public Function selectGoals(ByVal pac_id As String, ByVal subactivity As String) As DataTable
+
+        QRY = "select id, name, subactivity as code from goals where pac_id = " & pac_id & " and 
+               subactivity = '" & subactivity & "' and state = 'A' order by subactivity "
 
         Return Data.OpenData(QRY)
     End Function

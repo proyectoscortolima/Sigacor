@@ -14,6 +14,7 @@
                 pnlNiv3.Visible = False
                 pnlNiv4.Visible = False
                 pnlNiv5.Visible = False
+                pnlNiv6.Visible = False
                 DataT = Nothing
                 DataT = parametrizacion.selectPacTodos()
                 If DataT.Rows.Count > 0 Then
@@ -35,7 +36,22 @@
     End Sub
 
 #End Region
-
+    Public Function DeleteArrayRepetitions(ByVal strArray1() As String, ByVal Sorted As Boolean) As Array
+        Dim strArray2(0) As String
+        Dim Count As Integer = 0
+        Dim Count2 As Integer = 0
+        For Each Element In strArray1
+            Dim Last As Integer = Array.LastIndexOf(strArray1, Element)
+            If Count = Last Then
+                ReDim Preserve strArray2(Count2)
+                strArray2(Count2) = Element
+                Count2 += 1
+            End If
+            Count += 1
+        Next
+        If Sorted = True Then Array.Sort(strArray2)
+        Return strArray2
+    End Function
 #Region "Click"
     Private Sub btnConsultarGeneral_Click(sender As Object, e As EventArgs) Handles btnConsultarGeneral.Click
         Try
@@ -44,6 +60,9 @@
             Dim i As Integer = 0
             Dim i2 As Integer = 0
             Dim array() As Char
+            Dim delimitadores() As String = {"."}
+            Dim vectoraux() As String
+            Dim contador = 0
 
             If cmbPac.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione el periodo", "info", "cmbPac")
@@ -67,19 +86,34 @@
                                                                            </div>                                                                        
                                                           "))
 
-
             DataT = Nothing
             If cmbNivel.SelectedValue = "1" Then
                 DataT = reportPac.selectLineasFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, "S")
+            ElseIf cmbNivel.SelectedValue = "6" Then
+                DataT = reportPac.selectGoals(cmbPac.SelectedValue)
+                If DataT.Rows.Count > 0 Then
+                    Dim vectorHistorial(DataT.Rows.Count - 1) As String
+                    For Each row As DataRow In DataT.Rows
+                        vectoraux = row("sublevel").Split(delimitadores, StringSplitOptions.None)
+                        vectorHistorial(contador) = CStr(vectoraux(0))
+                        contador += 1
+                    Next
+
+                    vectoraux = DeleteArrayRepetitions(vectorHistorial, True)
+                End If
+                DataT = reportPac.selectLineasFiltroGeneralMetas(cmbPac.SelectedValue, vectoraux)
             Else
                 DataT = reportPac.selectLineasFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue)
             End If
+
+
+
             If DataT.Rows.Count > 0 Then
-                For Each row As DataRow In DataT.Rows
-                    Fila = Nothing
-                    Fila = reportPac.selectLineasFila(Mid(CStr(row("sublevel")), 1, 1), cmbPac.SelectedValue)
-                    If Fila IsNot Nothing Then
-                        pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
+                    For Each row As DataRow In DataT.Rows
+                        Fila = Nothing
+                        Fila = reportPac.selectLineasFila(Mid(CStr(row("sublevel")), 1, 1), cmbPac.SelectedValue)
+                        If Fila IsNot Nothing Then
+                            pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
                                                                        <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & Fila("code") & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
                                                                            <div class=""card-header-report"" id=""headingOne"">
                                                                                <div class=""row"">
@@ -101,49 +135,52 @@
                                                                                    <div class=""row"">
 
                                                                    "))
-                    End If
+                        End If
 
 
 
-                    Dim code As String
-                    'dataT2 = parametrizacion.selectGoalsFiltro(cmbPac.SelectedValue, row("code"))
-                    dataT2 = reportPac.selectContentsFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, Fila("code"))
-                    If dataT2.Rows.Count > 0 Then
-                        For Each row2 As DataRow In dataT2.Rows
-                            arrayCode = CStr(row2("code")).Replace(".", "")
-                            array = arrayCode.ToCharArray
+                        Dim code As String
+                        If cmbNivel.SelectedValue = "6" Then
+                            dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, Fila("code"))
+                        Else
+                            dataT2 = reportPac.selectContentsFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, Fila("code"))
+                        End If
+                        If dataT2.Rows.Count > 0 Then
+                            For Each row2 As DataRow In dataT2.Rows
+                                arrayCode = CStr(row2("code")).Replace(".", "")
+                                array = arrayCode.ToCharArray
 
-                            script = String.Empty
-                            If arrayCode <> String.Empty Then
-                                For Each valor In array
-                                    If i = 0 Then
-                                        jerarquia = valor
-                                        subLevel = String.Empty
-                                    Else
-                                        jerarquia &= "." & valor
-                                        subLevel = jerarquia
-                                        subLevel = Mid(subLevel, 1, Len(subLevel) - 2)
+                                script = String.Empty
+                                If arrayCode <> String.Empty Then
+                                    For Each valor In array
+                                        If i = 0 Then
+                                            jerarquia = valor
+                                            subLevel = String.Empty
+                                        Else
+                                            jerarquia &= "." & valor
+                                            subLevel = jerarquia
+                                            subLevel = Mid(subLevel, 1, Len(subLevel) - 2)
+                                        End If
+                                        Fila = Nothing
+                                        Fila = reportPac.selectContentsReport(cmbPac.SelectedValue, jerarquia, subLevel)
+                                        If Fila IsNot Nothing Then
+                                            script &= "<b>" & Fila("name_level") & ": </b>" & Fila("name") & " <br/>"
+                                        End If
+                                        i += 1
+                                    Next
+                                Else
+                                    If row("code") = row2("code") Then
+                                        script &= "<b>" & row2("name_level") & ": </b>" & row2("name") & " <br/>"
                                     End If
-                                    Fila = Nothing
-                                    Fila = reportPac.selectContentsReport(cmbPac.SelectedValue, jerarquia, subLevel)
-                                    If Fila IsNot Nothing Then
-                                        script &= "<b>" & Fila("name_level") & ": </b>" & Fila("name") & " <br/>"
-                                    End If
-                                    i += 1
-                                Next
-                            Else
-                                If row("code") = row2("code") Then
-                                    script &= "<b>" & row2("name_level") & ": </b>" & row2("name") & " <br/>"
+
                                 End If
 
-                            End If
+                                i = 0
+                                jerarquia = String.Empty
+                                subLevel = String.Empty
 
-                            i = 0
-                            jerarquia = String.Empty
-                            subLevel = String.Empty
-
-                            If arrayCode <> String.Empty Then
-                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                If arrayCode <> String.Empty Then
+                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
@@ -167,17 +204,16 @@
                                                                                                            </div>                                                                                                                 
                                                                                                        </div>                                                                                                    
                                                                                                    </div>                                                                                                    
-                                                                                               </div> 
-                                                                                               <a href=""DetallePac.aspx"">Ver mas</a>
+                                                                                               </div>                                                                                                
                                                                                            </div>                                                                                           
                                                                                        </div>                                                                                                              
                                                                                    </div>
                                                                                </a>                                                                                                                                                           
                                                                            </div>
                                                                            "))
-                            Else
-                                If row("code") = row2("code") Then
-                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                Else
+                                    If row("code") = row2("code") Then
+                                        pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
                                                                                 <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
@@ -196,8 +232,7 @@
                                                                                                            <div class=""row""> 
                                                                                                                <div class=""col-12"">
                                                                                                                     " & script & "
-                                                                                                                    <br/>
-                                                                                                                    <label>Ver más</label>
+                                                                                                                    <br/>                                                                                                                    
                                                                                                                </div>                                                                                                                                                                                                                        
                                                                                                            </div>
                                                                                                        </div>
@@ -209,24 +244,25 @@
                                                                                </a>                                                                                                                                                           
                                                                            </div>
                                                                            "))
+                                    End If
                                 End If
-                            End If
 
 
-                            i2 += 1
-                        Next
-                    Else
-                        pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
-                    End If
+                                i2 += 1
+                            Next
+                        Else
+                            pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
+                        End If
 
-                    pnlResultados.Controls.Add(New LiteralControl("</div>
+                        pnlResultados.Controls.Add(New LiteralControl("</div>
                                                                        </div>
                                                                            </div>                                                                        
                                                                                </div>
                                                                                    </div><br/>"))
-                Next
-            End If
-            pnlResultados.Controls.Add(New LiteralControl("</div>
+                    Next
+                End If
+
+                pnlResultados.Controls.Add(New LiteralControl("</div>
                                                                </div>
                                                                    </div>
                                                                        </div>"))
@@ -272,7 +308,13 @@
                             level_id = "4"
                             If cmbNiv5.SelectedIndex > 0 Then
                                 level_id = "5"
-                                code = cmbNiv5.SelectedValue
+                                If cmbNiv6.SelectedIndex > 0 Then
+                                    level_id = "6"
+                                    code = cmbNiv6.SelectedValue
+                                Else
+                                    level_id = "6"
+                                    code = cmbNiv5.SelectedValue
+                                End If
                             Else
                                 level_id = "5"
                                 code = cmbNiv4.SelectedValue
@@ -293,6 +335,7 @@
                 level_id = "1"
                 code = String.Empty
             End If
+
             DataT = Nothing
             DataT = reportPac.selectLineas(cmbLineas.SelectedValue, cmbPac.SelectedValue)
             If DataT.Rows.Count > 0 Then
@@ -321,7 +364,12 @@
                                                                    "))
 
                     'dataT2 = parametrizacion.selectGoalsFiltro(cmbPac.SelectedValue, row("code"))
-                    dataT2 = reportPac.selectContentsFiltro(cmbPac.SelectedValue, code, level_id)
+                    If level_id = "6" Then
+                        dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, code)
+                    Else
+                        dataT2 = reportPac.selectContentsFiltro(cmbPac.SelectedValue, code, level_id)
+                    End If
+
                     If dataT2.Rows.Count > 0 Then
                         For Each row2 As DataRow In dataT2.Rows
                             arrayCode = code.Replace(".", "")
@@ -791,6 +839,35 @@
             lblError.Visible = True
         End Try
     End Sub
+    Private Sub cmbNiv5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv5.SelectedIndexChanged
+        Try
+            ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'", True)
+            DataT = Nothing
+            If cmbNiv5.SelectedIndex = 0 Then
+                cmbNiv6.Items.Clear()
+                pnlNiv6.Visible = False
+            Else
+                DataT = reportPac.selectGoals(cmbPac.SelectedValue, cmbNiv5.SelectedValue)
+                If DataT.Rows.Count > 0 Then
+                    cmbNiv6.Items.Clear()
+                    cmbNiv6.DataTextField = "name"
+                    cmbNiv6.DataValueField = "code"
+                    cmbNiv6.DataSource = DataT
+                    cmbNiv6.DataBind()
+                    cmbNiv6.Items.Insert(0, New ListItem("Todos", ""))
+                    lblNiv6.Text = "Metas"
+                    pnlNiv6.Visible = True
+                Else
+                    cmbNiv6.Items.Clear()
+                    pnlNiv6.Visible = False
+                    alerta("Advertencia", "No se han encontrado metas", "info")
+                End If
+            End If
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
+    End Sub
 #End Region
 
 #Region "Metodos - Funciones"
@@ -840,6 +917,7 @@
                 cmbNivel.DataSource = DataT
                 cmbNivel.DataBind()
                 cmbNivel.Items.Insert(0, New ListItem("-Selecione un nivel-", ""))
+                cmbNivel.Items.Insert(6, New ListItem("Metas", "6"))
             Else
                 cmbNivel.Items.Clear()
             End If

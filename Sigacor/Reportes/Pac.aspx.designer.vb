@@ -185,6 +185,33 @@ Partial Public Class Pac
     Protected WithEvents cmbNiv5 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control pnlNiv6.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlNiv6 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control lblNiv6.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblNiv6 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control cmbNiv6.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cmbNiv6 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Control btnConsultar.
     '''</summary>
     '''<remarks>
