@@ -32,6 +32,15 @@ Partial Public Class DetallePac
     Protected WithEvents lblPac As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Control lblCodMeta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCodMeta As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control lblNomPac.
     '''</summary>
     '''<remarks>
@@ -41,13 +50,67 @@ Partial Public Class DetallePac
     Protected WithEvents lblNomPac As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control tblJerarquia.
+    '''Control pnlDescripcionJerarquia.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents tblJerarquia As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents pnlDescripcionJerarquia As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblLineaBase.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblLineaBase As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblMeta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMeta As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control progressbarEjecucion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents progressbarEjecucion As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control lblValorProgress.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblValorProgress As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtAvances.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtAvances As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control btnVisualizarHojaVida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnVisualizarHojaVida As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''Control lblError.
@@ -57,4 +120,85 @@ Partial Public Class DetallePac
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtSiglaHojaVida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtSiglaHojaVida As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtDescripHojaVida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtDescripHojaVida As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtDefinHojaVida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtDefinHojaVida As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtMetodoMedic.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtMetodoMedic As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtFormulaHojaVida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtFormulaHojaVida As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtVariablesHojaVida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtVariablesHojaVida As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtObservHojaVida.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtObservHojaVida As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtGeografica.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtGeografica As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control cmbPeriodicidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cmbPeriodicidad As Global.System.Web.UI.WebControls.DropDownList
 End Class

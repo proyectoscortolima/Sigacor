@@ -82,7 +82,7 @@
                 If Fila IsNot Nothing Then
                     lblPac.Text = Fila("id")
                     lblNompac.Text = Fila("name")
-                    lblSlogan.Text = Fila("slogan")
+                    'lblSlogan.Text = Fila("slogan")
                     lblYearIni.Text = Fila("initial_year")
                     lblCantYears.Text = Fila("number_years")
 

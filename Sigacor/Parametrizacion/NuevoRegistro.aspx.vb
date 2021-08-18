@@ -95,9 +95,9 @@
             End If
 
             visualizarPac(Session("id_pac"))
-                cargarLineas()
-                Session("id_pac") = Nothing
-                Session("pac") = Nothing
+            cargarLineas()
+            Session("id_pac") = Nothing
+            Session("pac") = Nothing
 
             End If
 
@@ -936,7 +936,7 @@
                 DataT = Nothing
                 DataT = parametrizacion.selectPac
                 If DataT.Rows.Count > 0 Then
-                    alerta("Advertencia", "No se puede grabar el pac, periodo ya existente.", "info", "")
+                    alerta("Advertencia", "No se puede grabar el pac, se encuentra un pac activo", "info", "")
                     Exit Sub
                 End If
             End If
@@ -945,10 +945,6 @@
 
             If txtNomPac.Text = String.Empty Then
                 alerta("Advertencia", "Ingrese el nombre el PAC", "info", "contenedor2_txtNomPac")
-                Exit Sub
-            End If
-            If txtSlogan.Text = String.Empty Then
-                alerta("Advertencia", "Ingrese el slogan", "info", "contenedor2_txtSlogan")
                 Exit Sub
             End If
             If txtYearInicial.Text = String.Empty Then
@@ -960,15 +956,14 @@
                 Exit Sub
             End If
 
-            If parametrizacion.updatePac(txtNomPac.Text.Trim, txtSlogan.Text.Trim, txtYearInicial.Text.Trim,
+            If parametrizacion.updatePac(txtNomPac.Text.Trim, txtYearInicial.Text.Trim,
                                          txtYearFinal.Text.Trim, txtCantYears.Text.Trim,
                                          "A", lblPac.Text.Trim) > 0 Then
 
                 alerta("Se ha actualizado el pac correctamente", "PAC:  " & lblPac.Text.Trim, "success", "")
             Else
-                parametrizacion.insertPac(txtNomPac.Text.Trim, txtSlogan.Text.Trim, txtYearInicial.Text.Trim,
-                                          txtYearFinal.Text.Trim, txtCantYears.Text.Trim,
-                                          "A")
+                parametrizacion.insertPac(txtNomPac.Text.Trim, txtYearInicial.Text.Trim,
+                                          txtYearFinal.Text.Trim, txtCantYears.Text.Trim, "A")
                 lblPac.Text = parametrizacion.consecutivoPac
                 alerta("Se ha creado el PAC correctamente", "Pac:  " & lblPac.Text.Trim, "success", "")
             End If
@@ -1491,7 +1486,6 @@
                     lblTituloForm.Text = "EDITAR PAC"
                     lblPac.Text = Fila("id")
                     txtNomPac.Text = Fila("name")
-                    txtSlogan.Text = Fila("slogan")
                     txtYearInicial.Text = Fila("initial_year")
                     txtCantYears.Text = Fila("number_years")
                     txtYearFinal.Text = Fila("final_year")
@@ -1736,7 +1730,6 @@
         Try
             lblPac.Text = String.Empty
             txtNomPac.Text = String.Empty
-            txtSlogan.Text = String.Empty
             txtYearInicial.Text = String.Empty
             txtCantYears.Text = String.Empty
             txtYearFinal.Text = String.Empty

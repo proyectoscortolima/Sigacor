@@ -54,7 +54,7 @@ Public Class clReportPac
 
     Public Function selectContentsFiltroGeneral(ByVal pac_id As String, ByVal level_id As String, ByVal code As String) As DataTable
 
-        QRY = "select c.code, c.name, c.sublevel, l.name name_level from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+        QRY = "select c.code, c.name, c.sublevel, l.name name_level, c.pac_id from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and l.hierarchy = " & level_id & " and c.code like '" & code & "%' and c.state = 'A'   "
 
         Return Data.OpenData(QRY)
@@ -102,7 +102,7 @@ Public Class clReportPac
     End Function
     Public Function selectGoalsFiltroGeneral(ByVal pac_id As String, ByVal subactivity As String) As DataTable
 
-        QRY = "select id, name, subactivity as code, 'Metas' as name_level from goals where pac_id = " & pac_id & " and 
+        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from goals where pac_id = " & pac_id & " and 
                subactivity like '" & subactivity & "%' and state = 'A' order by  subactivity"
 
         Return Data.OpenData(QRY)

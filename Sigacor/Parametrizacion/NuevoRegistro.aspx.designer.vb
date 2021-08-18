@@ -95,15 +95,6 @@ Partial Public Class NuevoRegistro
     Protected WithEvents txtNomPac As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtSlogan.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtSlogan As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
     '''Control txtYearInicial.
     '''</summary>
     '''<remarks>

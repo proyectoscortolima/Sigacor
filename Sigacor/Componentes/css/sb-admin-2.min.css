@@ -12676,7 +12676,7 @@ body.sidebar-toggled footer.sticky-footer {
     min-width: 0;
     word-wrap: break-word;
     background-clip: border-box;
-    border-radius: 30px;
+    border-radius: 30px !important;
     box-shadow: 6px 8px 15px -7px #5c588b;
     background: #ffffff6e;
 }
@@ -12706,6 +12706,5 @@ body.sidebar-toggled footer.sticky-footer {
     word-wrap: break-word;
     background-color: #ffffffa6;
     background-clip: border-box;
-    border: 1px solid #e3e6f0;
     border-radius: 30px;
 }

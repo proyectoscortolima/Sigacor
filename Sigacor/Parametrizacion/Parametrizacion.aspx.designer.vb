@@ -59,15 +59,6 @@ Partial Public Class Parametrizacion
     Protected WithEvents lblNomPac As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblSlogan.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblSlogan As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''Control lblYearIni.
     '''</summary>
     '''<remarks>

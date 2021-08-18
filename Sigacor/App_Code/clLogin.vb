@@ -33,6 +33,22 @@ Public Class clLogin
 
         Return Data.OpenData(QRY)
     End Function
+    Public Function selectEmpleados(ByVal cedl_empld As String) As String
+
+        Dim row As DataRow
+
+        QRY = "select usuario_bd, concat(nombr_empld, aplld_empld) nombre from RHMHOJVI where usuario_bd = '" & cedl_empld & "'"
+
+        row = Data.OpenRow(QRY)
+        If row IsNot Nothing Then
+            selectEmpleados = row("nombre").ToString.Trim
+        Else
+            selectEmpleados = String.Empty
+        End If
+
+        Return selectEmpleados
+    End Function
+
 
     Public Function selectMenu(ByVal rol As String) As DataTable
 

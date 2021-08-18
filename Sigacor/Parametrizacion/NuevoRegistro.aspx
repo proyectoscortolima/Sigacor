@@ -41,16 +41,10 @@
             <div class="card mb-4 py-3 border-bottom-info" style="box-shadow: 4px 4px 8px #bdbdbd;">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label>Nombre del PAC</label>
                                 <asp:TextBox ID="txtNomPac" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Slogan</label>
-                                <asp:TextBox ID="txtSlogan" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-4">

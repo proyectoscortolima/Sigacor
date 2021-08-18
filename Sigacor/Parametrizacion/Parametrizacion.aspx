@@ -40,7 +40,7 @@
                             <Columns>
                                 <asp:BoundField DataField="id" HeaderText="Código" />
                                 <asp:BoundField DataField="name" HeaderText="Nombre" />
-                                <asp:BoundField DataField="slogan" HeaderText="Slogan" />
+                                <%--<asp:BoundField DataField="slogan" HeaderText="Slogan" />--%>
                                 <asp:BoundField DataField="initial_year" HeaderText="Año Inicial" />
                                 <asp:BoundField DataField="final_year" HeaderText="Año Final" />
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px" HeaderText="Acciones">
@@ -102,20 +102,13 @@
                         <div class="col-6">
                             <asp:Label ID="lblNomPac" runat="server"></asp:Label>
                         </div>
-
-                        <div class="col-4">
-                            <label class="lblModal">Slogan</label>
-                        </div>
                         <div class="col-4">
                             <label class="lblModal">Año Inicial</label>
                         </div>
                         <div class="col-4">
                             <label class="lblModal">Cantidad de años</label>
                         </div>
-
-                        <div class="col-4">
-                            <asp:Label ID="lblSlogan" runat="server"></asp:Label>
-                        </div>
+                        <div class="col-4"></div>
                         <div class="col-4">
                             <asp:Label ID="lblYearIni" runat="server"></asp:Label>
                         </div>

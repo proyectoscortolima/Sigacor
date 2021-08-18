@@ -139,8 +139,8 @@
 
 
 
-                        Dim code As String
-                        If cmbNivel.SelectedValue = "6" Then
+                    Dim code, botonRedireccionar As String
+                    If cmbNivel.SelectedValue = "6" Then
                             dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, Fila("code"))
                         Else
                             dataT2 = reportPac.selectContentsFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, Fila("code"))
@@ -151,36 +151,42 @@
                                 array = arrayCode.ToCharArray
 
                                 script = String.Empty
-                                If arrayCode <> String.Empty Then
-                                    For Each valor In array
-                                        If i = 0 Then
-                                            jerarquia = valor
-                                            subLevel = String.Empty
-                                        Else
-                                            jerarquia &= "." & valor
-                                            subLevel = jerarquia
-                                            subLevel = Mid(subLevel, 1, Len(subLevel) - 2)
-                                        End If
-                                        Fila = Nothing
-                                        Fila = reportPac.selectContentsReport(cmbPac.SelectedValue, jerarquia, subLevel)
-                                        If Fila IsNot Nothing Then
-                                            script &= "<b>" & Fila("name_level") & ": </b>" & Fila("name") & " <br/>"
-                                        End If
-                                        i += 1
-                                    Next
-                                Else
-                                    If row("code") = row2("code") Then
-                                        script &= "<b>" & row2("name_level") & ": </b>" & row2("name") & " <br/>"
+                            If arrayCode <> String.Empty Then
+                                For Each valor In array
+                                    If i = 0 Then
+                                        jerarquia = valor
+                                        subLevel = String.Empty
+                                    Else
+                                        jerarquia &= "." & valor
+                                        subLevel = jerarquia
+                                        subLevel = Mid(subLevel, 1, Len(subLevel) - 2)
                                     End If
-
+                                    Fila = Nothing
+                                    Fila = reportPac.selectContentsReport(cmbPac.SelectedValue, jerarquia, subLevel)
+                                    If Fila IsNot Nothing Then
+                                        script &= "<b>" & Fila("name_level") & ": </b>" & Fila("name") & " <br/>"
+                                    End If
+                                    i += 1
+                                Next
+                            Else
+                                If row("code") = row2("code") Then
+                                    script &= "<b>" & row2("name_level") & ": </b>" & row2("name") & " <br/>"
                                 End If
 
-                                i = 0
+                            End If
+
+                            If cmbNivel.SelectedValue = "6" Then
+                                botonRedireccionar = "<a href=""detallepac.aspx?meta=" & row2("id") & "&pac=" & row2("pac_id") & """>Leer más</a>"
+                            Else
+                                botonRedireccionar = String.Empty
+                            End If
+
+                            i = 0
                                 jerarquia = String.Empty
                                 subLevel = String.Empty
 
                                 If arrayCode <> String.Empty Then
-                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
@@ -203,7 +209,8 @@
                                                                                                                 </div>                                                                                                                 
                                                                                                            </div>                                                                                                                 
                                                                                                        </div>                                                                                                    
-                                                                                                   </div>                                                                                                    
+                                                                                                   </div> 
+                                                                                                   " & botonRedireccionar & "                  
                                                                                                </div>                                                                                                
                                                                                            </div>                                                                                           
                                                                                        </div>                                                                                                              
@@ -211,10 +218,10 @@
                                                                                </a>                                                                                                                                                           
                                                                            </div>
                                                                            "))
-                                Else
+                            Else
                                     If row("code") = row2("code") Then
-                                        pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
-                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
+                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none; border:none !important; "">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
@@ -236,7 +243,8 @@
                                                                                                                </div>                                                                                                                                                                                                                        
                                                                                                            </div>
                                                                                                        </div>
-                                                                                                   </div>                                                                        
+                                                                                                   </div> 
+                                                                                                   " & botonRedireccionar & "                 
                                                                                                </div>
                                                                                            </div>                                                                                              
                                                                                        </div>
@@ -244,7 +252,7 @@
                                                                                </a>                                                                                                                                                           
                                                                            </div>
                                                                            "))
-                                    End If
+                                End If
                                 End If
 
 

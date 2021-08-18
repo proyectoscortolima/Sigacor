@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Pac.aspx.vb" Inherits="Sigacor.Pac" %>
+﻿    <%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Pac.aspx.vb" Inherits="Sigacor.Pac" %>
 
 <!DOCTYPE html>
 
@@ -20,18 +20,18 @@
 <body style="background-image: url('../Componentes/img/FondoReport.jpg'); background-size: cover;">
 
     <form id="form1" runat="server">
-        <asp:Label ID="lblPac" runat="server"></asp:Label>
+        <asp:label ID="lblPac" runat="server"></asp:label>
         <div class="container-fluid">
             <nav class="navbar header-report">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="../Index.aspx">
                         <img src="../Componentes/img/sigaporverde.png" alt="" width="250" height="80" class="d-inline-block align-text-top" />
-                    </a>
+                    </a>                   
                 </div>
-            </nav>
-
+            </nav>             
             <div class="row" style="margin-top: 9rem;">
                 <div class="col-xs-12 col-md-12">
+                    <a class="btn btn-primary mt-4 mb-4" href="../Index.aspx"><i class="fa fa-arrow-left"></i> Volver</a>                    
                     <div class="card-report">
                         <div class="card-body">
                             <div class="row">
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-3 mt-2">
                                     <div class="form-group">
-                                        <label>Periodo</label>
+                                        <h6>Periodo</h6>
                                         <asp:DropDownList ID="cmbPac" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                                 <div class="row">
                                                     <div class="col-12 mt-2">
                                                         <div class="form-group">
-                                                            <label>Nivel</label>
+                                                            <h6>Nivel</h6>
                                                             <asp:DropDownList ID="cmbNivel" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
                                                         </div>
                                                     </div>
@@ -101,37 +101,37 @@
                                                 <div class="row">
                                                     <div class="col-12 mt-2">
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblLineas" runat="server"></asp:Label>
+                                                            <asp:label ID="lblLineas" runat="server"></asp:label>
                                                             <asp:DropDownList ID="cmbLineas" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 mt-2" id="pnlNiv2" runat="server">
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblNiv2" runat="server"></asp:Label>
+                                                            <asp:label ID="lblNiv2" runat="server"></asp:label>
                                                             <asp:DropDownList ID="cmbNiv2" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 mt-2" id="pnlNiv3" runat="server">
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblNiv3" runat="server"></asp:Label>
+                                                            <asp:label ID="lblNiv3" runat="server"></asp:label>
                                                             <asp:DropDownList ID="cmbNiv3" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 mt-2" id="pnlNiv4" runat="server">
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblNiv4" runat="server"></asp:Label>
+                                                            <asp:label ID="lblNiv4" runat="server"></asp:label>
                                                             <asp:DropDownList ID="cmbNiv4" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 mt-2" id="pnlNiv5" runat="server">
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblNiv5" runat="server"></asp:Label>
+                                                            <asp:label ID="lblNiv5" runat="server"></asp:label>
                                                             <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                                                         </div>
                                                     </div>   
                                                     <div class="col-12 mt-2" id="pnlNiv6" runat="server">
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblNiv6" runat="server"></asp:Label>
+                                                            <asp:label ID="lblNiv6" runat="server"></asp:label>
                                                             <asp:DropDownList ID="cmbNiv6" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
                                                         </div>
                                                     </div>   
@@ -164,7 +164,7 @@
                                                 <div class="row">
                                                     <div class="col-12 mt-2">
                                                         <div class="form-group">
-                                                            <label>Palabra clave</label>
+                                                            <h6>Palabra clave</h6>
                                                             <asp:TextBox ID="txtPalabraClave" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>                                                            
                                                         </div>
                                                     </div>
@@ -198,28 +198,28 @@
                                     <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl1.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">No Programado</label>
+                                    <img src="../Componentes/img/nvl1.svg" class="icon-report" height="80" width="80"/>
+                                    <h6 class="mt-3 label-conveciones">No Programado</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl2.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">Se Ha ejecutado menos del 25%</label>
+                                    <img src="../Componentes/img/nvl2.svg" class="icon-report" height="80" width="80"/>
+                                    <h6 class="mt-3 label-conveciones">Se Ha ejecutado menos del 25%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl3.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">Se ha ejecutado del 25% al 49%</label>
+                                    <img src="../Componentes/img/nvl3.svg" class="icon-report" height="80" width="80"/>
+                                    <h6 class="mt-3 label-conveciones">Se ha ejecutado del 25% al 49%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl4.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">Se ha ejecutado del 50% al 74%</label>
+                                    <img src="../Componentes/img/nvl4.svg" class="icon-report" height="80" width="80"/>
+                                    <h6 class="mt-3 label-conveciones">Se ha ejecutado del 50% al 74%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl5.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">Se ha ejecutado del 75% al 99.9%</label>
+                                    <img src="../Componentes/img/nvl5.svg" class="icon-report" height="80" width="80"/>
+                                    <h6 class="mt-3 label-conveciones">Se ha ejecutado del 75% al 99.9%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl6.svg" class="icon-report" height="100" width="100"/>
-                                    <label class="mt-3">Se ha ejecutado mas del 100%</label>
+                                    <img src="../Componentes/img/nvl6.svg" class="icon-report" height="80" width="80"/>
+                                    <h6 class="mt-3 label-conveciones">Se ha ejecutado mas del 100%</h6>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
         <div>
         </div>
 
-        <asp:Label ID="lblError" runat="server" style="color:red;"></asp:Label>
+        <asp:label ID="lblError" runat="server" style="color:red;"></asp:label>
     </form>
 
     <footer class="sticky-footer bg-white mt-5">
@@ -245,6 +245,12 @@
                         </div>
                     </div>
                 </footer>
+
+    <style>
+        .label-conveciones{
+            font-size: 0.8rem;
+        }
+    </style>
 
     <script src="../Componentes/vendor/jquery/jquery.min.js"></script>
     <script src="../Componentes/vendor/bootstrap/js/bootstrap.bundle.js"></script>

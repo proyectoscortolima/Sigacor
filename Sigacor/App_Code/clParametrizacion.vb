@@ -3,21 +3,21 @@ Public Class clParametrizacion
 
 #Region "Pac"
 
-    Public Function insertPac(ByVal name As String, ByVal slogan As String, ByVal initial_year As String,
+    Public Function insertPac(ByVal name As String, ByVal initial_year As String,
                               ByVal final_year As String, ByVal number_years As String, ByVal state As String) As Integer
 
-        QRY = "insert into pac(name, slogan, initial_year, final_year, number_years, state) values (" &
-              "'" & name & "', '" & slogan & "', " & initial_year & ", " & final_year & ", " &
+        QRY = "insert into pac(name, initial_year, final_year, number_years, state) values (" &
+              "'" & name & "', " & initial_year & ", " & final_year & ", " &
               "" & number_years & ", '" & state & "') "
 
         Return Data.Execute(QRY)
     End Function
 
-    Public Function updatePac(ByVal name As String, ByVal slogan As String, ByVal initial_year As String,
+    Public Function updatePac(ByVal name As String, ByVal initial_year As String,
                               ByVal final_year As String, ByVal number_years As String, ByVal state As String,
                               ByVal id As String) As Integer
 
-        QRY = "update pac set name = '" & name & "', slogan = '" & slogan & "', initial_year = " & initial_year & ", 
+        QRY = "update pac set name = '" & name & "', initial_year = " & initial_year & ", 
                final_year = " & final_year & ", number_years = " & number_years & ", state = '" & state & "'
                where id = " & id & ""
 
@@ -46,7 +46,7 @@ Public Class clParametrizacion
 
     Public Function selectPac() As DataTable
 
-        QRY = "select id, name, slogan, initial_year, final_year, number_years, state from pac where state = 'A' 
+        QRY = "select id, name, initial_year, final_year, number_years, state from pac where state = 'A' 
                order by id"
 
         Return Data.OpenData(QRY)
@@ -54,7 +54,7 @@ Public Class clParametrizacion
 
     Public Function selectPacTodos() As DataTable
 
-        QRY = "select id, name, slogan, initial_year, final_year, number_years, state from pac where state <> 'I' 
+        QRY = "select id, name, initial_year, final_year, number_years, state from pac where state <> 'I' 
                order by id desc"
 
         Return Data.OpenData(QRY)
@@ -62,14 +62,14 @@ Public Class clParametrizacion
 
     Public Function selectPac(ByVal id As String) As DataRow
 
-        QRY = "select id, name, slogan, initial_year, final_year, number_years, state from pac where id = " & id
+        QRY = "select id, name, initial_year, final_year, number_years, state from pac where id = " & id
 
         Return Data.OpenRow(QRY)
     End Function
 
     Public Function selectPacActivo() As DataRow
 
-        QRY = "select id, name, slogan, initial_year, final_year, number_years, state from pac where state = 'A'"
+        QRY = "select id, name, initial_year, final_year, number_years, state from pac where state = 'A'"
 
         Return Data.OpenRow(QRY)
     End Function
@@ -391,6 +391,13 @@ Public Class clParametrizacion
         Return Data.Execute(QRY)
     End Function
 
+    Public Function selectReport(ByVal goal_id As String) As DataTable
+
+        QRY = "select activities_developed, CONVERT(nvarchar(30), date_reg, 107) fecha, who_report, user_reg
+               from report where goal_id = " & goal_id
+
+        Return Data.OpenData(QRY)
+    End Function
 #End Region
 
 End Class
