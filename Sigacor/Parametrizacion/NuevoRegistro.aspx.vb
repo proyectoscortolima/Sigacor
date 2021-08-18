@@ -939,6 +939,12 @@
                     alerta("Advertencia", "No se puede grabar el pac, se encuentra un pac activo", "info", "")
                     Exit Sub
                 End If
+                DataT = Nothing
+                DataT = parametrizacion.selectPacPeriodo(txtYearInicial.Text.Trim, txtYearFinal.Text.Trim)
+                If DataT.Rows.Count > 0 Then
+                    alerta("Advertencia", "No se puede grabar el pac, el periodo ya fue cerrado", "info", "")
+                    Exit Sub
+                End If
             End If
 
             Session("Actualizar") = "N"
