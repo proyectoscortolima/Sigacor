@@ -22,16 +22,17 @@
     <form id="form1" runat="server">
         <asp:label ID="lblPac" runat="server"></asp:label>
         <div class="container-fluid">
-            <nav class="navbar header-report">
+            <nav class="navbar header-report" style="height: 90px;">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="../Index.aspx">
-                        <img src="../Componentes/img/sigaporverde.png" alt="" width="250" height="80" class="d-inline-block align-text-top" />
-                    </a>                   
+                        <img src="../Componentes/img/sigaporverde.png" alt="" width="170" height="60" class="d-inline-block align-text-top" />
+                    </a> 
+                    <a class="btn btn-primary" href="../Index.aspx"><i class="fa fa-arrow-left"></i> Volver</a>       
                 </div>
+                
             </nav>             
             <div class="row" style="margin-top: 9rem;">
-                <div class="col-xs-12 col-md-12">
-                    <a class="btn btn-primary mt-4 mb-4" href="../Index.aspx"><i class="fa fa-arrow-left"></i> Volver</a>                    
+                <div class="col-xs-12 col-md-12">                                 
                     <div class="card-report">
                         <div class="card-body">
                             <div class="row">
@@ -189,36 +190,36 @@
             <div class="row mt-4">
                 <div class="col-xs-12 col-md-12">
                     <div class="card-report">
-                        <div class="card-body">
+                        <div class="card-body" style="padding: 0.5rem;">
                             <div class="row">
                                 <div class="col-xs-6 col-md-2">
-                                    <h3>Covenciones</h3>
+                                    <h5>Covenciones</h5>
                                 </div>
                                 <div class="col-xs-6 col-md-10">
                                     <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl1.svg" class="icon-report" height="80" width="80"/>
+                                    <img src="../Componentes/img/nvl1.svg" class="icon-report" height="70" width="70"/>
                                     <h6 class="mt-3 label-conveciones">No Programado</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl2.svg" class="icon-report" height="80" width="80"/>
+                                    <img src="../Componentes/img/nvl2.svg" class="icon-report" height="70" width="70"/>
                                     <h6 class="mt-3 label-conveciones">Se Ha ejecutado menos del 25%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl3.svg" class="icon-report" height="80" width="80"/>
+                                    <img src="../Componentes/img/nvl3.svg" class="icon-report" height="70" width="70"/>
                                     <h6 class="mt-3 label-conveciones">Se ha ejecutado del 25% al 49%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl4.svg" class="icon-report" height="80" width="80"/>
+                                    <img src="../Componentes/img/nvl4.svg" class="icon-report" height="70" width="70"/>
                                     <h6 class="mt-3 label-conveciones">Se ha ejecutado del 50% al 74%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl5.svg" class="icon-report" height="80" width="80"/>
+                                    <img src="../Componentes/img/nvl5.svg" class="icon-report" height="70" width="70"/>
                                     <h6 class="mt-3 label-conveciones">Se ha ejecutado del 75% al 99.9%</h6>
                                 </div>
                                 <div class="col-xs-12 col-md-2 text-center">
-                                    <img src="../Componentes/img/nvl6.svg" class="icon-report" height="80" width="80"/>
+                                    <img src="../Componentes/img/nvl6.svg" class="icon-report" height="70" width="70"/>
                                     <h6 class="mt-3 label-conveciones">Se ha ejecutado mas del 100%</h6>
                                 </div>
                             </div>
