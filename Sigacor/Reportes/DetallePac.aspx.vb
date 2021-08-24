@@ -82,33 +82,11 @@
                             lblMeta.Text = CInt(Fila3("value_one_year")) + CInt(Fila3("value_two_year")) +
                                            CInt(Fila3("value_three_year")) + CInt(Fila3("value_four_year"))
                         ElseIf Fila3("type_goal") = "M" Then
-                            lblMeta.Text = Fila("line_base")
+                            lblMeta.Text = Fila3("line_base")
                         ElseIf Fila3("type_goal") = "R" Then
                             lblMeta.Text = CInt(Fila3("value_one_year")) - CInt(Fila3("value_two_year")) -
                                            CInt(Fila3("value_three_year")) - CInt(Fila3("value_four_year"))
                         End If
-
-
-
-
-                        'year_initial = CInt(Fila("initial_year"))
-                        'For i2 As Integer = 1 To CInt(Fila("number_years"))
-                        '    If year_initial = CInt(Date.Now.ToString("yyyy")) Then
-                        '        index = i2
-                        '    End If
-                        '    year_initial += 1
-                        'Next
-                        'Select Case index
-                        '    Case 1
-                        '        lblMeta.Text = Fila3("value_one_year")
-                        '    Case 2
-                        '        lblMeta.Text = Fila3("value_two_year")
-                        '    Case 3
-                        '        lblMeta.Text = Fila3("value_three_year")
-                        '    Case 4
-                        '        lblMeta.Text = Fila3("value_four_year")
-                        'End Select
-
 
 
                         progressbarEjecucion.Attributes.Add("style", "width: " & Fila3("value_progress") & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; ")

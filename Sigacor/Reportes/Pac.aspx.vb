@@ -36,22 +36,7 @@
     End Sub
 
 #End Region
-    Public Function DeleteArrayRepetitions(ByVal strArray1() As String, ByVal Sorted As Boolean) As Array
-        Dim strArray2(0) As String
-        Dim Count As Integer = 0
-        Dim Count2 As Integer = 0
-        For Each Element In strArray1
-            Dim Last As Integer = Array.LastIndexOf(strArray1, Element)
-            If Count = Last Then
-                ReDim Preserve strArray2(Count2)
-                strArray2(Count2) = Element
-                Count2 += 1
-            End If
-            Count += 1
-        Next
-        If Sorted = True Then Array.Sort(strArray2)
-        Return strArray2
-    End Function
+
 #Region "Click"
     Private Sub btnConsultarGeneral_Click(sender As Object, e As EventArgs) Handles btnConsultarGeneral.Click
         Try
@@ -879,6 +864,22 @@
 #End Region
 
 #Region "Metodos - Funciones"
+    Public Function DeleteArrayRepetitions(ByVal strArray1() As String, ByVal Sorted As Boolean) As Array
+        Dim strArray2(0) As String
+        Dim Count As Integer = 0
+        Dim Count2 As Integer = 0
+        For Each Element In strArray1
+            Dim Last As Integer = Array.LastIndexOf(strArray1, Element)
+            If Count = Last Then
+                ReDim Preserve strArray2(Count2)
+                strArray2(Count2) = Element
+                Count2 += 1
+            End If
+            Count += 1
+        Next
+        If Sorted = True Then Array.Sort(strArray2)
+        Return strArray2
+    End Function
     Public Sub cargarLineas()
         Try
             If cmbPac.SelectedIndex = 0 Then
@@ -925,7 +926,7 @@
                 cmbNivel.DataSource = DataT
                 cmbNivel.DataBind()
                 cmbNivel.Items.Insert(0, New ListItem("-Selecione un nivel-", ""))
-                cmbNivel.Items.Insert(6, New ListItem("Metas", "6"))
+                cmbNivel.Items.Insert(DataT.Rows.Count + 1, New ListItem("Metas", "6"))
             Else
                 cmbNivel.Items.Clear()
             End If
