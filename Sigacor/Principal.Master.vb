@@ -3,7 +3,7 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Session("CodUsuario") Is Nothing Then
-            Response.Redirect("../Login.aspx")
+            Response.Redirect("../Index.aspx")
         End If
         lblNomUsuario.Text = Session("NomUsuario")
         pnlMenu.Controls.Clear()
