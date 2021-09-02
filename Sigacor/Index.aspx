@@ -13,7 +13,7 @@
         rel="stylesheet" />
     <link href="Componentes/css/sb-admin-2.min.css" rel="stylesheet" />
     <script src="Componentes/sweetAlert2/sweetalert2.all.min.js"></script>
-    <script src="../Componentes/vendor/jquery/jquery.min.js"></script>     
+    <script src="Componentes/vendor/jquery/jquery.min.js"></script>     
 
 </head>
 <body style="background-image: url('Componentes/img/imagen_cortolima.png'); background-size: cover;">
@@ -212,7 +212,7 @@
 
         </div>--%>
     </form>
-    <script src="../Componentes/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="../Componentes/js/sb-admin-2.min.js"></script>    
+    <script src="Componentes/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="Componentes/js/sb-admin-2.min.js"></script>    
 </body>
 </html>
