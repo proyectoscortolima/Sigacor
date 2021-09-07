@@ -2010,6 +2010,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Parametrizacion\AvancePac.aspx" />
     <Content Include="Parametrizacion\HojaVida.aspx" />
     <Content Include="Parametrizacion\NuevoRegistro.aspx" />
     <Content Include="Parametrizacion\Parametrizacion.aspx" />
@@ -2065,6 +2066,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Parametrizacion\AvancePac.aspx.designer.vb">
+      <DependentUpon>AvancePac.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\AvancePac.aspx.vb">
+      <DependentUpon>AvancePac.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Parametrizacion\HojaVida.aspx.designer.vb">
       <DependentUpon>HojaVida.aspx</DependentUpon>

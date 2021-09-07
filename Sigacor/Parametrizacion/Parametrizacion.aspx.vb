@@ -1,7 +1,10 @@
-﻿Public Class Parametrizacion
+﻿
+
+Public Class Parametrizacion
     Inherits System.Web.UI.Page
 
     Dim parametrizacion As New clParametrizacion
+    Dim reportPac As New clReportPac
 
 #Region "Load"
 
@@ -9,6 +12,8 @@
         Try
             If Not IsPostBack Then
                 lblError.Visible = False
+                lblError.Visible = False
+                lblPac.Visible = False
                 actualizarStatePac()
                 cargarPac()
             End If
@@ -81,7 +86,7 @@
                 Fila = parametrizacion.selectPac(pac)
                 If Fila IsNot Nothing Then
                     lblPac.Text = Fila("id")
-                    lblNompac.Text = Fila("name")
+                    lblNomPac.Text = Fila("name")
                     'lblSlogan.Text = Fila("slogan")
                     lblYearIni.Text = Fila("initial_year")
                     lblCantYears.Text = Fila("number_years")

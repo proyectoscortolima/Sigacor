@@ -1167,8 +1167,12 @@
             '    array = "[" & cmbNiveles.SelectedItem.ToString() & ":" & txtCodigo.Text.Trim & "]"
             'End If
             'DataT = Nothing
+            If subNivel <> String.Empty Then
+                code = subNivel & "." & txtCodigo.Text.Trim
+            Else
+                code = txtCodigo.Text.Trim
+            End If
 
-            code = subNivel & "." & txtCodigo.Text.Trim
             DataT = parametrizacion.selectContents(lblPac.Text.Trim, code)
             If DataT.Rows.Count > 0 Then
                 alerta("Advertencia", "Jerarquia " & code & " ya existe", "info")

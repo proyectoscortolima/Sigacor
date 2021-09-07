@@ -4,10 +4,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="contenedor2" runat="server">
-    <script src="../Componentes/vendor/jquery/jquery.min.js"></script>
+
+    <script src="../Componentes/vendor/jquery/jquery.min.js"></script>    
 
     <div class="container">
-
         <div class="row">
             <div class="col-5">
                 <h3>PARAMETRIZACIÓN DEL PAC</h3>
@@ -32,7 +32,7 @@
                     <asp:DropDownList ID="cmbFiltrar" class="btn btn-amarillo dropdown-toggle" runat="server">
                         <asp:ListItem>Filtrar por </asp:ListItem>
                     </asp:DropDownList>
-                </div>                
+                </div>
 
                 <div class="row mt-4">
                     <div class="col-12 text-left" style="overflow-x: auto; overflow-y: auto;">
@@ -74,7 +74,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="modal fade" id="mdlVisualizador" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -120,11 +119,11 @@
                             <label class="lblModal">Niveles</label>
                         </div>
 
-                         <div class="col-12" style="overflow-x: auto; overflow-y: auto;">
+                        <div class="col-12" style="overflow-x: auto; overflow-y: auto;">
                             <asp:GridView ID="tblNivParam" runat="server" CssClass="table" Width="100%" AutoGenerateColumns="False">
-                                <Columns>                                    
+                                <Columns>
                                     <asp:BoundField DataField="hierarchy" HeaderText="Código" />
-                                    <asp:BoundField DataField="name" HeaderText="Nombre" />                                    
+                                    <asp:BoundField DataField="name" HeaderText="Nombre" />
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -133,7 +132,7 @@
                             <label class="lblModal">Plan de acción cuatrienal</label>
                         </div>
 
-                         <div class="col-12" style="overflow-x: auto; overflow-y: auto;">
+                        <div class="col-12" style="overflow-x: auto; overflow-y: auto;">
                             <asp:GridView ID="tblPlanAccParam" runat="server" CssClass="table" Width="100%" AutoGenerateColumns="False">
                                 <Columns>
                                     <asp:BoundField DataField="level_id" HeaderText="Nivel" />
@@ -153,7 +152,7 @@
         </div>
     </div>
 
-    <asp:Button ID="eliminarPac" runat="server" CssClass="d-none"/>
+    <asp:Button ID="eliminarPac" runat="server" CssClass="d-none" />
 
     <style>
         .espacioBtnAlerta{
@@ -162,7 +161,7 @@
     </style>
 
     <script>
-        $(window).on('load', function () {            
+        $(window).on('load', function () {
             $('#1').addClass("MnuActive");
         });
 
@@ -200,7 +199,7 @@
                     )
                 }
             })
-        };                
+        };
 
         window.onload = function () {
             var pos = window.name || 0;
@@ -209,5 +208,32 @@
         window.onunload = function () {
             window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
         }
+
+
+        $("#dialog").dialog({
+            autoOpen: false,
+            width: 400,
+            buttons: [
+                {
+                    text: "Ok",
+                    click: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                {
+                    text: "Cancel",
+                    click: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            ]
+        });
+
+        // Link to open the dialog
+        $("#dialog-link").click(function (event) {
+            $("#dialog").dialog("open");
+            event.preventDefault();
+        });
     </script>
 </asp:Content>
+
