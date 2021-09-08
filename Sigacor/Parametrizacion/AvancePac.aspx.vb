@@ -568,16 +568,19 @@
                                                                            </div>                                                                        
                                                           "))
 
-            Dim codeLinea, nombreLinea, arrayCodeLinea, lineaGlobal As String
+            Dim codeLinea, nombreLinea, lineaGlobal As String
             Dim contador As Integer = 0
             DataT = Nothing
             DataT = reportPac.selectPalabraClave(txtPalabraClave.Text.Trim, cmbPac.SelectedValue)
             If DataT.Rows.Count > 0 Then
                 For Each row As DataRow In DataT.Rows
+                    Dim delimitadores() As String = {"."}
+                    Dim vectoraux() As String
 
-                    codeLinea = CStr(row("code")).Replace(".", "")
-                    arrayCodeLinea = codeLinea.ToCharArray
-                    Fila = reportPac.selectLineasFila(arrayCodeLinea(0), cmbPac.SelectedValue)
+                    codeLinea = row("code")
+                    vectoraux = codeLinea.Split(delimitadores, StringSplitOptions.None)
+
+                    Fila = reportPac.selectLineasFila(vectoraux(0), cmbPac.SelectedValue)
 
                     If Fila IsNot Nothing Then
                         If contador = 0 Then
@@ -651,89 +654,27 @@
                                 subLevel = String.Empty
 
                                 If arrayCode <> String.Empty Then
-                                    'pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
-                                    '                                           <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
-                                    '                                               <div class=""card-header-report"" id=""headingOne"">
-                                    '                                                   <div class=""row"">
-                                    '                                                       <div class=""col-12 text-center"">
-                                    '                                                           <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
-                                    '                                                           <h5 class=""mb-0"">
-                                    '                                                               <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
-                                    '                                                                   <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
-                                    '                                                               </button>
-                                    '                                                           </h5>
-                                    '                                                       </div>
-                                    '                                                       <div class=""col-12"">
-                                    '                                                           <div class=""collapse"" id=""rptSub-" & i2 & """>
-                                    '                                                               <div class=""card-report mb-3"" style=""margin-top: 0.4rem;"">
-                                    '                                                                   <div class=""card-body"">
-                                    '                                                                       <div class=""row""> 
-                                    '                                                                            <div class=""col-12"">
-                                    '                                                                                " & script & "
-                                    '                                                                                <br/>
-                                    '                                                                                <label>Ver más</label>
-                                    '                                                                            </div> 
-                                    '                                                                       </div>
-                                    '                                                                   </div>
-                                    '                                                               </div>                                                                        
-                                    '                                                           </div>
-                                    '                                                       </div><br/>
-                                    '                                                   </div>
-                                    '                                               </div>
-                                    '                                           </a>                                                                                                                                                           
-                                    '                                       </div>
-                                    '                                       "))
+
 
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                <a class=""card-report-2"" >
                                                                                    <div class=""card-header-report"" id=""headingOne"" style=""padding: 10px 10px; background: #1cc88a; color: white;"">                                                                                                                                                                                                                                                                         
                                                                                            <h5 class=""mb-0 text-center"" style=""font-size: 11px;"">
-                                                                                               <b>" & row2("code") & "
+                                                                                               <b>" & row2("code") & " </b>
                                                                                            </h5>                                                                                                                                                                                                                                                                                                                                                                             
                                                                                    </div>
                                                                                </a>                                                                                                                                                           
                                                                             </div>
                                                                            "))
+
+
                                 Else
                                     If row("code") = row2("code") Then
-                                        'pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
-                                        '                                       <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
-                                        '                                           <div class=""card-header-report"" id=""headingOne"">
-                                        '                                               <div class=""row"">
-                                        '                                                   <div class=""col-12 text-center"">
-                                        '                                                       <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
-                                        '                                                       <h5 class=""mb-0"">
-                                        '                                                           <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
-                                        '                                                               <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
-                                        '                                                           </button>
-                                        '                                                       </h5>
-                                        '                                                   </div>
-                                        '                                                   <div class=""col-12"">
-                                        '                                                       <div class=""collapse"" id=""rptSub-" & i2 & """>
-                                        '                                                           <div class=""card-report mb-3"" style=""margin-top: 0.4rem;"">
-                                        '                                                               <div class=""card-body"">
-                                        '                                                                   <div class=""row""> 
-                                        '                                                                       <div class=""col-12"">
-                                        '                                                                            " & script & "
-                                        '                                                                            <br/>
-                                        '                                                                            <label>Ver más</label>
-                                        '                                                                       </div>                                                                                                                                                                                                                        
-                                        '                                                                   </div>
-                                        '                                                               </div>
-                                        '                                                           </div>                                                                        
-                                        '                                                       </div>
-                                        '                                                   </div><br/>
-                                        '                                               </div>
-                                        '                                           </div>
-                                        '                                       </a>                                                                                                                                                           
-                                        '                                   </div>
-                                        '                                   "))
-
                                         pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                <a class=""card-report-2"" >
                                                                                    <div class=""card-header-report"" id=""headingOne"" style=""padding: 10px 10px; background: #1cc88a; color: white;"">                                                                                                                                                                                                                                                                         
                                                                                            <h5 class=""mb-0 text-center"" style=""font-size: 11px;"">
-                                                                                               <b>" & row2("code") & "
+                                                                                               <b>" & row2("code") & " </b>
                                                                                            </h5>                                                                                                                                                                                                                                                                                                                                                                             
                                                                                    </div>
                                                                                </a>                                                                                                                                                           
