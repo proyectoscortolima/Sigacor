@@ -13,10 +13,12 @@
                     Session("CodMeta") = Request.QueryString("meta")
                     Response.Redirect("detallepac.aspx")
                 End If
+            End If
 
-                lblPac.Text = Session("CodPac")
-                lblCodMeta.Text = Session("CodMeta")
+            lblPac.Text = Session("CodPac")
+            lblCodMeta.Text = Session("CodMeta")
 
+            If lblPac.Text <> String.Empty And lblCodMeta.Text <> String.Empty Then
                 DataT = Nothing
                 Dim Fila2, Fila3 As DataRow
                 Dim Datat2 As New DataTable
@@ -109,9 +111,7 @@
                     End If
 
                 End If
-
             End If
-
 
         Catch ex As Exception
             lblError.Text = ex.Message

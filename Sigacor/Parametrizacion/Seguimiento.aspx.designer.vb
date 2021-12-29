@@ -599,11 +599,11 @@ Partial Public Class Seguimiento
     Protected WithEvents CargarArchivo As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control CaragrImagen.
+    '''Control CargarImagen.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents CaragrImagen As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents CargarImagen As Global.System.Web.UI.WebControls.Button
 End Class

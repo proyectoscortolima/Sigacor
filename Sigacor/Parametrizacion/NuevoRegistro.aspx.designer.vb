@@ -689,13 +689,22 @@ Partial Public Class NuevoRegistro
     Protected WithEvents cmbTipoMeta As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control cmbSubActividad.
+    '''Control lblNivelMeta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents cmbSubActividad As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblNivelMeta As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control cmbNivelMeta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cmbNivelMeta As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control txtLineaBaseMeta.
@@ -995,13 +1004,22 @@ Partial Public Class NuevoRegistro
     Protected WithEvents cmbTipoMetaMdl As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control cmbSubActividadMetaMdl.
+    '''Control lblNivelMetaMdl.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents cmbSubActividadMetaMdl As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblNivelMetaMdl As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control cmbNivelMetaMdl.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cmbNivelMetaMdl As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control txtLineaBaseMetaMdl.

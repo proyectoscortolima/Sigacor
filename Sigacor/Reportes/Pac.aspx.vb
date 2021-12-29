@@ -91,13 +91,11 @@
                 DataT = reportPac.selectLineasFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue)
             End If
 
-
-
             If DataT.Rows.Count > 0 Then
                     For Each row As DataRow In DataT.Rows
                         Fila = Nothing
-                        Fila = reportPac.selectLineasFila(Mid(CStr(row("sublevel")), 1, 1), cmbPac.SelectedValue)
-                        If Fila IsNot Nothing Then
+                    Fila = reportPac.selectLineasFila(row("code"), cmbPac.SelectedValue)
+                    If Fila IsNot Nothing Then
                             pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
                                                                        <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & Fila("code") & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
                                                                            <div class=""card-header-report"" id=""headingOne"">
@@ -943,6 +941,221 @@
         End If
         Script &= " </script>"
         ScriptManager.RegisterStartupScript(Me, GetType(Page), "swal", Script, False)
+    End Sub
+
+    Protected Sub chkConvenciones_CheckedChanged(sender As Object, e As EventArgs)
+        Try
+            Dim dataT2 As DataTable
+            Dim jerarquia, subLevel, script, botonRedireccionar As String
+            Dim i As Integer = 0 
+            Dim i2 As Integer = 0
+            Dim array() As Char
+            Dim delimitadores() As String = {"."}
+            Dim vectoraux() As String
+            Dim arrayCode() As String
+            Dim contador = 0
+
+            If cmbPac.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione el periodo", "info", "cmbPac")
+                Exit Sub
+            End If
+
+            pnlResultados.Controls.Clear()
+            pnlResultados.Controls.Add(New LiteralControl("<div Class=""col-xs-12 col-md-12"">
+                                                               <div class=""card-report"">
+                                                                   <div class=""card-body"">
+                                                                       <div class=""row"">
+                                                                           <div class=""col-xs-6 col-md-2"">
+                                                                               <h3>Resultados</h3>
+                                                                           </div>
+                                                                           <div class=""col-xs-6 col-md-10"">
+                                                                               <hr style=""border-top: 3px solid rgba(0, 0, 0, .1);"" />
+                                                                           </div>                                                                        
+                                                          "))
+
+            DataT = Nothing
+
+            DataT = reportPac.selectGoals(True, cmbPac.SelectedValue, chkNoProgramado.Checked, chkEjecMenos25.Checked, chkEjec25Al49.Checked,
+                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked)
+            If DataT.Rows.Count > 0 Then
+                Dim vectorHistorial(DataT.Rows.Count - 1) As String
+                For Each row As DataRow In DataT.Rows
+                    vectoraux = row("sublevel").Split(delimitadores, StringSplitOptions.None)
+                    vectorHistorial(contador) = CStr(vectoraux(0))
+                    contador += 1
+                Next
+
+                vectoraux = DeleteArrayRepetitions(vectorHistorial, True)
+            End If
+            If DataT.Rows.Count > 0 Then
+                DataT = reportPac.selectLineasFiltroGeneralMetas(cmbPac.SelectedValue, vectoraux)
+            Else
+                pnlResultados.Controls.Add(New LiteralControl("</div>
+                                                               </div>
+                                                                   </div>
+                                                                       </div>"))
+            End If
+            If DataT.Rows.Count > 0 Then
+                For Each row As DataRow In DataT.Rows
+                    Fila = Nothing
+                    Fila = reportPac.selectLineasFila(row("code"), cmbPac.SelectedValue)
+                    If Fila IsNot Nothing Then
+                        pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
+                                                                       <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & Fila("code") & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
+                                                                           <div class=""card-header-report"" id=""headingOne"">
+                                                                               <div class=""row"">
+                                                                                   <div class=""col-12"">
+                                                                                       <h5 class=""mb-0"">
+                                                                                           <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
+                                                                                               " & Fila("code") & " - " & Fila("name") & " <i class=""fa fa-arrow-down ml-3""></i>
+                                                                                           </button>
+                                                                                       </h5>
+                                                                                   </div>
+                                                                               </div>
+                                                                           </div>
+                                                                       </a>
+                                                                   </div>
+                                                                   <div class=""col-12"">
+                                                                       <div class=""collapse show"" id=""rpt-" & Fila("code") & """>
+                                                                           <div class=""card-report card-body mb-3"" style=""margin-top: 0.4rem;"">
+                                                                               <div class=""card-body"">
+                                                                                   <div class=""row"">
+
+                                                                   "))
+                    End If
+
+
+
+
+                    dataT2 = reportPac.selectGoals(False, cmbPac.SelectedValue, chkNoProgramado.Checked, chkEjecMenos25.Checked, chkEjec25Al49.Checked,
+                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked, Fila("code"))
+                    If dataT2.Rows.Count > 0 Then
+                        For Each row2 As DataRow In dataT2.Rows
+                            arrayCode = row2("code").Split(delimitadores, StringSplitOptions.None)
+
+                            script = String.Empty
+                            If arrayCode IsNot Nothing Then
+                                For Each valor In arrayCode
+                                    If i = 0 Then
+                                        jerarquia = valor
+                                        subLevel = String.Empty
+                                    Else
+                                        jerarquia &= "." & valor
+                                        subLevel = jerarquia
+                                        subLevel = Mid(subLevel, 1, Len(subLevel) - 2)
+                                    End If
+                                    Fila = Nothing
+                                    Fila = reportPac.selectContentsReport(cmbPac.SelectedValue, jerarquia, subLevel)
+                                    If Fila IsNot Nothing Then
+                                        script &= "<b>" & Fila("name_level") & ": </b>" & Fila("name") & " <br/>"
+                                    End If
+                                    i += 1
+                                Next
+                            Else
+                                If row("code") = row2("code") Then
+                                    script &= "<b>" & row2("name_level") & ": </b>" & row2("name") & " <br/>"
+                                End If
+
+                            End If
+
+                            botonRedireccionar = "<a href=""detallepac.aspx?meta=" & row2("id") & "&pac=" & row2("pac_id") & """>Leer más</a>"
+                            i = 0
+                            jerarquia = String.Empty
+                            subLevel = String.Empty
+
+                            If arrayCode IsNot Nothing Then
+                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                                                               <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
+                                                                                   <div class=""card-header-report"" id=""headingOne"">
+                                                                                       <div class=""row"">
+                                                                                           <div class=""col-12 text-center"">
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <h5 class=""mb-0"">
+                                                                                                   <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
+                                                                                                       <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
+                                                                                                   </button>
+                                                                                               </h5>
+                                                                                           </div>
+                                                                                           <div class=""col-12"">
+                                                                                               <div class=""collapse"" id=""rptSub-" & i2 & """>
+                                                                                                   <div class=""card-report mb-3"" style=""margin-top: 0.4rem;"">
+                                                                                                       <div class=""card-body"">
+                                                                                                           <div class=""row""> 
+                                                                                                                <div class=""col-12"">
+                                                                                                                    " & script & "
+                                                                                                                    <br/>                                                                                                                    
+                                                                                                                </div>                                                                                                                 
+                                                                                                           </div>                                                                                                                 
+                                                                                                       </div>                                                                                                    
+                                                                                                   </div> 
+                                                                                                   " & botonRedireccionar & "                  
+                                                                                               </div>                                                                                                
+                                                                                           </div>                                                                                           
+                                                                                       </div>                                                                                                              
+                                                                                   </div>
+                                                                               </a>                                                                                                                                                           
+                                                                           </div>
+                                                                           "))
+                            Else
+                                If row("code") = row2("code") Then
+                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none; border:none !important; "">
+                                                                                   <div class=""card-header-report"" id=""headingOne"">
+                                                                                       <div class=""row"">
+                                                                                           <div class=""col-12 text-center"">
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <h5 class=""mb-0"">
+                                                                                                   <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
+                                                                                                       <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
+                                                                                                   </button>
+                                                                                               </h5>
+                                                                                           </div>
+                                                                                           <div class=""col-12"">
+                                                                                               <div class=""collapse"" id=""rptSub-" & i2 & """>
+                                                                                                   <div class=""card-report mb-3"" style=""margin-top: 0.4rem;"">
+                                                                                                       <div class=""card-body"">
+                                                                                                           <div class=""row""> 
+                                                                                                               <div class=""col-12"">
+                                                                                                                    " & script & "
+                                                                                                                    <br/>                                                                                                                    
+                                                                                                               </div>                                                                                                                                                                                                                        
+                                                                                                           </div>
+                                                                                                       </div>
+                                                                                                   </div> 
+                                                                                                   " & botonRedireccionar & "                 
+                                                                                               </div>
+                                                                                           </div>                                                                                              
+                                                                                       </div>
+                                                                                   </div>
+                                                                               </a>                                                                                                                                                           
+                                                                           </div>
+                                                                           "))
+                                End If
+                            End If
+
+
+                            i2 += 1
+                        Next
+                    Else
+                        pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
+                    End If
+
+                    pnlResultados.Controls.Add(New LiteralControl("</div>
+                                                                       </div>
+                                                                           </div>                                                                        
+                                                                               </div>
+                                                                                   </div><br/>"))
+                Next
+            End If
+
+            pnlResultados.Controls.Add(New LiteralControl("</div>
+                                                               </div>
+                                                                   </div>
+                                                                       </div>"))
+        Catch ex As Exception
+            lblError.Text = ex.Message
+            lblError.Visible = True
+        End Try
     End Sub
 
 #End Region

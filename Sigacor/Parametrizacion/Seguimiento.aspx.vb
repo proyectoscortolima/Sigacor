@@ -612,7 +612,7 @@ Public Class Seguimiento
         End Try
     End Sub
 
-    Private Sub CaragrImagen_Click(sender As Object, e As EventArgs) Handles CaragrImagen.Click
+    Private Sub CargarImagen_Click(sender As Object, e As EventArgs) Handles CargarImagen.Click
         Try
             Dim fileName, filePat, pathCorto, arraySeguimiento As String
 
@@ -627,7 +627,7 @@ Public Class Seguimiento
             End If
 
             If fuImagenes.HasFile Then
-                For Each uploadedFile As HttpPostedFile In fuArchivo.PostedFiles
+                For Each uploadedFile As HttpPostedFile In fuImagenes.PostedFiles
 
                     If (uploadedFile.ContentLength > 2000000) Then
                         alerta("El archivo no puede ser mayor a 2 MB", "", "error", "")

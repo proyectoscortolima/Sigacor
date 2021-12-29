@@ -495,7 +495,7 @@
 
 
     <asp:Button ID="CargarArchivo" runat="server" class="d-none" />
-    <asp:Button ID="CaragrImagen" runat="server" class="d-none" />
+    <asp:Button ID="CargarImagen" runat="server" class="d-none" />
 
     <script>
         $(window).on('load', function () {
@@ -547,7 +547,7 @@
 
         document.getElementById('contenedor2_fuImagenes').addEventListener('change', function () {
             document.getElementById('contenedor2_txtImagen').value = this.value;
-            document.getElementById('contenedor2_CaragrImagen').click();
+            document.getElementById('contenedor2_CargarImagen').click();
         });
 
         window.onload = function () {

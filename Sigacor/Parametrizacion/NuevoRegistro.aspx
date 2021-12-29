@@ -155,8 +155,6 @@
                                 <asp:DropDownList ID="cmbNiveles" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                             </div>
                         </div>
-
-
                         <div class="col-4 mt-2" id="pnlNvl1Reg" runat="server">
                             <div class="form-group">
                                 <asp:Label ID="lblNvl1Reg" runat="server"></asp:Label>
@@ -187,14 +185,6 @@
                                 <asp:DropDownList ID="cmbNvl5Reg" class="form-control" runat="server" AutoComplete="Off" ></asp:DropDownList>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
                         <div class="col-4" id="pnlSubNivel" runat="server">
                             <div class="form-group">
                                 <asp:Label ID="lblSubNivel" runat="server" CssClass="labelAccionCua"></asp:Label>
@@ -367,8 +357,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Sub actividades</label>
-                                <asp:DropDownList ID="cmbSubActividad" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                                <asp:Label ID="lblNivelMeta" runat="server"></asp:Label>                                
+                                <asp:DropDownList ID="cmbNivelMeta" class="form-control mt-2" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
                         <div class="col-2">
@@ -499,11 +489,7 @@
                                                 Style="display: inline-grid" title="Editar meta" class="btn btn-success btn-circle">                                            
                                             <i class="fas fa-edit"></i>                                        
                                             </asp:LinkButton>
-                                            <%--<asp:LinkButton ID="lnkEliminarMeta" runat="server" data-placement="top"
-                                                data-toggle="tooltip" Height="30px" Width="30px" CommandName="Eliminar"
-                                                Style="display: inline-grid" title="Eliminar meta" class="btn btn-success btn-circle">                                            
-                                            <i class="fas fa-backspace"></i>
-                                            </asp:LinkButton>--%>
+
                                         </ItemTemplate>
                                         <ItemStyle Width="20%" VerticalAlign="Middle" HorizontalAlign="Center" />
                                     </asp:TemplateField>
@@ -552,8 +538,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Sub actividades</label>
-                                <asp:DropDownList ID="cmbSubActividadMetaMdl" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                                <asp:Label ID="lblNivelMetaMdl" runat="server"></asp:Label>                                
+                                <asp:DropDownList ID="cmbNivelMetaMdl" class="form-control mt-2" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
                         <div class="col-2">

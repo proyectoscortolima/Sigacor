@@ -29,9 +29,10 @@ Public Class clReportPac
     End Function
     Public Function selectLineasFiltroGeneralMetas(ByVal pac_id As String, ByVal arrayLineas As String()) As DataTable
         Dim codLineas As String
-        Dim i As Integer
+        Dim i As Integer = 0
         For Each row In arrayLineas
             codLineas &= "'" & arrayLineas(i) & "',"
+            i += 1
         Next
         codLineas = Mid(codLineas, 1, Len(codLineas) - 1)
         QRY = "select * from contents where pac_id = " & pac_id & " and code IN (" & codLineas & ")"
@@ -112,6 +113,45 @@ Public Class clReportPac
 
         QRY = "select id, name, subactivity as code from goals where pac_id = " & pac_id & " and 
                subactivity = '" & subactivity & "' and state = 'A' order by subactivity "
+
+        Return Data.OpenData(QRY)
+    End Function
+
+    Public Function selectGoals(ByVal campos As Boolean, ByVal pac_id As String, ByVal noProgramado As Boolean, ByVal ejecMenos25 As Boolean, ByVal ejec25Al49 As Boolean,
+                                ByVal ejec50Al74 As Boolean, ByVal ejec75Al99 As Boolean, ByVal ejecMas100 As Boolean, Optional subactivity As String = "") As DataTable
+        If campos Then
+            QRY = "select id, name, subactivity as sublevel from goals where pac_id = " & pac_id & " and state = 'A' and ("
+        Else
+            QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from goals where pac_id = " & pac_id & " and state = 'A' and subactivity like '" & subactivity & "%' and ("
+        End If
+
+        If noProgramado Then
+            QRY &= " or value_progress = 0 "
+        End If
+        If ejecMenos25 Then
+            QRY &= " or value_progress < 25 "
+        End If
+        If ejec25Al49 Then
+            QRY &= " or value_progress BETWEEN 25 and 49 "
+        End If
+        If ejec50Al74 Then
+            QRY &= " or value_progress BETWEEN 50 and 74 "
+        End If
+        If ejec75Al99 Then
+            QRY &= " or value_progress BETWEEN 75 and 99 "
+        End If
+        If ejecMas100 Then
+            QRY &= " or value_progress >= 100 "
+        End If
+
+        QRY &= " )"
+
+        Return Data.OpenData(QRY.Replace("( or", "("))
+    End Function
+
+    Public Function selectGoalsXId(ByVal id As String) As DataTable
+
+        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from goals where id = " & id
 
         Return Data.OpenData(QRY)
     End Function

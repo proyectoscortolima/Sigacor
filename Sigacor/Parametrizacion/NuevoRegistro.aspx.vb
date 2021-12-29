@@ -133,7 +133,7 @@
 
 #Region "SelectedIndexChanged"
 
-    Private Sub cmbNiveles_SelectedIndexChsanged(sender As Object, e As EventArgs) Handles cmbNiveles.SelectedIndexChanged
+    Private Sub cmbNiveles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiveles.SelectedIndexChanged
         Try
 
             If cmbNiveles.SelectedIndex = 0 Then
@@ -366,7 +366,7 @@
                 Else
                     cmbNiv2.Items.Clear()
                     pnlNiv2.Visible = False
-                    alerta("Advertencia", "No se han encontrado programas", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -394,7 +394,7 @@
                 Else
                     cmbNiv2Meta.Items.Clear()
                     pnlNiv2Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado programas", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -423,7 +423,7 @@
                 Else
                     cmbNiv3.Items.Clear()
                     pnlNiv3.Visible = False
-                    alerta("Advertencia", "No se han encontrado proyectos", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -451,7 +451,7 @@
                 Else
                     cmbNiv3Meta.Items.Clear()
                     pnlNiv3Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado proyectos", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -479,7 +479,7 @@
                 Else
                     cmbNiv4.Items.Clear()
                     pnlNiv4.Visible = False
-                    alerta("Advertencia", "No se han encontrado actividades", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -507,7 +507,7 @@
                 Else
                     cmbNiv5.Items.Clear()
                     pnlNiv5.Visible = False
-                    alerta("Advertencia", "No se han encontrado sub actividades", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -535,7 +535,7 @@
                 Else
                     cmbNiv4Meta.Items.Clear()
                     pnlNiv4Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado actividades", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -563,7 +563,7 @@
                 Else
                     cmbNiv5Meta.Items.Clear()
                     pnlNiv5Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado sub actividades", "info")
+                    alerta("Advertencia", "No se han encontrado registros", "info")
                 End If
             End If
         Catch ex As Exception
@@ -832,7 +832,7 @@
                 If Fila IsNot Nothing Then
                     txtNombreMetaMdl.Text = Fila("name")
                     cmbTipoMetaMdl.SelectedValue = Fila("type_goal")
-                    cmbSubActividadMetaMdl.SelectedValue = Fila("subactivity")
+                    cmbNivelMetaMdl.SelectedValue = Fila("subactivity")
                     txtLineaBaseMetaMdl.Text = Fila("line_base")
                     txtPriYearMetaMdl.Text = Fila("value_one_year")
                     txtSegYearMetaMdl.Text = Fila("value_two_year")
@@ -923,6 +923,7 @@
             pnlNiveles.Visible = False
             pnlPlanAccion.Visible = False
             pnlMetas.Visible = True
+            cargarMetas(lblPac.Text.Trim, 1)
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True
@@ -1149,24 +1150,6 @@
                 Exit Sub
             End If
 
-
-            'If cmbSubNivel.Items.Count > 0 Then
-            '    subNivel = cmbSubNivel.SelectedValue.Trim
-            '    name = cmbSubNivel.SelectedItem.ToString.Trim
-            'Else
-            '    subNivel = String.Empty
-            'End If
-
-            'DataT = parametrizacion.selectContents(lblPac.Text.Trim, cmbNiveles.SelectedValue.Trim - 1, "", subNivel)
-            'If DataT.Rows.Count > 0 Then
-            '    code = DataT(0)(3) & "." & txtCodigo.Text.Trim
-            '    DataT(0)(9) = CStr(DataT(0)(9)).Substring(0, CStr(DataT(0)(9)).Length - 1)
-            '    array = CStr(DataT(0)(9)) & ", " & cmbNiveles.SelectedItem.ToString & ":" & txtCodigo.Text.Trim & "]"
-            'Else
-            '    code = txtCodigo.Text.Trim
-            '    array = "[" & cmbNiveles.SelectedItem.ToString() & ":" & txtCodigo.Text.Trim & "]"
-            'End If
-            'DataT = Nothing
             If subNivel <> String.Empty Then
                 code = subNivel & "." & txtCodigo.Text.Trim
             Else
@@ -1188,10 +1171,9 @@
                 txtPesoPlanAcc.Text = String.Empty
 
                 limiarFiltroRegistro()
-                cargarLineas()
+                cmbNiveles_SelectedIndexChanged(Nothing, Nothing)
+                'cargarLineas()
                 btnConsultar_Click(Nothing, Nothing)
-                'cargarPlanAccion(lblPac.Text.Trim)
-                'cargarMetas(lblPac.Text.Trim, 1)
                 alerta("Se ha creado el item correctamente", "", "success")
             Else
                 alerta("Advertencia", "Se genero un error al grabar", "error", "")
@@ -1213,8 +1195,8 @@
                 alerta("Advertencia", "Seleccione el tipo de meta", "info", "contenedor2_cmbTipoMeta")
                 Exit Sub
             End If
-            If cmbSubActividad.SelectedIndex = 0 Then
-                alerta("Advertencia", "Seleccione la subactividad la meta", "info", "contenedor2_cmbSubActividad")
+            If cmbNivelMeta.SelectedIndex = 0 Then
+                alerta("Advertencia", "Seleccione el nivel de la meta", "info", "contenedor2_cmbNivelMeta")
                 Exit Sub
             End If
             If txtLineaBaseMeta.Text = String.Empty Then
@@ -1247,9 +1229,9 @@
             End If
 
             If parametrizacion.insertGoals(lblPac.Text.Trim, txtNombreMeta.Text.Trim, cmbTipoMeta.SelectedValue,
-                                           cmbSubActividad.SelectedValue, txtLineaBaseMeta.Text.Trim, txtPriYearMeta.Text.Trim,
+                                           cmbNivelMeta.SelectedValue, txtLineaBaseMeta.Text.Trim, txtPriYearMeta.Text.Trim,
                                            txtSegYearMeta.Text.Trim, txtTerYearMeta.Text.Trim, txtCuaYearMeta.Text.Trim,
-                                           cmbResponsable.SelectedValue.Trim, cmbAlimentador.SelectedValue.Trim, "A") > 0 Then
+                                           cmbResponsable.SelectedValue, cmbAlimentador.SelectedValue, "A") > 0 Then
 
                 alerta("Se ha creado correctamente la meta", "", "success", "")
                 limpiarMetas()
@@ -1273,8 +1255,8 @@
                 alertaMdl("Advertencia", "Seleccione el tipo de meta", "info", "mdlEditarMeta", "contenedor2_cmbTipoMetaMdl")
                 Exit Sub
             End If
-            If cmbSubActividadMetaMdl.SelectedIndex = 0 Then
-                alertaMdl("Advertencia", "Seleccione la subactividad la meta", "info", "mdlEditarMeta", "contenedor2_cmbSubActividadMetaMdl")
+            If cmbNivelMetaMdl.SelectedIndex = 0 Then
+                alertaMdl("Advertencia", "Seleccione la el nivel del la meta", "info", "mdlEditarMeta", "contenedor2_cmbNivelMetaMdl")
                 Exit Sub
             End If
             If txtLineaBaseMetaMdl.Text = String.Empty Then
@@ -1307,9 +1289,9 @@
             End If
 
             If parametrizacion.updateGoals(lblIdMeta.Text.Trim, txtNombreMetaMdl.Text.Trim, cmbTipoMetaMdl.SelectedValue,
-                                           cmbSubActividadMetaMdl.SelectedValue, txtLineaBaseMetaMdl.Text.Trim, txtPriYearMetaMdl.Text.Trim,
+                                           cmbNivelMetaMdl.SelectedValue, txtLineaBaseMetaMdl.Text.Trim, txtPriYearMetaMdl.Text.Trim,
                                            txtSegYearMetaMdl.Text.Trim, txtTercYearMetaMdl.Text.Trim, txtCuartYearMetaMdl.Text.Trim,
-                                           cmbResponsableMdl.SelectedValue.Trim, cmbAlimentadorMdl.SelectedValue.Trim) > 0 Then
+                                           cmbResponsableMdl.SelectedValue, cmbAlimentadorMdl.SelectedValue) > 0 Then
 
                 alerta("Se ha actualizado correctamente la meta", "", "success", "")
                 limpiarMetas()
@@ -1583,40 +1565,32 @@
                     DataT = parametrizacion.selectLevels(pac, "hierarchy desc")
                     If DataT.Rows.Count > 0 Then
                         codLevel = DataT(0)(3)
+                        lblNivelMeta.Text = DataT(0)(1)
+                        lblNivelMetaMdl.Text = DataT(0)(1)
                     Else
                         codLevel = "0"
+                        lblNivelMeta.Text = "No hay niveles"
+                        lblNivelMetaMdl.Text = "No hay niveles"
                     End If
 
                     DataT = Nothing
                     DataT = parametrizacion.selectContents(pac, codLevel, , )
                     If DataT.Rows.Count > 0 Then
-                        cmbSubActividad.Items.Clear()
-                        cmbSubActividad.DataTextField = "name"
-                        cmbSubActividad.DataValueField = "code"
-                        cmbSubActividad.DataSource = DataT
-                        cmbSubActividad.DataBind()
-                        cmbSubActividad.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                        cmbNivelMeta.Items.Clear()
+                        cmbNivelMeta.DataTextField = "name"
+                        cmbNivelMeta.DataValueField = "code"
+                        cmbNivelMeta.DataSource = DataT
+                        cmbNivelMeta.DataBind()
+                        cmbNivelMeta.Items.Insert(0, New ListItem("---Seleccione---", ""))
 
-                        cmbSubActividadMetaMdl.Items.Clear()
-                        cmbSubActividadMetaMdl.DataTextField = "name"
-                        cmbSubActividadMetaMdl.DataValueField = "code"
-                        cmbSubActividadMetaMdl.DataSource = DataT
-                        cmbSubActividadMetaMdl.DataBind()
-                        cmbSubActividadMetaMdl.Items.Insert(0, New ListItem("---Seleccione---", ""))
+                        cmbNivelMetaMdl.Items.Clear()
+                        cmbNivelMetaMdl.DataTextField = "name"
+                        cmbNivelMetaMdl.DataValueField = "code"
+                        cmbNivelMetaMdl.DataSource = DataT
+                        cmbNivelMetaMdl.DataBind()
+                        cmbNivelMetaMdl.Items.Insert(0, New ListItem("---Seleccione---", ""))
                     End If
                 End If
-
-                'DataT = Nothing
-                'DataT = parametrizacion.selectGoals(pac)
-                'If DataT.Rows.Count > 0 Then
-                '    tblMetas.DataSource = DataT
-                '    tblMetas.DataBind()
-                '    tblMetas.UseAccessibleHeader = True
-                '    tblMetas.HeaderRow.TableSection = TableRowSection.TableHeader
-                'Else
-                '    tblMetas.DataSource = Nothing
-                '    tblMetas.DataBind()
-                'End If
             Else
                 tblMetas.DataSource = Nothing
                 tblMetas.DataBind()
@@ -1777,7 +1751,7 @@
         lblIdMeta.Text = String.Empty
         txtNombreMeta.Text = String.Empty
         cmbTipoMeta.SelectedIndex = 0
-        cmbSubActividad.SelectedIndex = 0
+        cmbNivelMeta.SelectedIndex = 0
         txtLineaBaseMeta.Text = String.Empty
         txtPriYearMeta.Text = String.Empty
         txtSegYearMeta.Text = String.Empty
@@ -1817,12 +1791,6 @@
         cmbNvl4Reg.Items.Clear()
         cmbNvl5Reg.Items.Clear()
     End Sub
-
-
-
-
-
-
 
 #End Region
 

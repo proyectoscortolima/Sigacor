@@ -239,6 +239,60 @@ Partial Public Class Pac
     Protected WithEvents btnConsultarPalabraClave As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''Control chkNoProgramado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkNoProgramado As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control chkEjecMenos25.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkEjecMenos25 As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control chkEjec25Al49.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkEjec25Al49 As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control chkEjec50Al74.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkEjec50Al74 As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control chkEjec75Al99.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkEjec75Al99 As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control chkEjecMas100.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents chkEjecMas100 As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
     '''Control pnlResultados.
     '''</summary>
     '''<remarks>
