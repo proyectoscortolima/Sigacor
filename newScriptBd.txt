@@ -1,0 +1,193 @@
+profiles --> SCRPERFLS
+menu --> SCRMEN
+submenu --> SCDSUBMN
+estsubmenu --> SCDESTSBMN
+roles --> SCRROLS
+states --> SCRESTDS
+pac --> SCMPAC
+levels --> SCRNIVLS
+contents --> SCRCONTND 
+goal_type --> SCDTIPMT
+report --> SCRREPRT
+goals  --> SCRMET
+curriculum --> SCRHOJVD
+periodicity --> SCDPERDCDD
+
+
+
+CREATE TABLE [SCRPERFLS] (
+  [id] int PRIMARY KEY IDENTITY(1, 1),
+  [user_id] nvarchar(255),
+  [rol_id] nvarchar(255),
+  [address] nvarchar(255),
+  [movil] nvarchar(50),
+  [state] nvarchar(255)
+)
+GO
+
+insert into SCRPERFLS(user_id, rol_id, address, movil, state) values ('katherinne-silva','ADM', 'katherinne.silva@cortolima.gov.co', '3107712363',	'A');
+insert into SCRPERFLS(user_id, rol_id, address, movil, state) values ('katherinne-silva1','ADM', 'katherinne.silva@cortolima.gov.co', '3107712363',	'A');
+
+
+CREATE TABLE [SCRMEN] (
+  [name] nvarchar(255),
+  [route] nvarchar(255),
+  [icon] nvarchar(255),
+  [rol] nvarchar(255),
+  [orden] int,
+  [state] nvarchar(255)
+)
+GO
+
+insert into SCRMEN(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A', 'ADM');
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'ADM');
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'ADM');
+insert into SCRMEN(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'I', 'AUX')
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'AUX');
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'AUX');
+
+
+CREATE TABLE [SCDSUBMN] (
+  [menu] nvarchar(255),
+  [name] nvarchar(255),
+  [route] nvarchar(255),
+  [orden] int,
+  [state] nvarchar(255)
+)
+GO
+
+CREATE TABLE [SCDESTSBMN] (
+  [name] nvarchar(255),
+  [submenu] nvarchar(255),
+  [rol] nvarchar(255),
+  [state] nvarchar(255)
+)
+GO
+
+CREATE TABLE [SCRROLS] (
+  [name] nvarchar(255),
+  [description] nvarchar(255),
+  [state] nvarchar(255)
+)
+GO
+
+insert into SCRROLS(name, description,	state) values ('ADM',	'ADMINISTRADOR',	'A');
+insert into SCRROLS(name, description, state) values('AUX', 'AUXILIAR', 'A');
+
+
+CREATE TABLE [SCRESTDS] (
+  [name] nvarchar(255),
+  [description] nvarchar(255)
+)
+GO
+
+insert into SCRESTDS(name, description) values ('A', 'Activo');
+insert into SCRESTDS(name, description) values ('I', 'Inactivo');
+
+CREATE TABLE SCMPAC (
+  id int PRIMARY KEY IDENTITY(1, 1),
+  name nvarchar(255),
+  slogan nvarchar(255),
+  initial_year int, 
+  final_year int, 
+  number_years int, 
+  state nvarchar(255)
+)
+
+CREATE TABLE SCRNIVLS (
+  id int PRIMARY KEY IDENTITY(1, 1),
+  name nvarchar(255),
+  pac_id int,
+  hierarchy int, 
+  weigth decimal, 
+  state nvarchar(255)
+)
+
+CREATE TABLE SCRCONTND (
+  id int PRIMARY KEY IDENTITY(1, 1),
+  pac_id int,
+  level_id int,
+  code nvarchar(255),
+  name_level nvarchar(255), 
+  sublevel nvarchar(255),
+  name nvarchar(255),
+  weigth decimal, 
+  array nvarchar(255),
+  state nvarchar(255)
+)
+
+create table SCDTIPMT (
+	name nvarchar(255),
+	description nvarchar(255),
+	state nvarchar(255)
+);
+
+
+insert into SCDTIPMT(name, description, state) values ('M', 'Mantenimiento', 'A' );
+
+  insert into SCDTIPMT(name, description, state) values ('R', 'Reducción', 'A' );
+
+  insert into SCDTIPMT(name, description, state) values ('I', 'Incremento', 'A' );
+
+create table SCRMET (
+	id int PRIMARY KEY IDENTITY(1, 1),
+	pac_id int,
+	name nvarchar(255),
+	type_goal nvarchar(255),
+	subactivity nvarchar(255),		
+	line_base int,
+	value_one_year int,
+	value_two_year int,
+	value_three_year int,
+        value_four_year int,
+        responsable_id nvarchar(255),
+	feeder_id nvarchar(255),
+	value_progress decimal default 0,
+	state nvarchar(255)
+);
+
+
+create table SCRHOJVD (
+	id int PRIMARY KEY IDENTITY(1, 1),
+	goal_id int,
+	initials text,
+	description text,
+	definition text, 
+	method text,
+	formulas text,
+	variables text,
+	observations text,
+	geographic text,
+	periodicity text,
+	state nvarchar(255)
+);
+
+create table SCDPERDCDD(
+	name nvarchar(255),
+	description nvarchar(255),
+	state nvarchar(255)
+);
+
+insert into SCDPERDCDD(name, description, state) values ('D', 'Diario', 'A');
+insert into SCDPERDCDD(name, description, state) values ('M',  'Mensual', 'A');
+insert into SCDPERDCDD(name, description, state) values ('S', 'Semanal ', 'A');
+
+
+create table SCRREPRT (
+	id int PRIMARY KEY IDENTITY(1, 1),
+	goal_id int,
+	year_current int,
+	value_progress decimal,
+	activities_developed text,
+	date_reg date,
+	array_archivos text,
+	array_imagenes text,
+	array_link text,
+	user_reg nvarchar(255),
+	who_report nvarchar(255),
+	state nvarchar(255)
+);
+
+
+
+

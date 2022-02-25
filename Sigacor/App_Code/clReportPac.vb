@@ -2,7 +2,7 @@
 Public Class clReportPac
     Public Function selectLineas(ByVal code As String, ByVal pac_id As String) As DataTable
 
-        QRY = "select code, name from contents where pac_id = " & pac_id & " "
+        QRY = "select code, name from SCRCONTND where pac_id = " & pac_id & " "
 
         If code <> String.Empty Then
             QRY &= "and code = '" & code & "'"
@@ -17,7 +17,7 @@ Public Class clReportPac
 
     Public Function selectLineasFila(ByVal code As String, ByVal pac_id As String) As DataRow
 
-        QRY = "select code, name from contents where pac_id = " & pac_id & " and state = 'A' "
+        QRY = "select code, name from SCRCONTND where pac_id = " & pac_id & " and state = 'A' "
 
         If code <> String.Empty Then
             QRY &= "and code = '" & code & "'"
@@ -35,17 +35,17 @@ Public Class clReportPac
             i += 1
         Next
         codLineas = Mid(codLineas, 1, Len(codLineas) - 1)
-        QRY = "select * from contents where pac_id = " & pac_id & " and code IN (" & codLineas & ")"
+        QRY = "select * from SCRCONTND where pac_id = " & pac_id & " and code IN (" & codLineas & ")"
 
         Return Data.OpenData(QRY)
     End Function
     Public Function selectLineasFiltroGeneral(ByVal pac_id As String, ByVal level_id As String, Optional ByVal indicador As String = "") As DataTable
 
         If indicador = String.Empty Then
-            QRY = "select c.sublevel from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+            QRY = "select c.sublevel from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and l.hierarchy = " & level_id & " and  c.state = 'A' group by c.sublevel"
         Else
-            QRY = "select c.code as sublevel from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+            QRY = "select c.code as sublevel from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and l.hierarchy = " & level_id & " and  c.state = 'A' group by c.code"
         End If
 
@@ -55,7 +55,7 @@ Public Class clReportPac
 
     Public Function selectContentsFiltroGeneral(ByVal pac_id As String, ByVal level_id As String, ByVal code As String) As DataTable
 
-        QRY = "select c.code, c.name, c.sublevel, l.name name_level, c.pac_id from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+        QRY = "select c.code, c.name, c.sublevel, l.name name_level, c.pac_id from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and l.hierarchy = " & level_id & " and c.code like '" & code & "%' and c.state = 'A'   "
 
         Return Data.OpenData(QRY)
@@ -64,14 +64,14 @@ Public Class clReportPac
 
     Public Function selectContentsFiltro(ByVal pac_id As String, ByVal code As String, ByVal level_id As String) As DataTable
 
-        QRY = "select c.code, c.name, c.sublevel, l.name name_level from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+        QRY = "select c.code, c.name, c.sublevel, l.name name_level from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and c.code like '" & code & "%' and c.level_id = " & level_id & " order by c.code"
 
         Return Data.OpenData(QRY)
     End Function
     Public Function selectContentsReport(ByVal pac_id As String, ByVal code As String, ByVal sublevel As String) As DataRow
 
-        QRY = "select c.code, c.name, c.sublevel, l.name name_level from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+        QRY = "select c.code, c.name, c.sublevel, l.name name_level from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and c.code like '" & code & "%' 
                and c.sublevel = '" & sublevel & "' order by c.code"
 
@@ -80,7 +80,7 @@ Public Class clReportPac
 
     Public Function selectPalabraClave(ByVal name As String, ByVal pac_id As String) As DataTable
 
-        QRY = "select c.level_id, l.name, c.code, c.name from contents c join levels l on c.level_id = l.hierarchy and 
+        QRY = "select c.level_id, l.name, c.code, c.name from SCRCONTND c join SCRNIVLS l on c.level_id = l.hierarchy and 
                c.pac_id = l.pac_id where c.name like  '%" & name & "%' and c.pac_id=" & pac_id & "  and c.state = 'A' order by c.code"
 
         Return Data.OpenData(QRY)
@@ -89,7 +89,7 @@ Public Class clReportPac
 
     Public Function selectPalabraClave(ByVal pac_id As String, ByVal code As String, ByVal name As String) As DataTable
 
-        QRY = "select c.code, c.name, c.sublevel, l.name name_level from contents c join levels l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+        QRY = "select c.code, c.name, c.sublevel, l.name name_level from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and c.code like '" & code & "%' and c.name like  '%" & name & "%' and c.state = 'A'   "
 
         Return Data.OpenData(QRY)
@@ -97,13 +97,13 @@ Public Class clReportPac
 
     Public Function selectGoals(ByVal pac_id As String) As DataTable
 
-        QRY = "select id, name, subactivity as sublevel from goals where pac_id = " & pac_id & " and state = 'A' order by  subactivity "
+        QRY = "select id, name, subactivity as sublevel from SCRMET where pac_id = " & pac_id & " and state = 'A' order by  subactivity "
 
         Return Data.OpenData(QRY)
     End Function
     Public Function selectGoalsFiltroGeneral(ByVal pac_id As String, ByVal subactivity As String) As DataTable
 
-        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from goals where pac_id = " & pac_id & " and 
+        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from SCRMET where pac_id = " & pac_id & " and 
                subactivity like '" & subactivity & "%' and state = 'A' order by  subactivity"
 
         Return Data.OpenData(QRY)
@@ -111,7 +111,7 @@ Public Class clReportPac
 
     Public Function selectGoals(ByVal pac_id As String, ByVal subactivity As String) As DataTable
 
-        QRY = "select id, name, subactivity as code from goals where pac_id = " & pac_id & " and 
+        QRY = "select id, name, subactivity as code from SCRMET where pac_id = " & pac_id & " and 
                subactivity = '" & subactivity & "' and state = 'A' order by subactivity "
 
         Return Data.OpenData(QRY)
@@ -120,9 +120,9 @@ Public Class clReportPac
     Public Function selectGoals(ByVal campos As Boolean, ByVal pac_id As String, ByVal noProgramado As Boolean, ByVal ejecMenos25 As Boolean, ByVal ejec25Al49 As Boolean,
                                 ByVal ejec50Al74 As Boolean, ByVal ejec75Al99 As Boolean, ByVal ejecMas100 As Boolean, Optional subactivity As String = "") As DataTable
         If campos Then
-            QRY = "select id, name, subactivity as sublevel from goals where pac_id = " & pac_id & " and state = 'A' and ("
+            QRY = "select id, name, subactivity as sublevel from SCRMET where pac_id = " & pac_id & " and state = 'A' and ("
         Else
-            QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from goals where pac_id = " & pac_id & " and state = 'A' and subactivity like '" & subactivity & "%' and ("
+            QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from SCRMET where pac_id = " & pac_id & " and state = 'A' and subactivity like '" & subactivity & "%' and ("
         End If
 
         If noProgramado Then
@@ -151,7 +151,7 @@ Public Class clReportPac
 
     Public Function selectGoalsXId(ByVal id As String) As DataTable
 
-        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from goals where id = " & id
+        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from SCRMET where id = " & id
 
         Return Data.OpenData(QRY)
     End Function

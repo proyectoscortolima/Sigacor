@@ -5,14 +5,14 @@ Public Class clLogin
         If consulta = String.Empty Then
             QRY = "select usuario_bd, clave, rol_id, address, movil, encriptado, description, " &
                   "concat(nombr_empld, ' ', aplld_empld) as nombreEmp from RHMHOJVI " &
-                  "join profiles on usuario_bd = user_id join roles on name = rol_id " &
+                  "join SCRPERFLS on usuario_bd = user_id join SCRROLS on name = rol_id " &
                   "where usuario_bd = '" & usuario_bd & "' "
         ElseIf consulta = "1" Then
-            QRY = "select  usuario_bd from    RHMHOJVI where   usuario_bd = '" & usuario_bd & "'" &
-                  "and codg_carg  not like  '99%'"
+            QRY = "select  usuario_bd from RHMHOJVI where usuario_bd = '" & usuario_bd & "'" &
+                  "and codg_carg  not like '99%'"
         ElseIf consulta = "2" Then
-            QRY = "select  usuario_bd from    RHMHOJVI where   usuario_bd = '" & usuario_bd & "'" &
-                  "and codg_carg  not like  '99%' and fech_retr >= '" & Now.ToString("yyyy-MM-dd") & "'"
+            QRY = "select  usuario_bd from RHMHOJVI where usuario_bd = '" & usuario_bd & "'" &
+                  "and codg_carg  not like '99%' and fech_retr >= '" & Now.ToString("yyyy-MM-dd") & "'"
         End If
 
         Return Data.OpenRow(QRY)
@@ -21,8 +21,8 @@ Public Class clLogin
     Public Function selectUsuario() As DataTable
 
         QRY = "select p.user_id, h.clave, p.rol_id, p.address, p.movil, h.encriptado, r.description, 
-               concat(h.nombr_empld, ' ', h.aplld_empld) as nombreEmp from RHMHOJVI h join profiles p on 
-               h.usuario_bd = p.user_id join roles r on r.name = p.rol_id where p.state = 'A' "
+               concat(h.nombr_empld, ' ', h.aplld_empld) as nombreEmp from RHMHOJVI h join SCRPERFLS p on 
+               h.usuario_bd = p.user_id join SCRROLS r on r.name = p.rol_id where p.state = 'A' "
 
         Return Data.OpenData(QRY)
     End Function
@@ -52,7 +52,7 @@ Public Class clLogin
 
     Public Function selectMenu(ByVal rol As String) As DataTable
 
-        QRY = "select * from menu where state = 'A' and rol = '" & rol & "'"
+        QRY = "select * from SCRMEN where state = 'A' and rol = '" & rol & "'"
 
         Return Data.OpenData(QRY)
     End Function

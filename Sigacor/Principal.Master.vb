@@ -26,7 +26,6 @@
                                                              </a>
                                                              <div id=""collapseTwo"" class=""collapse"" aria-labelledby=""headingTwo"" data-parent=""#accordionSidebar"">
                                                              <div class=""bg-white py-2 collapse-inner rounded"">"))
-                    'DataT2 = Menu.selectSubMenu(row("MNNOMBRE"), Session("CodRol"))
                     DataT2 = Nothing
                     If DataT2 IsNot Nothing Then
                         For Each rowSub As DataRow In DataT2.Rows
