@@ -39,12 +39,12 @@ CREATE TABLE [SCRMEN] (
 )
 GO
 
-insert into SCRMEN(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A', 'ADM');
-insert into SCRMEN (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'ADM');
-insert into SCRMEN (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'ADM');
-insert into SCRMEN(name, route,	icon, orden, state, rol) values ('Parametrización',	'/Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'I', 'AUX')
-insert into SCRMEN (name, route, icon, orden, state, rol) values ('Hoja de Vida', '/Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'AUX');
-insert into SCRMEN (name, route, icon, orden, state, rol) values ('Seguimiento', '/Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'AUX');
+insert into SCRMEN(name, route,	icon, orden, state, rol) values ('Parametrización',	'Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'A', 'ADM');
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Hoja de Vida', 'Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'ADM');
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Seguimiento', 'Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'ADM');
+insert into SCRMEN(name, route,	icon, orden, state, rol) values ('Parametrización',	'Parametrizacion/Parametrizacion.aspx', 'fas fa-fw fa-cog', 1,	'I', 'AUX')
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Hoja de Vida', 'Parametrizacion/HojaVida.aspx', 'fa fa-file', '2', 'A', 'AUX');
+insert into SCRMEN (name, route, icon, orden, state, rol) values ('Seguimiento', 'Parametrizacion/Seguimiento.aspx', 'fa fa-list', '3', 'A', 'AUX');
 
 
 CREATE TABLE [SCDSUBMN] (
