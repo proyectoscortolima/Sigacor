@@ -62,13 +62,7 @@
             pnlResultados.Controls.Add(New LiteralControl("<div Class=""col-xs-12 col-md-12"">
                                                                <div class=""card-report"">
                                                                    <div class=""card-body"">
-                                                                       <div class=""row"">
-                                                                           <div class=""col-xs-6 col-md-2"">
-                                                                               <h3>Resultados</h3>
-                                                                           </div>
-                                                                           <div class=""col-xs-6 col-md-10"">
-                                                                               <hr style=""border-top: 3px solid rgba(0, 0, 0, .1);"" />
-                                                                           </div>                                                                        
+                                                                       <div class=""row"">                                                                                                                                                  
                                                           "))
 
             DataT = Nothing
@@ -99,7 +93,7 @@
                             pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
                                                                        <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & Fila("code") & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
                                                                            <div class=""card-header-report"" id=""headingOne"">
-                                                                               <div class=""row"">
+                                                                               <div class=""row"" style=""justify-content: center;"">
                                                                                    <div class=""col-12"">
                                                                                        <h5 class=""mb-0"">
                                                                                            <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
@@ -169,12 +163,12 @@
                                 subLevel = String.Empty
 
                                 If arrayCode <> String.Empty Then
-                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
-                                                                                       <div class=""row"">
+                                                                                       <div class=""row"" style=""justify-content: center;"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -203,12 +197,12 @@
                                                                            "))
                             Else
                                     If row("code") = row2("code") Then
-                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                 <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none; border:none !important; "">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
-                                                                                       <div class=""row"">
+                                                                                       <div class=""row"" style=""justify-content: center;"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -279,13 +273,7 @@
             pnlResultados.Controls.Add(New LiteralControl("<div Class=""col-xs-12 col-md-12"">
                                                                <div class=""card-report"">
                                                                    <div class=""card-body"">
-                                                                       <div class=""row"">
-                                                                           <div class=""col-xs-6 col-md-2"">
-                                                                               <h3>Resultados</h3>
-                                                                           </div>
-                                                                           <div class=""col-xs-6 col-md-10"">
-                                                                               <hr style=""border-top: 3px solid rgba(0, 0, 0, .1);"" />
-                                                                           </div>                                                                        
+                                                                       <div class=""row"">                                                                          
                                                           "))
 
             Dim code, level_id As String
@@ -334,7 +322,7 @@
                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
                                                                        <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & row("code") & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
                                                                            <div class=""card-header-report"" id=""headingOne"">
-                                                                               <div class=""row"">
+                                                                               <div class=""row"" style=""justify-content: center;"">
                                                                                    <div class=""col-12"">
                                                                                        <h5 class=""mb-0"">
                                                                                            <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
@@ -396,12 +384,12 @@
                             subLevel = String.Empty
 
                             If arrayCode <> String.Empty Then
-                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
-                                                                                       <div class=""row"">
+                                                                                       <div class=""row"" style=""justify-content: center;"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -430,12 +418,12 @@
                                                                            "))
                             Else
                                 If row("code") = row2("code") Then
-                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
-                                                                                       <div class=""row"">
+                                                                                       <div class=""row"" style=""justify-content: center;"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -607,7 +595,7 @@
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -641,7 +629,7 @@
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -1069,7 +1057,7 @@
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -1103,7 +1091,7 @@
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""150""/>
+                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>

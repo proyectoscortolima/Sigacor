@@ -5028,7 +5028,7 @@ input[type=submit].btn-block {
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem
+    padding: 0.5rem
 }
 
 .card-title {
@@ -12693,7 +12693,7 @@ body.sidebar-toggled footer.sticky-footer {
 
 
 .card-header-report {
-    padding: .75rem 1.25rem;
+    padding: 0.5rem;
     margin-bottom: 0;
     box-shadow: 6px 8px 15px -7px #5c588b;
     border-radius: 30px !important;
