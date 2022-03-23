@@ -42,10 +42,10 @@ Public Class clReportPac
     Public Function selectLineasFiltroGeneral(ByVal pac_id As String, ByVal level_id As String, Optional ByVal indicador As String = "") As DataTable
 
         If indicador = String.Empty Then
-            QRY = "select c.sublevel from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+            QRY = "select c.sublevel, c.sublevel as code from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and l.hierarchy = " & level_id & " and  c.state = 'A' group by c.sublevel"
         Else
-            QRY = "select c.code as sublevel from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+            QRY = "select c.code from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and l.hierarchy = " & level_id & " and  c.state = 'A' group by c.code"
         End If
 

@@ -197,7 +197,7 @@
                 </div>
                 <div class="col-xs-12 col-md-2 text-center">
                     <asp:CheckBox ID="chkEjecMas100" runat="server" OnCheckedChanged="chkConvenciones_CheckedChanged" AutoPostBack="true" />
-                    <img src="../Componentes/img/nvl6.svg" class="icon-report" height="70" width="70" />
+                    <img src="../Componentes/img/nvl6.svg" class="icon-report" height="60" width="60" />
                     <h6 class="mt-3 label-conveciones">Se ha ejecutado mas del 100%</h6>
                 </div>
             </div>

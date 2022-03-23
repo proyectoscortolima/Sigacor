@@ -6,18 +6,6 @@ Diagrama: https://dbdiagram.io/d/60479d46fcdcb6230b235111
 Git: https://github.com/eguarnizo77/Sigacor
 
 
-Comdepndncs
-
-COMDEPNDNC
-
-colpotatria
-bogota
-7423197
-linea nacional
-018000932933
-
-
-
 
 
 
