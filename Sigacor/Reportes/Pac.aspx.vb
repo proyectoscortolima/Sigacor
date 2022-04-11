@@ -79,18 +79,18 @@
                     Next
 
                     vectoraux = DeleteArrayRepetitions(vectorHistorial, True)
+                    DataT = reportPac.selectLineasFiltroGeneralMetas(cmbPac.SelectedValue, vectoraux)
                 End If
-                DataT = reportPac.selectLineasFiltroGeneralMetas(cmbPac.SelectedValue, vectoraux)
             Else
                 DataT = reportPac.selectLineasFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue)
             End If
 
             If DataT.Rows.Count > 0 Then
-                    For Each row As DataRow In DataT.Rows
-                        Fila = Nothing
+                For Each row As DataRow In DataT.Rows
+                    Fila = Nothing
                     Fila = reportPac.selectLineasFila(row("code"), cmbPac.SelectedValue)
                     If Fila IsNot Nothing Then
-                            pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
+                        pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
                                                                        <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & Fila("code") & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
                                                                            <div class=""card-header-report"" id=""headingOne"">
                                                                                <div class=""row"" style=""justify-content: center;"">
@@ -112,22 +112,22 @@
                                                                                    <div class=""row"">
 
                                                                    "))
-                        End If
+                    End If
 
 
 
                     Dim code, botonRedireccionar As String
                     If cmbNivel.SelectedValue = "6" Then
-                            dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, Fila("code"))
-                        Else
-                            dataT2 = reportPac.selectContentsFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, Fila("code"))
-                        End If
-                        If dataT2.Rows.Count > 0 Then
-                            For Each row2 As DataRow In dataT2.Rows
-                                arrayCode = CStr(row2("code")).Replace(".", "")
-                                array = arrayCode.ToCharArray
+                        dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, Fila("code"))
+                    Else
+                        dataT2 = reportPac.selectContentsFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, Fila("code"))
+                    End If
+                    If dataT2.Rows.Count > 0 Then
+                        For Each row2 As DataRow In dataT2.Rows
+                            arrayCode = CStr(row2("code")).Replace(".", "")
+                            array = arrayCode.ToCharArray
 
-                                script = String.Empty
+                            script = String.Empty
                             If arrayCode <> String.Empty Then
                                 For Each valor In array
                                     If i = 0 Then
@@ -159,10 +159,10 @@
                             End If
 
                             i = 0
-                                jerarquia = String.Empty
-                                subLevel = String.Empty
+                            jerarquia = String.Empty
+                            subLevel = String.Empty
 
-                                If arrayCode <> String.Empty Then
+                            If arrayCode <> String.Empty Then
                                 pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
@@ -196,7 +196,7 @@
                                                                            </div>
                                                                            "))
                             Else
-                                    If row("code") = row2("code") Then
+                                If row("code") = row2("code") Then
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                 <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none; border:none !important; "">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
@@ -230,22 +230,24 @@
                                                                            </div>
                                                                            "))
                                 End If
-                                End If
+                            End If
 
 
-                                i2 += 1
-                            Next
-                        Else
-                            pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
-                        End If
+                            i2 += 1
+                        Next
+                    Else
+                        pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
+                    End If
 
-                        pnlResultados.Controls.Add(New LiteralControl("</div>
+                    pnlResultados.Controls.Add(New LiteralControl("</div>
                                                                        </div>
                                                                            </div>                                                                        
                                                                                </div>
                                                                                    </div><br/>"))
-                    Next
-                End If
+                Next
+            Else
+                pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
+            End If
 
                 pnlResultados.Controls.Add(New LiteralControl("</div>
                                                                </div>
@@ -466,6 +468,8 @@
                                                                                </div>
                                                                                    </div><br/>"))
                 Next
+            Else
+                pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado jerarquia</label>"))
             End If
             pnlResultados.Controls.Add(New LiteralControl("</div>
                                                                </div>
@@ -498,13 +502,7 @@
             pnlResultados.Controls.Add(New LiteralControl("<div Class=""col-xs-12 col-md-12"">
                                                                <div class=""card-report"">
                                                                    <div class=""card-body"">
-                                                                       <div class=""row"">
-                                                                           <div class=""col-xs-6 col-md-2"">
-                                                                               <h3>Resultados</h3>
-                                                                           </div>
-                                                                           <div class=""col-xs-6 col-md-10"">
-                                                                               <hr style=""border-top: 3px solid rgba(0, 0, 0, .1);"" />
-                                                                           </div>                                                                        
+                                                                       <div class=""row"">                                                                       
                                                           "))
 
             Dim codeLinea, nombreLinea, arrayCodeLinea, lineaGlobal As String
@@ -674,6 +672,8 @@
                     End If
                     contador += 1
                 Next
+            Else
+                pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
             End If
             pnlResultados.Controls.Add(New LiteralControl("</div>
                                                                </div>
@@ -952,13 +952,7 @@
             pnlResultados.Controls.Add(New LiteralControl("<div Class=""col-xs-12 col-md-12"">
                                                                <div class=""card-report"">
                                                                    <div class=""card-body"">
-                                                                       <div class=""row"">
-                                                                           <div class=""col-xs-6 col-md-2"">
-                                                                               <h3>Resultados</h3>
-                                                                           </div>
-                                                                           <div class=""col-xs-6 col-md-10"">
-                                                                               <hr style=""border-top: 3px solid rgba(0, 0, 0, .1);"" />
-                                                                           </div>                                                                        
+                                                                       <div class=""row"">                                                                         
                                                           "))
 
             DataT = Nothing
@@ -977,11 +971,6 @@
             End If
             If DataT.Rows.Count > 0 Then
                 DataT = reportPac.selectLineasFiltroGeneralMetas(cmbPac.SelectedValue, vectoraux)
-            Else
-                pnlResultados.Controls.Add(New LiteralControl("</div>
-                                                               </div>
-                                                                   </div>
-                                                                       </div>"))
             End If
             If DataT.Rows.Count > 0 Then
                 For Each row As DataRow In DataT.Rows
@@ -1134,6 +1123,8 @@
                                                                                </div>
                                                                                    </div><br/>"))
                 Next
+            Else
+                pnlResultados.Controls.Add(New LiteralControl("<label>No se han encontrado datos </label>"))
             End If
 
             pnlResultados.Controls.Add(New LiteralControl("</div>
