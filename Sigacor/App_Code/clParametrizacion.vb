@@ -288,6 +288,13 @@ Public Class clParametrizacion
         Return Data.OpenRow(QRY)
     End Function
 
+    Public Function selectGoalsXPacActivo() As DataTable
+
+        QRY = "select m.id, type_goal, subactivity, m.name, line_base from SCRMET m join SCMPAC p on m.pac_id = p.id  where p.state = 'A' "
+
+        Return Data.OpenData(QRY)
+    End Function
+
     Public Function selectGoalsFiltro(ByVal pac_id As String, ByVal subactivity As String) As DataTable
 
         QRY = "select * from SCRMET where state = 'A' and subactivity like '" & subactivity & "%' and pac_id = " & pac_id

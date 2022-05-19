@@ -15,7 +15,7 @@
     <!--Aplicacion-->
     <link href="../Componentes/css/sb-admin-2.min.css" rel="stylesheet" />
     <script src="../Componentes/sweetAlert2/sweetalert2.all.min.js"></script>
-
+    <script src="../Componentes/vendor/jquery/jquery.min.js"></script>
 </head>
 <body style="background-image: url('../Componentes/img/FondoReport.jpg'); background-size: cover;">
 
@@ -80,7 +80,8 @@
                                 <div class="col-xs-12 col-md-6 mt-3">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="progressbarEjecucion" runat="server">
-                                            <asp:Label ID="lblValorProgress" runat="server"></asp:Label></div>
+                                            <asp:Label ID="lblValorProgress" runat="server"></asp:Label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-3 mt-3"></div>
@@ -91,7 +92,9 @@
                                 <div class="col-xs-12 col-md-12 mt-1 card-footer card-report">Actividades ejecutadas:</div>
 
                                 <div class="col-xs-12 col-md-12 mt-3">
-                                    <asp:TextBox ID="txtAvances" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="10" ReadOnly="true"></asp:TextBox>
+                                    <asp:Panel ID="pnlAvances" runat="server" class="row mt-2">
+                                    </asp:Panel>
+                                    <%--<asp:TextBox ID="txtAvances" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="10" ReadOnly="true"></asp:TextBox>--%>
                                 </div>
 
                                 <div class="col-xs-12 col-md-12 mt-3 card-footer card-report">Fuente:</div>
@@ -114,103 +117,104 @@
         </div>
 
         <asp:Label ID="lblError" runat="server" Style="color: red;"></asp:Label>
-    
 
-    <footer class="sticky-footer bg-white mt-5">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Cortolima 2021</span>
-            </div>
-        </div>
-    </footer>
 
-    <div class="modal fade" id="mdlVisualizador" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Hoja de vida</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Sigla de la hoja de vida</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtSiglaHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Descripción de la hoja de vida</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtDescripHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Definición de la hoja de vida</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtDefinHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Método de medición</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtMetodoMedic" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Formulas de la hoja de vida</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtFormulaHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Variables de la hoja de vida</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtVariablesHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Observaciones</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtObservHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Desag. Geográfica</label>
-                                <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtGeografica" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Periodicidad</label>
-                                <asp:DropDownList ID="cmbPeriodicidad" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    </div>
+        <footer class="sticky-footer bg-white mt-5">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Cortolima 2021</span>
                 </div>
             </div>
+        </footer>
+
+        <div class="modal fade" id="mdlVisualizador" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hoja de vida</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Sigla de la hoja de vida</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtSiglaHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Descripción de la hoja de vida</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtDescripHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Definición de la hoja de vida</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtDefinHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Método de medición</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtMetodoMedic" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Formulas de la hoja de vida</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtFormulaHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Variables de la hoja de vida</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtVariablesHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Observaciones</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtObservHojaVida" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Desag. Geográfica</label>
+                                    <asp:TextBox TextMode="MultiLine" Rows="5" ID="txtGeografica" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Periodicidad</label>
+                                    <asp:DropDownList ID="cmbPeriodicidad" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</form>
-    <script src="../Componentes/vendor/jquery/jquery.min.js"></script>
+    </form>
+
     <script src="../Componentes/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="../Componentes/js/sb-admin-2.min.js"></script>
     <script src="../Componentes/vendor/datatables/datatables.min.js"></script>
     <script src="../Componentes/vendor/datatables/scriptTable.js"></script>
+
 </body>
 </html>
 

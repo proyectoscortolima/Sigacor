@@ -179,36 +179,6 @@
         End Try
     End Sub
 
-    'Private Sub cmbNiveles_SelectedIndexChsanged(sender As Object, e As EventArgs) Handles cmbNiveles.SelectedIndexChanged
-    '    Try
-    '        If cmbNiveles.SelectedValue = "1" Then
-    '            pnlSubNivel.Visible = False
-    '            cmbSubNivel.Items.Clear()
-    '        Else
-    '            DataT = Nothing
-    '            DataT = parametrizacion.selectContents(lblPac.Text.Trim, CInt(cmbNiveles.SelectedValue.Trim) - 1, "", "")
-    '            If DataT.Rows.Count > 0 Then
-    '                lblSubNivel.Text = "¿A que " & DataT(0)(4) & " pertenece?"
-    '                pnlSubNivel.Visible = True
-    '                cmbSubNivel.Items.Clear()
-    '                cmbSubNivel.DataTextField = "name"
-    '                cmbSubNivel.DataValueField = "code"
-    '                cmbSubNivel.DataSource = DataT
-    '                cmbSubNivel.DataBind()
-    '                cmbSubNivel.Items.Insert(0, New ListItem("Todos", ""))
-    '                cmbSubNivel.Focus()
-    '            Else
-    '                txtNombrePlanAcc.Focus()
-    '            End If
-    '        End If
-    '        lblCodigo.Text = "Código de " & cmbNiveles.SelectedItem.ToString
-    '        lblNombre.Text = "Nombre de " & cmbNiveles.SelectedItem.ToString
-    '    Catch ex As Exception
-    '        lblError.Text = ex.Message
-    '        lblError.Visible = True
-    '    End Try
-    'End Sub
-
     Private Sub cmbNvl1Reg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNvl1Reg.SelectedIndexChanged
         Try
 

@@ -95,13 +95,13 @@ Partial Public Class DetallePac
     Protected WithEvents lblValorProgress As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control txtAvances.
+    '''Control pnlAvances.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtAvances As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents pnlAvances As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
     '''Control btnVisualizarHojaVida.

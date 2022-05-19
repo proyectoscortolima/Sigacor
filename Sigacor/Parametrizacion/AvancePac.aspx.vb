@@ -31,7 +31,6 @@
                 End If
 
                 actualizarStatePac()
-                'cargarPac()
             End If
 
         Catch ex As Exception
@@ -59,6 +58,8 @@
             Dim vectoraux() As String
             Dim contador = 0
 
+            Dim dataNiveles As DataTable = parametrizacion.selectLevels(cmbPac.SelectedValue, "hierarchy")
+
             If cmbPac.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione el periodo", "info", "cmbPac")
                 Exit Sub
@@ -78,7 +79,7 @@
             DataT = Nothing
             If cmbNivel.SelectedValue = "1" Then
                 DataT = reportPac.selectLineasFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, "S")
-            ElseIf cmbNivel.SelectedValue = "6" Then
+            ElseIf cmbNivel.SelectedValue = dataNiveles.Rows.Count + 1 Then
                 DataT = reportPac.selectGoals(cmbPac.SelectedValue)
                 If DataT.Rows.Count > 0 Then
                     Dim vectorHistorial(DataT.Rows.Count - 1) As String
@@ -130,7 +131,7 @@
 
                     filaPac = parametrizacion.selectPac(cmbPac.SelectedValue)
 
-                    If cmbNivel.SelectedValue = "6" Then
+                    If cmbNivel.SelectedValue = dataNiveles.Rows.Count + 1 Then
                         dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, Fila("code"))
                     Else
                         dataT2 = reportPac.selectContentsFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, Fila("code"))
@@ -166,7 +167,7 @@
 
                             End If
 
-                            If cmbNivel.SelectedValue = "6" Then
+                            If cmbNivel.SelectedValue = dataNiveles.Rows.Count + 1 Then
                                 botonRedireccionar = "<a href=""detallepac.aspx?meta=" & row2("id") & "&pac=" & row2("pac_id") & """>Leer más</a>"
                                 filaMeta = parametrizacion.selectGoalsFila(row2("id"))
                             Else
@@ -189,12 +190,12 @@
                                 dataAvance = parametrizacion.selectReport(cmbPac.SelectedValue)
                                 If dataAvance.Rows.Count > 0 Then
                                     i = 0
-                                    For Each rowAvance As DataRow In DataT.Rows
+                                    For Each rowAvance As DataRow In dataAvance.Rows
                                         If i > 0 Then
                                             avances &= vbCrLf & "---------------------------------------"
                                         End If
-                                        avances &= rowAvance("fecha") & ": " & "Consolida Información: " & Login.selectEmpleados(rowAvance("who_report")) & ". Carga Información: " &
-                                              Login.selectEmpleados(rowAvance("user_reg")) & vbCrLf & rowAvance("activities_developed")
+                                        avances &= rowAvance("fecha") & ": " & "Consolida Información: " & login.selectEmpleados(rowAvance("who_report")) & ". Carga Información: " &
+                                              login.selectEmpleados(rowAvance("user_reg")) & vbCrLf & rowAvance("activities_developed")
                                     Next
                                 Else
                                     avances = "No se ha ejecutado ninguna actividad"
@@ -309,6 +310,8 @@
             Dim i2 As Integer = 0
             Dim array() As Char
 
+            Dim dataNiveles As DataTable = parametrizacion.selectLevels(cmbPac.SelectedValue, "hierarchy")
+
             If cmbPac.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione el periodo", "info", "cmbPac")
                 Exit Sub
@@ -388,7 +391,7 @@
                                                                    "))
 
                     dataT2 = parametrizacion.selectGoalsFiltro(cmbPac.SelectedValue, row("code"))
-                    If level_id = "6" Then
+                    If level_id = dataNiveles.Rows.Count + 1 Then
                         dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, code)
                     Else
                         dataT2 = reportPac.selectContentsFiltro(cmbPac.SelectedValue, code, level_id)
@@ -680,7 +683,6 @@
     End Sub
 
 #End Region
-
 
 #Region "SelectedIndexChanged"
 
@@ -1150,7 +1152,7 @@
                 cmbNivel.DataSource = DataT
                 cmbNivel.DataBind()
                 cmbNivel.Items.Insert(0, New ListItem("-Selecione un nivel-", ""))
-                cmbNivel.Items.Insert(DataT.Rows.Count + 1, New ListItem("Metas", "6"))
+                cmbNivel.Items.Insert(DataT.Rows.Count + 1, New ListItem("Metas", DataT.Rows.Count + 1))
             Else
                 cmbNivel.Items.Clear()
             End If

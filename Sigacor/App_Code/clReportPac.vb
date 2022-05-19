@@ -120,9 +120,9 @@ Public Class clReportPac
     Public Function selectGoals(ByVal campos As Boolean, ByVal pac_id As String, ByVal noProgramado As Boolean, ByVal ejecMenos25 As Boolean, ByVal ejec25Al49 As Boolean,
                                 ByVal ejec50Al74 As Boolean, ByVal ejec75Al99 As Boolean, ByVal ejecMas100 As Boolean, Optional subactivity As String = "") As DataTable
         If campos Then
-            QRY = "select id, name, subactivity as sublevel from SCRMET where pac_id = " & pac_id & " and state = 'A' and ("
+            QRY = "select id, name, subactivity as sublevel, value_progress from SCRMET where pac_id = " & pac_id & " and state = 'A' and ("
         Else
-            QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from SCRMET where pac_id = " & pac_id & " and state = 'A' and subactivity like '" & subactivity & "%' and ("
+            QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id, value_progress from SCRMET where pac_id = " & pac_id & " and state = 'A' and subactivity like '" & subactivity & "%' and ("
         End If
 
         If noProgramado Then

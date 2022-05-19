@@ -4,6 +4,7 @@
     Dim reportPac As New clReportPac
     Dim parametrizacion As New clParametrizacion
     Dim login As New clLogin
+    Dim fun As New Funciones
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
@@ -12,6 +13,16 @@
                     Session("CodPac") = Request.QueryString("pac")
                     Session("CodMeta") = Request.QueryString("meta")
                     Response.Redirect("detallepac.aspx")
+                End If
+                DataT = Nothing
+                DataT = fun.periodicity()
+                If DataT.Rows.Count > 0 Then
+                    cmbPeriodicidad.Items.Clear()
+                    cmbPeriodicidad.DataTextField = "description"
+                    cmbPeriodicidad.DataValueField = "name"
+                    cmbPeriodicidad.DataSource = DataT
+                    cmbPeriodicidad.DataBind()
+                    cmbPeriodicidad.Items.Insert(0, New ListItem("---Seleccione---", ""))
                 End If
             End If
 
@@ -100,15 +111,45 @@
                     If DataT.Rows.Count > 0 Then
                         i = 0
                         For Each row As DataRow In DataT.Rows
-                            If i > 0 Then
-                                txtAvances.Text &= vbCrLf & "---------------------------------------"
-                            End If
-                            txtAvances.Text &= row("fecha") & ": " & "Consolida Información: " & login.selectEmpleados(row("who_report")) & ". Carga Información: " &
-                                              login.selectEmpleados(row("user_reg")) & vbCrLf & row("activities_developed")
+
+                            pnlAvances.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
+                                                                            <a class=""card-report-2"" data-toggle=""collapse"" href=""#avc-" & i & """ role=""button"" aria-expanded=""false"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
+                                                                                <div class=""card-header-report"">
+                                                                                    <div class=""row"">
+                                                                                        <div class=""col-12"">
+                                                                                            <h5 class=""mb-0"">
+                                                                                                <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""true"" aria-controls=""collapseOne"">
+                                                                                                    " & row("fecha") & " <i class=""fa fa-arrow-down ml-3""></i>
+                                                                                                </button>
+                                                                                            </h5>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class=""collapse"" id=""avc-" & i & """>
+                                                                                    <div class=""card-report card-body mb-3"" style=""margin-top: 0.4rem; padding: 0rem;"">
+                                                                                        <div class=""card-body"">
+                                                                                            <div class=""row"">
+                                                                                                <div class=""col-12 mt-2"">  
+                                                                                                    " & row("fecha") & " - Consolida Información: " & login.selectEmpleados(row("who_report")) & ".  
+                                                                                                    Carga Información: " & login.selectEmpleados(row("user_reg")) & vbCrLf & row("activities_developed") & "
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                        </div>
+                                                                        "))
+
+                            i += 1
                         Next
                     Else
-                        txtAvances.Text = "No se ha ejecutado ninguna actividad"
+                        pnlAvances.Controls.Add(New LiteralControl("No se ha ejecutado ninguna actividad"))
                     End If
+
+
+
+
 
                 End If
             End If
@@ -134,7 +175,7 @@
                     txtObservHojaVida.Text = Fila("observations")
                     txtGeografica.Text = Fila("geographic")
                     cmbPeriodicidad.SelectedValue = Fila("periodicity")
-                    ScriptManager.RegisterStartupScript(Me, GetType(Page), "modal", "abrirModal();", True)
+                    ScriptManager.RegisterStartupScript(Me, GetType(Page), "modal", "$(window).on('load', function () {$('#mdlVisualizador').modal('show');});", True)
                 Else
                     alerta("Advertencia", "La meta no tiene la hoja de vida grabada", "info")
                 End If

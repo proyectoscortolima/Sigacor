@@ -37,7 +37,7 @@ Public Class clLogin
 
         Dim row As DataRow
 
-        QRY = "select usuario_bd, concat(nombr_empld, aplld_empld) nombre from RHMHOJVI where usuario_bd = '" & cedl_empld & "'"
+        QRY = "select usuario_bd, concat(nombr_empld, aplld_empld) nombre from RHMHOJVI where cedl_empld = '" & cedl_empld & "'"
 
         row = Data.OpenRow(QRY)
         If row IsNot Nothing Then

@@ -212,7 +212,7 @@
     Public Sub cargarMetas()
         Try
             DataT = Nothing
-            DataT = parametrizacion.selectGoals()
+            DataT = parametrizacion.selectGoalsXPacActivo()
             If DataT.Rows.Count > 0 Then
                 tblMetass.DataSource = DataT
                 tblMetass.DataBind()

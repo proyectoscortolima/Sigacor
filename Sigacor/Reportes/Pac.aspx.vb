@@ -49,6 +49,8 @@
             Dim vectoraux() As String
             Dim contador = 0
 
+            Dim dataNiveles As DataTable = parametrizacion.selectLevels(cmbPac.SelectedValue, "hierarchy")
+
             If cmbPac.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione el periodo", "info", "cmbPac")
                 Exit Sub
@@ -68,7 +70,7 @@
             DataT = Nothing
             If cmbNivel.SelectedValue = "1" Then
                 DataT = reportPac.selectLineasFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, "S")
-            ElseIf cmbNivel.SelectedValue = "6" Then
+            ElseIf cmbNivel.SelectedValue = dataNiveles.Rows.Count + 1 Then
                 DataT = reportPac.selectGoals(cmbPac.SelectedValue)
                 If DataT.Rows.Count > 0 Then
                     Dim vectorHistorial(DataT.Rows.Count - 1) As String
@@ -117,7 +119,7 @@
 
 
                     Dim code, botonRedireccionar As String
-                    If cmbNivel.SelectedValue = "6" Then
+                    If cmbNivel.SelectedValue = dataNiveles.Rows.Count + 1 Then
                         dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, Fila("code"))
                     Else
                         dataT2 = reportPac.selectContentsFiltroGeneral(cmbPac.SelectedValue, cmbNivel.SelectedValue, Fila("code"))
@@ -152,7 +154,7 @@
 
                             End If
 
-                            If cmbNivel.SelectedValue = "6" Then
+                            If cmbNivel.SelectedValue = dataNiveles.Rows.Count + 1 Then
                                 botonRedireccionar = "<a href=""detallepac.aspx?meta=" & row2("id") & "&pac=" & row2("pac_id") & """>Leer más</a>"
                             Else
                                 botonRedireccionar = String.Empty
@@ -266,6 +268,8 @@
             Dim i2 As Integer = 0
             Dim array() As Char
 
+            Dim dataNiveles As DataTable = parametrizacion.selectLevels(cmbPac.SelectedValue, "hierarchy")
+
             If cmbPac.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione el periodo", "info", "cmbPac")
                 Exit Sub
@@ -344,8 +348,7 @@
 
                                                                    "))
 
-                    'dataT2 = parametrizacion.selectGoalsFiltro(cmbPac.SelectedValue, row("code"))
-                    If level_id = "6" Then
+                    If level_id = dataNiveles.Rows.Count + 1 Then
                         dataT2 = reportPac.selectGoalsFiltroGeneral(cmbPac.SelectedValue, code)
                     Else
                         dataT2 = reportPac.selectContentsFiltro(cmbPac.SelectedValue, code, level_id)
@@ -502,8 +505,7 @@
             pnlResultados.Controls.Add(New LiteralControl("<div Class=""col-xs-12 col-md-12"">
                                                                <div class=""card-report"">
                                                                    <div class=""card-body"">
-                                                                       <div class=""row"">                                                                       
-                                                          "))
+                                                                       <div class=""row"">"))
 
             Dim codeLinea, nombreLinea, arrayCodeLinea, lineaGlobal As String
             Dim contador As Integer = 0
@@ -896,7 +898,6 @@
             lblError.Visible = True
         End Try
     End Sub
-
     Public Sub cargarNiveles()
         Try
             If cmbPac.SelectedIndex = 0 Then
@@ -912,7 +913,7 @@
                 cmbNivel.DataSource = DataT
                 cmbNivel.DataBind()
                 cmbNivel.Items.Insert(0, New ListItem("-Selecione un nivel-", ""))
-                cmbNivel.Items.Insert(DataT.Rows.Count + 1, New ListItem("Metas", "6"))
+                cmbNivel.Items.Insert(DataT.Rows.Count + 1, New ListItem("Metas", DataT.Rows.Count + 1))
             Else
                 cmbNivel.Items.Clear()
             End If
@@ -1046,7 +1047,7 @@
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
+                                                                                               <img src=""" & cargarImagenConveciones(row2("value_progress")) & """ width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -1080,7 +1081,7 @@
                                                                                    <div class=""card-header-report"" id=""headingOne"">
                                                                                        <div class=""row"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""../Componentes/img/nvl1.svg"" width=""70""/>
+                                                                                               <img src=""" & cargarImagenConveciones(row2("value_progress")) & """ width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b> " & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -1138,5 +1139,27 @@
     End Sub
 
 #End Region
+
+
+    Public Function cargarImagenConveciones(ByVal valueProgress As Integer) As String
+
+        Dim pathIcono As String
+
+        If valueProgress = 0 Then
+            pathIcono = "../Componentes/img/nvl1.svg"
+        ElseIf valueProgress <= 24 Then
+            pathIcono = "../Componentes/img/nvl2.svg"
+        ElseIf valueProgress >= 25 And valueProgress <= 49 Then
+            pathIcono = "../Componentes/img/nvl3.svg"
+        ElseIf valueProgress >= 50 And valueProgress <= 74 Then
+            pathIcono = "../Componentes/img/nvl4.svg"
+        ElseIf valueProgress >= 75 And valueProgress <= 99 Then
+            pathIcono = "../Componentes/img/nvl5.svg"
+        ElseIf valueProgress >= 100 Then
+            pathIcono = "../Componentes/img/nvl6.svg"
+        End If
+
+        Return pathIcono
+    End Function
 
 End Class
