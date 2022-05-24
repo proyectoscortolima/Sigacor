@@ -95,11 +95,6 @@
                                 <Columns>
                                     <asp:BoundField DataField="id" />
                                     <asp:BoundField DataField="hierarchy" HeaderText="Código" />
-                                    <%--<asp:TemplateField HeaderText="Código">
-                                        <ItemTemplate>
-                                            <asp:TextBox TextMode="Number" ID="txtCodigo" class="form-control" runat="server"></asp:TextBox>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>--%>
                                     <asp:BoundField DataField="name" HeaderText="Nombre" />
                                     <asp:TemplateField HeaderText="Nombre">
                                         <ItemTemplate>
@@ -118,11 +113,6 @@
                                                 Style="display: inline-grid" title="Confirmar" class="btn btn-success btn-circle">                                            
                                             <i class="fas fa-check"></i>                                   
                                             </asp:LinkButton>
-                                            <%--<asp:LinkButton ID="lnkEliNiv" runat="server" data-placement="top"
-                                                data-toggle="tooltip" Height="30px" Width="30px" CommandName="Eliminar"
-                                                Style="display: inline-grid" title="Eliminar niveles" class="btn btn-success btn-circle">                                            
-                                            <i class="fas fa-backspace"></i>
-                                            </asp:LinkButton>--%>
                                         </ItemTemplate>
                                         <ItemStyle Width="20%" VerticalAlign="Middle" HorizontalAlign="Center" />
                                     </asp:TemplateField>
@@ -174,7 +164,7 @@
                             </div>
                         </div>
                         <div class="col-4 mt-2" id="pnlNvl4Reg" runat="server">
-                            <div class="form-group" >
+                            <div class="form-group">
                                 <asp:Label ID="lblNvl4Reg" runat="server"></asp:Label>
                                 <asp:DropDownList ID="cmbNvl4Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                             </div>
@@ -182,7 +172,7 @@
                         <div class="col-4 mt-2" id="pnlNvl5Reg" runat="server">
                             <div class="form-group">
                                 <asp:Label ID="lblNvl5Reg" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNvl5Reg" class="form-control" runat="server" AutoComplete="Off" ></asp:DropDownList>
+                                <asp:DropDownList ID="cmbNvl5Reg" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
                         <div class="col-4" id="pnlSubNivel" runat="server">
@@ -223,7 +213,7 @@
                         </div>
                     </div>
                     <br />
-                    <asp:Panel ID="pnlFiltro" CssClass="row" runat="server">                        
+                    <asp:Panel ID="pnlFiltro" CssClass="row" runat="server">
                         <div class="col-2">
                             <h5>Filtro</h5>
                         </div>
@@ -257,7 +247,7 @@
                         <div class="col-3 mt-2">
                             <div class="form-group" id="pnlNiv5" runat="server">
                                 <asp:Label ID="lblNiv5" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off" ></asp:DropDownList>
+                                <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
 
@@ -323,7 +313,7 @@
                     </asp:Panel>
                     <br />
                     <div class="row">
-                         <div class="col-12 text-center">
+                        <div class="col-12 text-center">
                             <asp:LinkButton ID="btnAtrasPlanAcc" runat="server" class="btn btn-primary">Atrás</asp:LinkButton>
                             <asp:LinkButton ID="btnSigPlanAcc" runat="server" class="btn btn-primary">Siguiente</asp:LinkButton>
                         </div>
@@ -357,7 +347,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <asp:Label ID="lblNivelMeta" runat="server"></asp:Label>                                
+                                <asp:Label ID="lblNivelMeta" runat="server"></asp:Label>
                                 <asp:DropDownList ID="cmbNivelMeta" class="form-control mt-2" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
@@ -423,9 +413,9 @@
                         <div class="col-12 text-left">
                             <asp:LinkButton ID="btnFiltroMeta" runat="server" class="btn btn-primary">Aplicar filtro</asp:LinkButton>
                         </div>
-                    </div>                    
+                    </div>
                     <br />
-                    <asp:Panel ID="pnlFiltroMeta" CssClass="row" runat="server">  
+                    <asp:Panel ID="pnlFiltroMeta" CssClass="row" runat="server">
                         <div class="col-2">
                             <h5>Filtro</h5>
                         </div>
@@ -538,7 +528,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <asp:Label ID="lblNivelMetaMdl" runat="server"></asp:Label>                                
+                                <asp:Label ID="lblNivelMetaMdl" runat="server"></asp:Label>
                                 <asp:DropDownList ID="cmbNivelMetaMdl" class="form-control mt-2" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>

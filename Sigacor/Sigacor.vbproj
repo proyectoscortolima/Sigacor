@@ -2007,6 +2007,7 @@
     <Content Include="Index.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Parametrizacion\controlesDinamicos.aspx" />
     <Content Include="Parametrizacion\AvancePac.aspx" />
     <Content Include="Parametrizacion\HojaVida.aspx" />
     <Content Include="Parametrizacion\NuevoRegistro.aspx" />
@@ -2063,6 +2064,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Parametrizacion\controlesDinamicos.aspx.designer.vb">
+      <DependentUpon>controlesDinamicos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametrizacion\controlesDinamicos.aspx.vb">
+      <DependentUpon>controlesDinamicos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Parametrizacion\AvancePac.aspx.designer.vb">
       <DependentUpon>AvancePac.aspx</DependentUpon>

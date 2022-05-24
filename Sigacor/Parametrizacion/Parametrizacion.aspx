@@ -40,7 +40,6 @@
                             <Columns>
                                 <asp:BoundField DataField="id" HeaderText="Código" />
                                 <asp:BoundField DataField="name" HeaderText="Nombre" />
-                                <%--<asp:BoundField DataField="slogan" HeaderText="Slogan" />--%>
                                 <asp:BoundField DataField="initial_year" HeaderText="Año Inicial" />
                                 <asp:BoundField DataField="final_year" HeaderText="Año Final" />
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px" HeaderText="Acciones">
