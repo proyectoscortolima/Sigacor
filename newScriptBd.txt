@@ -191,4 +191,14 @@ create table SCRREPRT (
 
 
 
+-----------------Actualizaciones-----------------------------
+ALTER TABLE SCRMET ADD weight decimal;
+ALTER TABLE SCRMET ADD value_one_budget decimal;
+ALTER TABLE SCRMET ADD value_two_budget decimal;
+ALTER TABLE SCRMET ADD value_three_budget decimal;
+ALTER TABLE SCRMET ADD value_four_budget decimal;
 
+ALTER TABLE SCRMET ADD progress_one_year decimal;
+ALTER TABLE SCRMET ADD progress_two_year decimal;
+ALTER TABLE SCRMET ADD progress_three_year decimal;
+ALTER TABLE SCRMET ADD progress_four_year decimal;

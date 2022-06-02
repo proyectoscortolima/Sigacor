@@ -1,4 +1,6 @@
-﻿Public Class AvancePac
+﻿Imports System.Drawing
+
+Public Class AvancePac
     Inherits System.Web.UI.Page
 
     Dim parametrizacion As New clParametrizacion
@@ -12,11 +14,6 @@
             If Not IsPostBack Then
                 lblError.Visible = False
                 lblError.Visible = False
-                pnlNiv2.Visible = False
-                pnlNiv3.Visible = False
-                pnlNiv4.Visible = False
-                pnlNiv5.Visible = False
-                pnlNiv6.Visible = False
                 DataT = Nothing
                 DataT = parametrizacion.selectPacTodos()
                 If DataT.Rows.Count > 0 Then
@@ -30,7 +27,19 @@
                     cmbPac_SelectedIndexChanged(Nothing, Nothing)
                 End If
 
+
+                Dim dt As DataTable = ViewState("Quantity")
+                Me.QuantityDinamicControls = dt
+                GenerateControls()
+
                 actualizarStatePac()
+
+                chkNoProgramado.BackColor = Color.White
+                chkEjecMenos25.BackColor = Color.Red
+                chkEjec25Al49.BackColor = Color.Orange
+                chkEjec50Al74.BackColor = Color.Yellow
+                chkEjec75Al99.BackColor = Color.Green
+                chkEjecMas100.BackColor = Color.Blue
             End If
 
         Catch ex As Exception
@@ -177,15 +186,6 @@
                             If filaMeta IsNot Nothing Then
                                 Dim valorTipoMeta, avances, nomMeta As String
                                 nomMeta = filaMeta("name")
-                                If filaMeta("type_goal") = "I" Then
-                                    valorTipoMeta = CInt(filaMeta("value_one_year")) + CInt(filaMeta("value_two_year")) +
-                                           CInt(filaMeta("value_three_year")) + CInt(filaMeta("value_four_year"))
-                                ElseIf filaMeta("type_goal") = "M" Then
-                                    valorTipoMeta = filaMeta("line_base")
-                                ElseIf filaMeta("type_goal") = "R" Then
-                                    valorTipoMeta = CInt(filaMeta("value_one_year")) - CInt(filaMeta("value_two_year")) -
-                                           CInt(filaMeta("value_three_year")) - CInt(filaMeta("value_four_year"))
-                                End If
 
                                 dataAvance = parametrizacion.selectReport(cmbPac.SelectedValue)
                                 If dataAvance.Rows.Count > 0 Then
@@ -201,22 +201,76 @@
                                     avances = "No se ha ejecutado ninguna actividad"
                                 End If
 
+                                Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour As Double
+                                Dim nombreMetaOneYear, nombreMetaTwoYear, nombreMetaThreeYear, nombreMetaFourYear As String
+
+                                nombreMetaOneYear = "Meta " & filaPac("initial_year")
+                                nombreMetaTwoYear = "Meta " & (CInt(filaPac("initial_year")) + 1)
+                                nombreMetaThreeYear = "Meta " & (CInt(filaPac("final_year")) - 1)
+                                nombreMetaFourYear = "Meta " & filaPac("final_year")
+
+                                If Not IsDBNull(filaMeta("progress_one_year")) Then
+                                    porcentajeOne = (CDbl(filaMeta("progress_one_year")) / CDbl(filaMeta("value_one_year"))) * 100
+                                    If porcentajeOne > 100 Then
+                                        porcentajeOne = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(filaMeta("progress_two_year")) Then
+                                    porcentajeTwo = (CDbl(filaMeta("progress_two_year")) / CDbl(filaMeta("value_two_year"))) * 100
+                                    If porcentajeTwo > 100 Then
+                                        porcentajeTwo = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(filaMeta("progress_three_year")) Then
+                                    porcentajeThree = (CDbl(filaMeta("progress_three_year")) / CDbl(filaMeta("value_three_year"))) * 100
+                                    If porcentajeThree > 100 Then
+                                        porcentajeThree = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(filaMeta("progress_four_year")) Then
+                                    porcentajeFour = (CDbl(filaMeta("progress_four_year")) / CDbl(filaMeta("value_four_year"))) * 100
+                                    If porcentajeFour > 100 Then
+                                        porcentajeFour = 100
+                                    End If
+                                End If
+
+
                                 script &= "<b>Meta: </b> " & nomMeta & " 
                                            <br/> 
                                            <b>Avance de meta física en el cuatrienio:</b> <br/> 
-                                           <div class=""progress""> 
-                                               <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" 
-                                                style=""width: " & filaMeta("value_progress") & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; "">
-                                               <label>" & filaMeta("value_progress") & "%</label>
-                                               </div>
-                                           </div>
                                            <div class=""row"">
-                                               <div class=""col-lg-6 text-center"">
-                                                   <b>Linea base: </b> " & filaMeta("line_base") & "
-                                               </div>
-                                               <div class=""col-lg-6 text-center"">
-                                                    <b>Meta: </b> " & valorTipoMeta & "
-                                               </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaOneYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeOne & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeOne & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaTwoYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeTwo & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeTwo & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaThreeYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeThree & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeFour & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaFourYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeFour & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeFour & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
                                            </div>
                                            <br/> 
                                            <b>Actividades ejecutadas:</b> <br/> 
@@ -224,6 +278,10 @@
                                            " & avances & "
                                            </div>
                                            "
+                                porcentajeOne = 0
+                                porcentajeTwo = 0
+                                porcentajeThree = 0
+                                porcentajeFour = 0
                             End If
 
 
@@ -236,7 +294,7 @@
                             If arrayCode <> String.Empty Then
                                 pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"">
+                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(filaMeta("value_progress")) & """>
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
@@ -257,7 +315,7 @@
                                 If row("code") = row2("code") Then
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"">
+                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(filaMeta("value_progress")) & """>
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
@@ -325,46 +383,31 @@
                                                           "))
 
             Dim code, level_id As String
-            If cmbLineas.SelectedIndex > 0 Then
-                level_id = "1"
-                If cmbNiv2.SelectedIndex > 0 Then
-                    level_id = "2"
-                    If cmbNiv3.SelectedIndex > 0 Then
-                        level_id = "3"
-                        If cmbNiv4.SelectedIndex > 0 Then
-                            level_id = "4"
-                            If cmbNiv5.SelectedIndex > 0 Then
-                                level_id = "5"
-                                If cmbNiv6.SelectedIndex > 0 Then
-                                    level_id = "6"
-                                    code = cmbNiv6.SelectedValue
-                                Else
-                                    level_id = "6"
-                                    code = cmbNiv5.SelectedValue
-                                End If
-                            Else
-                                level_id = "5"
-                                code = cmbNiv4.SelectedValue
-                            End If
-                        Else
-                            level_id = "4"
-                            code = cmbNiv3.SelectedValue
-                        End If
-                    Else
-                        level_id = "3"
-                        code = cmbNiv2.SelectedValue
-                    End If
+
+            If (QuantityDinamicControls.Rows.Count > 0) Then
+                Dim lastRow As DataRow = QuantityDinamicControls.Rows(QuantityDinamicControls.Rows.Count - 1)
+                If IsDBNull(lastRow("sublevel")) Then
+                    code = String.Empty
                 Else
-                    level_id = "2"
-                    code = cmbLineas.SelectedValue
+                    code = lastRow("sublevel")
                 End If
-            Else
-                level_id = "1"
-                code = String.Empty
+                If IsDBNull(lastRow("level")) Then
+                    level_id = String.Empty
+                Else
+                    level_id = lastRow("level")
+                End If
+            End If
+
+            Dim control As DropDownList
+            Dim linea As String = String.Empty
+
+            control = TryCast(phDinamicControls.FindControl("cmbNivel-" & QuantityDinamicControls(0)(1)), DropDownList)
+            If control IsNot Nothing Then
+                linea = control.SelectedValue
             End If
 
             DataT = Nothing
-            DataT = reportPac.selectLineas(cmbLineas.SelectedValue, cmbPac.SelectedValue)
+            DataT = reportPac.selectLineas(linea, cmbPac.SelectedValue)
             If DataT.Rows.Count > 0 Then
                 For Each row As DataRow In DataT.Rows
                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
@@ -817,10 +860,43 @@
                                            CInt(filaMeta("value_three_year")) - CInt(filaMeta("value_four_year"))
                                 End If
 
+                                Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour As Double
+                                Dim nombreMetaOneYear, nombreMetaTwoYear, nombreMetaThreeYear, nombreMetaFourYear As String
+
+                                nombreMetaOneYear = "Meta " & filaPac("initial_year")
+                                nombreMetaTwoYear = "Meta " & (CInt(filaPac("initial_year")) + 1)
+                                nombreMetaThreeYear = "Meta " & (CInt(filaPac("final_year")) - 1)
+                                nombreMetaFourYear = "Meta " & filaPac("final_year")
+
+                                If Not IsDBNull(filaMeta("progress_one_year")) Then
+                                    porcentajeOne = (CDbl(filaMeta("progress_one_year")) / CDbl(filaMeta("value_one_year"))) * 100
+                                    If porcentajeOne > 100 Then
+                                        porcentajeOne = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(filaMeta("progress_two_year")) Then
+                                    porcentajeTwo = (CDbl(filaMeta("progress_two_year")) / CDbl(filaMeta("value_two_year"))) * 100
+                                    If porcentajeTwo > 100 Then
+                                        porcentajeTwo = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(filaMeta("progress_three_year")) Then
+                                    porcentajeThree = (CDbl(filaMeta("progress_three_year")) / CDbl(filaMeta("value_three_year"))) * 100
+                                    If porcentajeThree > 100 Then
+                                        porcentajeThree = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(filaMeta("progress_four_year")) Then
+                                    porcentajeFour = (CDbl(filaMeta("progress_four_year")) / CDbl(filaMeta("value_four_year"))) * 100
+                                    If porcentajeFour > 100 Then
+                                        porcentajeFour = 100
+                                    End If
+                                End If
+
                                 dataAvance = parametrizacion.selectReport(cmbPac.SelectedValue)
                                 If dataAvance.Rows.Count > 0 Then
                                     i = 0
-                                    For Each rowAvance As DataRow In DataT.Rows
+                                    For Each rowAvance As DataRow In dataAvance.Rows
                                         If i > 0 Then
                                             avances &= vbCrLf & "---------------------------------------"
                                         End If
@@ -834,19 +910,39 @@
                                 script &= "<b>Meta: </b> " & nomMeta & " 
                                            <br/> 
                                            <b>Avance de meta física en el cuatrienio:</b> <br/> 
-                                           <div class=""progress""> 
-                                               <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" 
-                                                style=""width: " & filaMeta("value_progress") & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; "">
-                                               <label>" & filaMeta("value_progress") & "%</label>
-                                               </div>
-                                           </div>
                                            <div class=""row"">
-                                               <div class=""col-lg-6 text-center"">
-                                                   <b>Linea base: </b> " & filaMeta("line_base") & "
-                                               </div>
-                                               <div class=""col-lg-6 text-center"">
-                                                    <b>Meta: </b> " & valorTipoMeta & "
-                                               </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaOneYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeOne & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeOne & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaTwoYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeTwo & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeTwo & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaThreeYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeThree & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeFour & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=""col-xs-12 col-md-3 mt-3"">
+                                                    " & nombreMetaFourYear & "
+                                                    <div class=""progress mt-2"">
+                                                        <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeFour & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
+                                                        " & porcentajeFour & "%
+                                                        </div>
+                                                    </div>
+                                                </div>
                                            </div>
                                            <br/> 
                                            <b>Actividades ejecutadas:</b> <br/> 
@@ -854,6 +950,10 @@
                                            " & avances & "
                                            </div>
                                            "
+                                porcentajeOne = 0
+                                porcentajeTwo = 0
+                                porcentajeThree = 0
+                                porcentajeFour = 0
                             End If
                             i = 0
                             enumerador += 1
@@ -863,7 +963,7 @@
                             If arrayCode IsNot Nothing Then
                                 pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"">
+                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(row2("value_progress")) & """>
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
@@ -884,7 +984,7 @@
                                 If row("code") = row2("code") Then
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                         <a class=""card-report-2 tip_trigger""  style=""text-decoration: none; border:none !important; "">
-                                                                                            <div class=""card-header-report"">
+                                                                                            <div class=""card-header-report"" style=""" & cargarColorConveciones(row2("value_progress")) & """>
                                                                                                 <div class=""row"" style=""justify-content: center;"">
                                                                                                     <div class=""col-12 text-center"">                                                                                               
                                                                                                         <h5 class=""mb-0"">                                                                                                   
@@ -930,163 +1030,13 @@
     End Sub
     Private Sub cmbPac_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPac.SelectedIndexChanged
         Try
-            cargarLineas()
             cargarNiveles()
-            cmbLineas.Focus()
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True
         End Try
     End Sub
 
-    Private Sub cmbLineas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLineas.SelectedIndexChanged
-        Try
-            ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'; document.getElementById('filtro').className='show';", True)
-            DataT = Nothing
-            If cmbLineas.SelectedIndex = 0 Then
-                cmbNiv2.Items.Clear()
-                pnlNiv2.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue, cmbLineas.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv2.Items.Clear()
-                    cmbNiv2.DataTextField = "name"
-                    cmbNiv2.DataValueField = "code"
-                    cmbNiv2.DataSource = DataT
-                    cmbNiv2.DataBind()
-                    cmbNiv2.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv2.Text = DataT(0)(2)
-                    pnlNiv2.Visible = True
-                Else
-                    cmbNiv2.Items.Clear()
-                    pnlNiv2.Visible = False
-                    alerta("Advertencia", "No se han encontrado programas", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-
-    Private Sub cmbNiv2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv2.SelectedIndexChanged
-        Try
-            ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'; document.getElementById('filtro').className='show';", True)
-            DataT = Nothing
-            If cmbNiv2.SelectedIndex = 0 Then
-                cmbNiv3.Items.Clear()
-                pnlNiv3.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue, cmbNiv2.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv3.Items.Clear()
-                    cmbNiv3.DataTextField = "name"
-                    cmbNiv3.DataValueField = "code"
-                    cmbNiv3.DataSource = DataT
-                    cmbNiv3.DataBind()
-                    cmbNiv3.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv3.Text = DataT(0)(2)
-                    pnlNiv3.Visible = True
-                Else
-                    cmbNiv3.Items.Clear()
-                    pnlNiv3.Visible = False
-                    alerta("Advertencia", "No se han encontrado proyectos", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-
-    Private Sub cmbNiv3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv3.SelectedIndexChanged
-        Try
-            ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'; document.getElementById('filtro').className='show';", True)
-            DataT = Nothing
-            If cmbNiv3.SelectedIndex = 0 Then
-                cmbNiv4.Items.Clear()
-                pnlNiv4.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue, cmbNiv3.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv4.Items.Clear()
-                    cmbNiv4.DataTextField = "name"
-                    cmbNiv4.DataValueField = "code"
-                    cmbNiv4.DataSource = DataT
-                    cmbNiv4.DataBind()
-                    cmbNiv4.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv4.Text = DataT(0)(2)
-                    pnlNiv4.Visible = True
-                Else
-                    cmbNiv4.Items.Clear()
-                    pnlNiv4.Visible = False
-                    alerta("Advertencia", "No se han encontrado actividades", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-
-    Private Sub cmbNiv4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv4.SelectedIndexChanged
-        Try
-            ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'; document.getElementById('filtro').className='show';", True)
-            DataT = Nothing
-            If cmbNiv4.SelectedIndex = 0 Then
-                cmbNiv5.Items.Clear()
-                pnlNiv5.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue, cmbNiv4.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv5.Items.Clear()
-                    cmbNiv5.DataTextField = "name"
-                    cmbNiv5.DataValueField = "code"
-                    cmbNiv5.DataSource = DataT
-                    cmbNiv5.DataBind()
-                    cmbNiv5.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv5.Text = DataT(0)(2)
-                    pnlNiv5.Visible = True
-                Else
-                    cmbNiv5.Items.Clear()
-                    pnlNiv5.Visible = False
-                    alerta("Advertencia", "No se han encontrado sub actividades", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-    Private Sub cmbNiv5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv5.SelectedIndexChanged
-        Try
-            ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'; document.getElementById('filtro').className='show';", True)
-            DataT = Nothing
-            If cmbNiv5.SelectedIndex = 0 Then
-                cmbNiv6.Items.Clear()
-                pnlNiv6.Visible = False
-            Else
-                DataT = reportPac.selectGoals(cmbPac.SelectedValue, cmbNiv5.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv6.Items.Clear()
-                    cmbNiv6.DataTextField = "name"
-                    cmbNiv6.DataValueField = "code"
-                    cmbNiv6.DataSource = DataT
-                    cmbNiv6.DataBind()
-                    cmbNiv6.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv6.Text = "Metas"
-                    pnlNiv6.Visible = True
-                Else
-                    cmbNiv6.Items.Clear()
-                    pnlNiv6.Visible = False
-                    alerta("Advertencia", "No se han encontrado metas", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
 #End Region
 
 #Region "Metodos - Funciones"
@@ -1106,36 +1056,6 @@
         If Sorted = True Then Array.Sort(strArray2)
         Return strArray2
     End Function
-    Public Sub cargarLineas()
-        Try
-            If cmbPac.SelectedIndex = 0 Then
-                alerta("Advertencia", "Seleccione el periodo", "info")
-                Exit Sub
-            End If
-            DataT = Nothing
-            DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue)
-            If DataT.Rows.Count > 0 Then
-                cmbLineas.Items.Clear()
-                cmbLineas.DataTextField = "name"
-                cmbLineas.DataValueField = "code"
-                cmbLineas.DataSource = DataT
-                cmbLineas.DataBind()
-                cmbLineas.Items.Insert(0, New ListItem("Todos", ""))
-                If DataT(0)(3) = "1" Then
-                    lblLineas.Text = DataT(0)(4)
-                Else
-                    lblLineas.Text = "No hay lineas"
-                End If
-            Else
-                cmbLineas.Items.Clear()
-            End If
-
-
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
 
     Public Sub cargarNiveles()
         Try
@@ -1181,6 +1101,245 @@
         End If
         Script &= " </script>"
         ScriptManager.RegisterStartupScript(Me, GetType(Page), "swal", Script, False)
+    End Sub
+
+    Public Function cargarColorConveciones(ByVal valueProgress As Integer) As String
+
+        Dim pathIcono As String
+
+        If valueProgress = 0 Then
+            pathIcono = "#ffffff"
+        ElseIf valueProgress <= 24 Then
+            pathIcono = "#FF0000"
+        ElseIf valueProgress >= 25 And valueProgress <= 49 Then
+            pathIcono = "#ff8000"
+        ElseIf valueProgress >= 50 And valueProgress <= 74 Then
+            pathIcono = "#FF0"
+        ElseIf valueProgress >= 75 And valueProgress <= 99 Then
+            pathIcono = "#00CC00"
+        ElseIf valueProgress >= 100 Then
+            pathIcono = "#66CCFF"
+        End If
+
+        Return pathIcono
+    End Function
+
+#End Region
+
+#Region "Init Filtro Dinamicos"
+    Protected Overloads Overrides Sub CreateChildControls()
+        If Page.IsPostBack Then
+            GenerateControls()
+        End If
+    End Sub
+
+    Private Property QuantityDinamicControls() As DataTable
+        Get
+            If ViewState("Quantity") Is Nothing Then
+                ViewState("Quantity") = New DataTable()
+            End If
+            Return DirectCast(ViewState("Quantity"), DataTable)
+        End Get
+        Set(ByVal value As DataTable)
+            ViewState("Quantity") = value
+        End Set
+    End Property
+
+#End Region
+
+#Region "Fltro Dinamico"
+
+    Private Sub controlNuevo(Optional nivel As String = "")
+        Dim nuevoCmb As DropDownList = New DropDownList()
+        Dim nuevoPanel As Panel = New Panel()
+
+        DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue, nivel)
+        If DataT.Rows.Count > 0 Then
+            nuevoCmb.ID = "cmbNivel-" + DataT(0)(4).ToString()
+            nuevoCmb.CssClass = "form-control"
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataTextField = "codeName"
+            nuevoCmb.DataValueField = "code"
+            nuevoCmb.DataSource = DataT
+            AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmb_SelectedIndexChanged
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataBind()
+            nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+            nuevoCmb.SelectedIndex = 0
+
+            nuevoPanel.ID = "pnl-" + DataT(0)(4).ToString()
+            nuevoPanel.CssClass = "col-12"
+            nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+            nuevoPanel.Controls.Add(nuevoCmb)
+            nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+            phDinamicControls.Controls.Add(nuevoPanel)
+
+        Else
+            Dim lastRow As DataRow = QuantityDinamicControls.Rows(QuantityDinamicControls.Rows.Count - 2)
+            Fila = parametrizacion.selectLevelsFila(cmbPac.SelectedValue, CInt(lastRow("level")) + 1, "")
+            If Fila IsNot Nothing Then
+                alerta("El nivel " & Fila("name") & " no contiene contenido", "", "info")
+            End If
+        End If
+
+    End Sub
+    Private Sub GenerateControls()
+        Dim Quantity As Integer = 0
+        Dim i As Integer = 0
+        phDinamicControls.Controls.Clear()
+        If QuantityDinamicControls.Rows.Count > 0 Then
+            For Each row As DataRow In QuantityDinamicControls.Rows
+                Dim nuevoCmb As DropDownList = New DropDownList()
+                Dim nuevoPanel As Panel = New Panel()
+                DataT = Nothing
+
+                If row("level").ToString() = "1" Then
+                    DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue)
+                Else
+                    DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue, row("sublevel").ToString())
+                End If
+                If DataT.Rows.Count > 0 Then
+                    nuevoCmb.ID = "cmbNivel-" + row("level")
+                    nuevoCmb.CssClass = "form-control"
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataTextField = "codeName"
+                    nuevoCmb.DataValueField = "code"
+                    nuevoCmb.DataSource = DataT
+                    AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmb_SelectedIndexChanged
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataBind()
+                    nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                    nuevoCmb.SelectedIndex = 0
+
+                    nuevoPanel.ID = "pnl-" + DataT(0)(4).ToString()
+                    nuevoPanel.CssClass = "col-12"
+                    nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+                    nuevoPanel.Controls.Add(nuevoCmb)
+                    nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                    phDinamicControls.Controls.Add(nuevoPanel)
+                End If
+            Next
+        Else
+            Dim nuevoCmb As DropDownList = New DropDownList()
+            Dim nuevoPanel As Panel = New Panel()
+            Dim dt As New DataTable()
+            dt.Columns.Add("idcontrol")
+            dt.Columns.Add("level")
+            dt.Columns.Add("sublevel")
+            Dim row As DataRow = dt.NewRow()
+            DataT = parametrizacion.selectNiveles(cmbPac.SelectedValue)
+            If DataT.Rows.Count > 0 Then
+                row("level") = DataT(0)(4).ToString()
+                row("idcontrol") = "cmbNivel-" + DataT(0)(4).ToString()
+                nuevoCmb.ID = "cmbNivel-" + DataT(0)(4).ToString()
+                nuevoCmb.CssClass = "form-control"
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataTextField = "codeName"
+                nuevoCmb.DataValueField = "code"
+                nuevoCmb.DataSource = DataT
+                AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmb_SelectedIndexChanged
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataBind()
+                nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                nuevoCmb.SelectedIndex = 0
+
+                nuevoPanel.ID = "pnl-" + DataT(0)(4).ToString()
+                nuevoPanel.CssClass = "col-12"
+                nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+                nuevoPanel.Controls.Add(nuevoCmb)
+                nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                phDinamicControls.Controls.Add(nuevoPanel)
+            End If
+            dt.Rows.Add(row)
+            QuantityDinamicControls = dt
+        End If
+    End Sub
+
+
+    Private Sub nuevoCmb_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        Dim DataT2 As New DataTable
+        Dim nivelControl As DropDownList = DirectCast(sender, DropDownList)
+        Dim row As DataRow = QuantityDinamicControls.NewRow()
+        Dim delimitadores() As String = {"-"}
+        Dim vectoraux() As String
+        Dim i As Integer = 1
+
+        vectoraux = nivelControl.ID.Split(delimitadores, StringSplitOptions.None)
+
+        If nivelControl.SelectedValue <> String.Empty Then
+            DataT2 = parametrizacion.selectNiveles(cmbPac.SelectedValue, nivelControl.SelectedValue)
+
+            If DataT2.Rows.Count > 0 Then
+                row("level") = DataT2(0)(4)
+            Else
+                If QuantityDinamicControls.Rows.Count > 1 Then
+                    Dim lastRow As DataRow = QuantityDinamicControls.Rows(QuantityDinamicControls.Rows.Count - 1)
+                    row("level") = CInt(lastRow("level") + 1)
+                Else
+                    row("level") = String.Empty
+                End If
+
+            End If
+            row("sublevel") = nivelControl.SelectedValue
+            row("idcontrol") = "cmbNivel-" + row("level").ToString()
+
+            Dim result As DataRow() = QuantityDinamicControls.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltro(nivelControl)
+            End If
+            QuantityDinamicControls.Rows.Add(row)
+            controlNuevo(nivelControl.SelectedValue)
+        Else
+            Dim result As DataRow() = QuantityDinamicControls.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltro(nivelControl)
+            End If
+        End If
+        ScriptManager.RegisterStartupScript(Me, GetType(Page), "Card", "document.getElementById('fltAvanzado').className='show'; document.getElementById('filtro').className='show';", True)
+    End Sub
+
+    Public Sub actualizarValoresFiltro(ByVal control As DropDownList)
+        Dim indice As Integer = -1
+        Dim i As Integer = 1
+        Dim vectorNvl() As String
+        Dim vectoraux() As String
+        Dim indicesRowsEliminar As New List(Of Integer)
+        Dim delimitadores() As String = {"-"}
+
+        vectoraux = control.ID.Split(delimitadores, StringSplitOptions.None)
+        For Each rowFilter As DataRow In QuantityDinamicControls.Rows
+            vectorNvl = rowFilter("idcontrol").Split(delimitadores, StringSplitOptions.None)
+            indice += 1
+            If rowFilter("level") = vectoraux(1) Then
+                rowFilter("sublevel") = control.SelectedValue
+            ElseIf rowFilter("level") > vectoraux(1) Then
+                indicesRowsEliminar.Add(indice)
+                Dim controlPanel As Panel = TryCast(phDinamicControls.FindControl("pnl-" & vectorNvl(1)), Panel)
+                phDinamicControls.Controls.Remove(controlPanel)
+            End If
+        Next
+
+        For x As Int32 = indicesRowsEliminar.Count - 1 To 0 Step -1
+            Dim indiceEliminar As Integer = indicesRowsEliminar.Item(x)
+            QuantityDinamicControls.Rows.RemoveAt(indiceEliminar)
+        Next
+
+        For Each rowFilter As DataRow In QuantityDinamicControls.Rows
+            If i > 1 Then
+                Dim controlCmb As DropDownList = TryCast(phDinamicControls.FindControl("cmbNivel-" & CInt(rowFilter("level")) - 1 & ""), DropDownList)
+                If controlCmb IsNot Nothing Then
+                    rowFilter("sublevel") = controlCmb.SelectedValue
+                End If
+            End If
+            i += 1
+        Next
     End Sub
 
 #End Region

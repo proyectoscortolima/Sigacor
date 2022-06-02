@@ -84,26 +84,54 @@
                         pnlDescripcionJerarquia.Controls.Add(New LiteralControl("<b>" & row("name_level") & ":</b> " & row("name") & " "))
                     Next
 
-                    Dim year_initial, index As Integer
                     Fila3 = parametrizacion.selectGoalsFila(lblCodMeta.Text.Trim)
                     If Fila3 IsNot Nothing Then
                         pnlDescripcionJerarquia.Controls.Add(New LiteralControl("<b>Meta: </b> " & Fila3("name") & ""))
-                        lblLineaBase.Text = Fila3("line_base")
 
+                        lblMetaOneYear.Text = "Meta " & Fila("initial_year")
+                        lblMetaTwoYear.Text = "Meta " & (CInt(Fila("initial_year")) + 1)
+                        lblMetaThreeYear.Text = "Meta " & (CInt(Fila("final_year")) - 1)
+                        lblMetaFourYear.Text = "Meta " & Fila("final_year")
 
-                        If Fila3("type_goal") = "I" Then
-                            lblMeta.Text = CInt(Fila3("value_one_year")) + CInt(Fila3("value_two_year")) +
-                                           CInt(Fila3("value_three_year")) + CInt(Fila3("value_four_year"))
-                        ElseIf Fila3("type_goal") = "M" Then
-                            lblMeta.Text = Fila3("line_base")
-                        ElseIf Fila3("type_goal") = "R" Then
-                            lblMeta.Text = CInt(Fila3("value_one_year")) - CInt(Fila3("value_two_year")) -
-                                           CInt(Fila3("value_three_year")) - CInt(Fila3("value_four_year"))
+                        Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour As Double
+
+                        If Not IsDBNull(Fila3("progress_one_year")) Then
+                            porcentajeOne = (CDbl(Fila3("progress_one_year")) / CDbl(Fila3("value_one_year"))) * 100
+                            If porcentajeOne > 100 Then
+                                porcentajeOne = 100
+                            End If
+                        End If
+                        If Not IsDBNull(Fila3("progress_two_year")) Then
+                            porcentajeTwo = (CDbl(Fila3("progress_two_year")) / CDbl(Fila3("value_two_year"))) * 100
+                            If porcentajeTwo > 100 Then
+                                porcentajeTwo = 100
+                            End If
+                        End If
+                        If Not IsDBNull(Fila3("progress_three_year")) Then
+                            porcentajeThree = (CDbl(Fila3("progress_three_year")) / CDbl(Fila3("value_three_year"))) * 100
+                            If porcentajeThree > 100 Then
+                                porcentajeThree = 100
+                            End If
+                        End If
+                        If Not IsDBNull(Fila3("progress_four_year")) Then
+                            porcentajeFour = (CDbl(Fila3("progress_four_year")) / CDbl(Fila3("value_four_year"))) * 100
+                            If porcentajeFour > 100 Then
+                                porcentajeFour = 100
+                            End If
                         End If
 
+                        progressbarEjecucionOne.Attributes.Add("style", "width: " & porcentajeOne & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; ")
+                        lblValorProgressOne.Text = porcentajeOne & "%"
 
-                        progressbarEjecucion.Attributes.Add("style", "width: " & Fila3("value_progress") & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; ")
-                        lblValorProgress.Text = Fila3("value_progress") & "%"
+                        progressbarEjecucionTwo.Attributes.Add("style", "width: " & porcentajeTwo & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; ")
+                        lblValorProgressTwo.Text = porcentajeTwo & "%"
+
+                        progressbarEjecucionThree.Attributes.Add("style", "width: " & porcentajeThree & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; ")
+                        lblValorProgressThree.Text = porcentajeThree & "%"
+
+                        progressbarEjecucionFour.Attributes.Add("style", "width: " & porcentajeFour & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100""; ")
+                        lblValorProgressFour.Text = porcentajeFour & "%"
+
                     End If
 
                     DataT = Nothing

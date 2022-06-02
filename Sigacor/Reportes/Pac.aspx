@@ -89,37 +89,8 @@
                     <div class="collapse" id="fltAvanzado">
                         <div class="card-report card-body mb-3" style="margin-top: 0.4rem;">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12 mt-2">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblLineas" runat="server"></asp:Label>
-                                            <asp:DropDownList ID="cmbLineas" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mt-2" id="pnlNiv2" runat="server">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblNiv2" runat="server"></asp:Label>
-                                            <asp:DropDownList ID="cmbNiv2" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mt-2" id="pnlNiv3" runat="server">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblNiv3" runat="server"></asp:Label>
-                                            <asp:DropDownList ID="cmbNiv3" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mt-2" id="pnlNiv4" runat="server">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblNiv4" runat="server"></asp:Label>
-                                            <asp:DropDownList ID="cmbNiv4" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mt-2" id="pnlNiv5" runat="server">
-                                        <div class="form-group">
-                                            <asp:Label ID="lblNiv5" runat="server"></asp:Label>
-                                            <asp:DropDownList ID="cmbNiv5" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                        </div>
-                                    </div>
+                                <div class="row">                                          
+                                    <asp:PlaceHolder ID="phDinamicControls" runat="server"></asp:PlaceHolder>
                                     <div class="col-12 mt-2" id="pnlNiv6" runat="server">
                                         <div class="form-group">
                                             <asp:Label ID="lblNiv6" runat="server"></asp:Label>

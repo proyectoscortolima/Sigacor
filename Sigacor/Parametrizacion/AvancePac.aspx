@@ -40,7 +40,7 @@
         }
     </style>
     <div class="col-12 mt-2">
-        <a class="card-report-2" data-toggle="collapse" href="#filtro" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <a class="card-report-2" data-toggle="collapse" href="#filtro" role="button" aria-expanded="false" aria-controls="collapseExample" id="pnlFiltro">
             <div class="card-header-report">
                 <div class="row">
                     <div class="col-12">
@@ -115,42 +115,7 @@
                                 <div class="card-report card-body mb-3" style="margin-top: 0.4rem;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-12 mt-2">
-                                                <div class="form-group">
-                                                    <asp:Label ID="lblLineas" runat="server" CssClass="h6"></asp:Label>
-                                                    <asp:DropDownList ID="cmbLineas" class="form-control mt-2" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt-2" id="pnlNiv2" runat="server">
-                                                <div class="form-group">
-                                                    <asp:Label ID="lblNiv2" runat="server" CssClass="h6"></asp:Label>
-                                                    <asp:DropDownList ID="cmbNiv2" class="form-control mt-2" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt-2" id="pnlNiv3" runat="server">
-                                                <div class="form-group">
-                                                    <asp:Label ID="lblNiv3" runat="server" CssClass="h6"></asp:Label>
-                                                    <asp:DropDownList ID="cmbNiv3" class="form-control mt-2" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt-2" id="pnlNiv4" runat="server">
-                                                <div class="form-group">
-                                                    <asp:Label ID="lblNiv4" runat="server" CssClass="h6"></asp:Label>
-                                                    <asp:DropDownList ID="cmbNiv4" class="form-control mt-2" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt-2" id="pnlNiv5" runat="server" cssclass="h6">
-                                                <div class="form-group">
-                                                    <asp:Label ID="lblNiv5" runat="server"></asp:Label>
-                                                    <asp:DropDownList ID="cmbNiv5" class="form-control mt-2" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt-2" id="pnlNiv6" runat="server" cssclass="h6">
-                                                <div class="form-group">
-                                                    <asp:Label ID="lblNiv6" runat="server"></asp:Label>
-                                                    <asp:DropDownList ID="cmbNiv6" class="form-control mt-2" runat="server" AutoComplete="Off"></asp:DropDownList>
-                                                </div>
-                                            </div>
+                                           <asp:PlaceHolder ID="phDinamicControls" runat="server"></asp:PlaceHolder>
                                             <div class="col-12 mt-2 text-center">
                                                 <asp:LinkButton ID="btnConsultar" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
                                             </div>
@@ -268,6 +233,7 @@
     </script>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
             //Tooltips
 

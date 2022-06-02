@@ -44,6 +44,10 @@ Public Class Parametrizacion
                 linkBtn2.CommandArgument = e.Row.Cells(0).Text.Trim
                 linkBtn3.CommandArgument = e.Row.Cells(0).Text.Trim
 
+                If Session("Rol") <> "SUPADM" Then
+                    linkBtn3.Visible = False
+                End If
+
             End If
         Catch ex As Exception
             lblError.Text = ex.Message
@@ -164,7 +168,10 @@ Public Class Parametrizacion
         Try
             Fila = parametrizacion.selectPacYear(Now.Year)
             If Fila IsNot Nothing Then
-                parametrizacion.updateStatePac(Fila("id"))
+                Dim fechaActualizacion As Date = New Date(Now.Year, 12, 31).AddMonths(1)
+                If Now > fechaActualizacion Then
+                    parametrizacion.updateStatePac(Fila("id"))
+                End If
             End If
         Catch ex As Exception
             lblError.Text = ex.Message

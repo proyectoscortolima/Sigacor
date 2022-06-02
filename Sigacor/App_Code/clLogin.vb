@@ -33,6 +33,13 @@ Public Class clLogin
 
         Return Data.OpenData(QRY)
     End Function
+
+    Public Function selectEmpleadosDependecia(ByVal idMeta As String) As DataTable
+
+        QRY = "select cedl_empld, concat(nombr_empld, aplld_empld) nombre from RHMHOJVI join SCRMET on codg_depndnc = responsable_id  where id = '" & idMeta & "' "
+
+        Return Data.OpenData(QRY)
+    End Function
     Public Function selectEmpleados(ByVal cedl_empld As String) As String
 
         Dim row As DataRow

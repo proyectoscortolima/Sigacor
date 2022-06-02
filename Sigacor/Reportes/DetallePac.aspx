@@ -65,30 +65,39 @@
                                     Avance de meta física en el cuatrienio:
                                 </div>
 
-                                <div class="col-xs-12 col-md-3 mt-3"></div>
                                 <div class="col-xs-12 col-md-3 mt-3">
-                                    <b>Linea base:</b>
-                                    <asp:Label ID="lblLineaBase" runat="server"></asp:Label>
-                                </div>
-                                <div class="col-xs-12 col-md-3 mt-3 text-right">
-                                    <b>Meta:</b>
-                                    <asp:Label ID="lblMeta" runat="server"></asp:Label>
-                                </div>
-                                <div class="col-xs-12 col-md-3 mt-3"></div>
-
-                                <div class="col-xs-12 col-md-3 mt-3"></div>
-                                <div class="col-xs-12 col-md-6 mt-3">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="progressbarEjecucion" runat="server">
-                                            <asp:Label ID="lblValorProgress" runat="server"></asp:Label>
+                                    <asp:Label ID="lblMetaOneYear" runat="server"></asp:Label>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="progressbarEjecucionOne" runat="server">
+                                            <asp:Label ID="lblValorProgressOne" runat="server"></asp:Label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-md-3 mt-3"></div>
-                                <div class="col-xs-12 col-md-12 mt-3">
-                                    <%--<label>Meta alcanzada: 34</label>--%>
+                                <div class="col-xs-12 col-md-3 mt-3">
+                                    <asp:Label ID="lblMetaTwoYear" runat="server"></asp:Label>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="progressbarEjecucionTwo" runat="server">
+                                            <asp:Label ID="lblValorProgressTwo" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
                                 </div>
-
+                                <div class="col-xs-12 col-md-3 mt-3">
+                                    <asp:Label ID="lblMetaThreeYear" runat="server"></asp:Label>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="progressbarEjecucionThree" runat="server">
+                                            <asp:Label ID="lblValorProgressThree" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-3 mt-3">
+                                    <asp:Label ID="lblMetaFourYear" runat="server"></asp:Label>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" id="progressbarEjecucionFour" runat="server">
+                                            <asp:Label ID="lblValorProgressFour" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
+                                </div>
+  
                                 <div class="col-xs-12 col-md-12 mt-1 card-footer card-report">Actividades ejecutadas:</div>
 
                                 <div class="col-xs-12 col-md-12 mt-3">

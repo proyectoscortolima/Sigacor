@@ -17,16 +17,8 @@
             pnlMetas.Visible = False
             lblError.Visible = False
             btnActPac.Visible = False
-            pnlNiv2.Visible = False
-            pnlNiv3.Visible = False
-            pnlNiv4.Visible = False
-            pnlNiv5.Visible = False
             btnFiltro.Visible = False
             pnlNuevoJerarquia.Visible = False
-            pnlNiv2Meta.Visible = False
-            pnlNiv3Meta.Visible = False
-            pnlNiv4Meta.Visible = False
-            pnlNiv5Meta.Visible = False
             pnlMetaNuevo.Visible = False
             btnFiltroMeta.Visible = False
 
@@ -36,8 +28,6 @@
             pnlNvl4Reg.Visible = False
             pnlNvl5Reg.Visible = False
 
-            lblLineas.Text = "No hay niveles"
-            lblLineasMeta.Text = "No hay lineas"
             Session("Actualizar") = "N"
 
             DataT = Nothing
@@ -95,13 +85,12 @@
             End If
 
             visualizarPac(Session("id_pac"))
-            cargarLineas()
             Session("id_pac") = Nothing
             Session("pac") = Nothing
 
-            End If
+        End If
 
-            If tblNiveles.Rows.Count > 0 Then
+        If tblNiveles.Rows.Count > 0 Then
             tblNiveles.UseAccessibleHeader = True
             tblNiveles.HeaderRow.TableSection = TableRowSection.TableHeader
         End If
@@ -132,6 +121,7 @@
 #End Region
 
 #Region "SelectedIndexChanged"
+
 
     Private Sub cmbNiveles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiveles.SelectedIndexChanged
         Try
@@ -315,233 +305,6 @@
     End Sub
 
 
-
-    Private Sub cmbLineas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLineas.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbLineas.SelectedIndex = 0 Then
-                cmbNiv2.Items.Clear()
-                pnlNiv2.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbLineas.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv2.Items.Clear()
-                    cmbNiv2.DataTextField = "name"
-                    cmbNiv2.DataValueField = "code"
-                    cmbNiv2.DataSource = DataT
-                    cmbNiv2.DataBind()
-                    cmbNiv2.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv2.Text = DataT(0)(2)
-                    pnlNiv2.Visible = True
-                Else
-                    cmbNiv2.Items.Clear()
-                    pnlNiv2.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-    Private Sub cmbLineasMeta_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLineasMeta.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbLineasMeta.SelectedIndex = 0 Then
-                cmbNiv2Meta.Items.Clear()
-                pnlNiv2Meta.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbLineasMeta.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv2Meta.Items.Clear()
-                    cmbNiv2Meta.DataTextField = "name"
-                    cmbNiv2Meta.DataValueField = "code"
-                    cmbNiv2Meta.DataSource = DataT
-                    cmbNiv2Meta.DataBind()
-                    cmbNiv2Meta.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv2Meta.Text = DataT(0)(2)
-                    pnlNiv2Meta.Visible = True
-                Else
-                    cmbNiv2Meta.Items.Clear()
-                    pnlNiv2Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-
-    Private Sub cmbNiv2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv2.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbNiv2.SelectedIndex = 0 Then
-                cmbNiv3.Items.Clear()
-                pnlNiv3.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv2.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv3.Items.Clear()
-                    cmbNiv3.DataTextField = "name"
-                    cmbNiv3.DataValueField = "code"
-                    cmbNiv3.DataSource = DataT
-                    cmbNiv3.DataBind()
-                    cmbNiv3.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv3.Text = DataT(0)(2)
-                    pnlNiv3.Visible = True
-                Else
-                    cmbNiv3.Items.Clear()
-                    pnlNiv3.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-    Private Sub cmbNiv2Meta_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv2Meta.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbNiv2Meta.SelectedIndex = 0 Then
-                cmbNiv3Meta.Items.Clear()
-                pnlNiv3Meta.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv2Meta.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv3Meta.Items.Clear()
-                    cmbNiv3Meta.DataTextField = "name"
-                    cmbNiv3Meta.DataValueField = "code"
-                    cmbNiv3Meta.DataSource = DataT
-                    cmbNiv3Meta.DataBind()
-                    cmbNiv3Meta.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv3Meta.Text = DataT(0)(2)
-                    pnlNiv3Meta.Visible = True
-                Else
-                    cmbNiv3Meta.Items.Clear()
-                    pnlNiv3Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-    Private Sub cmbNiv3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv3.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbNiv3.SelectedIndex = 0 Then
-                cmbNiv4.Items.Clear()
-                pnlNiv4.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv3.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv4.Items.Clear()
-                    cmbNiv4.DataTextField = "name"
-                    cmbNiv4.DataValueField = "code"
-                    cmbNiv4.DataSource = DataT
-                    cmbNiv4.DataBind()
-                    cmbNiv4.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv4.Text = DataT(0)(2)
-                    pnlNiv4.Visible = True
-                Else
-                    cmbNiv4.Items.Clear()
-                    pnlNiv4.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-    Private Sub cmbNiv4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv4.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbNiv4.SelectedIndex = 0 Then
-                cmbNiv5.Items.Clear()
-                pnlNiv5.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv4.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv5.Items.Clear()
-                    cmbNiv5.DataTextField = "name"
-                    cmbNiv5.DataValueField = "code"
-                    cmbNiv5.DataSource = DataT
-                    cmbNiv5.DataBind()
-                    cmbNiv5.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv5.Text = DataT(0)(2)
-                    pnlNiv5.Visible = True
-                Else
-                    cmbNiv5.Items.Clear()
-                    pnlNiv5.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-    Private Sub cmbNiv3Meta_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv3Meta.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbNiv3Meta.SelectedIndex = 0 Then
-                cmbNiv4Meta.Items.Clear()
-                pnlNiv4Meta.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv3Meta.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv4Meta.Items.Clear()
-                    cmbNiv4Meta.DataTextField = "name"
-                    cmbNiv4Meta.DataValueField = "code"
-                    cmbNiv4Meta.DataSource = DataT
-                    cmbNiv4Meta.DataBind()
-                    cmbNiv4Meta.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv4Meta.Text = DataT(0)(2)
-                    pnlNiv4Meta.Visible = True
-                Else
-                    cmbNiv4Meta.Items.Clear()
-                    pnlNiv4Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-    Private Sub cmbNiv4Meta_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNiv4Meta.SelectedIndexChanged
-        Try
-            DataT = Nothing
-            If cmbNiv4Meta.SelectedIndex = 0 Then
-                cmbNiv5Meta.Items.Clear()
-                pnlNiv5Meta.Visible = False
-            Else
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, cmbNiv4Meta.SelectedValue)
-                If DataT.Rows.Count > 0 Then
-                    cmbNiv5Meta.Items.Clear()
-                    cmbNiv5Meta.DataTextField = "name"
-                    cmbNiv5Meta.DataValueField = "code"
-                    cmbNiv5Meta.DataSource = DataT
-                    cmbNiv5Meta.DataBind()
-                    cmbNiv5Meta.Items.Insert(0, New ListItem("Todos", ""))
-                    lblNiv5Meta.Text = DataT(0)(2)
-                    pnlNiv5Meta.Visible = True
-                Else
-                    cmbNiv5Meta.Items.Clear()
-                    pnlNiv5Meta.Visible = False
-                    alerta("Advertencia", "No se han encontrado registros", "info")
-                End If
-            End If
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
-
 #End Region
 
 #Region "RowDataBound"
@@ -556,10 +319,8 @@
                 linkBtnEditar = e.Row.FindControl("lnkEditPlanAcc")
                 linkBtnEliminar = e.Row.FindControl("lnkEliPlanAcc")
                 linkBtnConfirmar = e.Row.FindControl("lnkConEditPlanAcc")
-
                 linkBtnEditar.CommandArgument = e.Row.Cells(0).Text.Trim
-                'linkBtnEliminar.CommandArgument = e.Row.Cells(0).Text.Trim
-
+                linkBtnEliminar.CommandArgument = e.Row.Cells(2).Text.Trim
                 linkBtnConfirmar.Visible = False
 
             End If
@@ -579,23 +340,28 @@
             If e.Row.RowType = DataControlRowType.DataRow Then
                 e.Row.Cells(0).Visible = False
                 e.Row.Cells(3).Visible = False
-                'e.Row.Cells(4).Visible = False
 
                 Dim linkBtnEditar, linkBtnEliminar, linkBtnConfirmar As New LinkButton
                 linkBtnEditar = e.Row.FindControl("lnkEditNiv")
-                'linkBtnEliminar = e.Row.FindControl("lnkEliNiv")
                 linkBtnConfirmar = e.Row.FindControl("lnkConEdit")
+                linkBtnEliminar = e.Row.FindControl("lnkEliminar")
 
                 linkBtnEditar.CommandArgument = e.Row.Cells(0).Text.Trim
-                'linkBtnEliminar.CommandArgument = e.Row.Cells(0).Text.Trim
-
+                linkBtnEliminar.CommandArgument = e.Row.Cells(0).Text.Trim
                 linkBtnConfirmar.Visible = False
 
-            End If
+                Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, "hierarchy desc")
+                If Fila IsNot Nothing Then
+                    If Fila("hierarchy") = e.Row.Cells(0).Text.Trim Then
+                        linkBtnEliminar.Visible = True
+                    Else
+                        linkBtnEliminar.Visible = False
+                    End If
+                End If
+                End If
             If e.Row.RowType = DataControlRowType.Header Then
                 e.Row.Cells(0).Visible = False
                 e.Row.Cells(3).Visible = False
-                'e.Row.Cells(4).Visible = False
             End If
         Catch ex As Exception
             lblError.Text = ex.Message
@@ -607,11 +373,7 @@
             If e.Row.RowType = DataControlRowType.DataRow Then
                 Dim linkBtn, linkBtn2 As New LinkButton
                 linkBtn = e.Row.FindControl("lnkEditarMeta")
-                'linkBtn2 = e.Row.FindControl("lnkEliminarMeta")
-
                 linkBtn.CommandArgument = e.Row.Cells(0).Text.Trim
-                'linkBtn2.CommandArgument = e.Row.Cells(0).Text.Trim
-
                 e.Row.Cells(0).Visible = False
             End If
             If e.Row.RowType = DataControlRowType.Header Then
@@ -637,27 +399,16 @@
 
                     linkBtnConfirmar = tblNiveles.Rows(row.RowIndex).FindControl("lnkConEdit")
                     linkBtnEditar = tblNiveles.Rows(row.RowIndex).FindControl("lnkEditNiv")
-                    'linkBtnEliminar = tblNiveles.Rows(row.RowIndex).FindControl("lnkEliNiv")
-
-                    'codigo = tblNiveles.Rows(row.RowIndex).FindControl("txtCodigo")
                     nombre = tblNiveles.Rows(row.RowIndex).FindControl("txtNombre")
 
                     If e.CommandArgument = row.Cells(0).Text Then
 
                         linkBtnEditar.Visible = False
                         linkBtnConfirmar.Visible = True
-                        'linkBtnEliminar.Visible = False
-
-                        'codigo.Text = row.Cells(1).Text.Trim
                         nombre.Text = HttpUtility.HtmlDecode(row.Cells(2).Text.Trim)
 
                         row.Cells(2).Visible = False
                         row.Cells(3).Visible = True
-
-                        'row.Cells(3).Visible = False
-                        'row.Cells(4).Visible = True
-
-
                     Else
                         linkBtnEditar.Visible = False
                         linkBtnEliminar.Visible = False
@@ -667,35 +418,14 @@
             ElseIf e.CommandName = "Confirmar" Then
 
                 For Each row As GridViewRow In tblNiveles.Rows
-                    'codigo = tblNiveles.Rows(row.RowIndex).FindControl("txtCodigo")
                     nombre = tblNiveles.Rows(row.RowIndex).FindControl("txtNombre")
 
                     If row.Cells(3).Visible = True Then
-                        'If codigo.Text = String.Empty Then
-                        '    alerta("Advertencia", "Ingrese el código del nivel", "info")
-                        '    Exit Sub
-                        'End If
                         If nombre.Text = String.Empty Then
                             alerta("Advertencia", "Ingrese el nombre del nivel", "info")
                             Exit Sub
                         End If
                         parametrizacion.updateLevels(row.Cells(0).Text.Trim, nombre.Text.Trim, row.Cells(1).Text.Trim, "A")
-                        'Fila = Nothing
-                        'Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, row.Cells(1).Text.Trim, nombre.Text.Trim)
-                        'If Fila Is Nothing Then
-
-                        '    If row.Cells(1).Text.Trim <> codigo.Text.Trim Then
-                        '        Fila = Nothing
-                        '        Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, codigo.Text.Trim)
-                        '        If Fila IsNot Nothing Then
-                        '            alerta("Advertencia", "El código del nivel, ya existe", "info")
-                        '            Exit Sub
-                        '        End If
-                        '    Else
-
-                        '    End If
-
-                        'End If
                     End If
                 Next
 
@@ -717,7 +447,6 @@
         Try
 
             Dim linkBtnConfirmar, linkBtnEditar, linkBtnEliminar As New LinkButton
-            'Dim jerarquia, nombre, peso As TextBox
             Dim nombre, peso As TextBox
 
             If e.CommandName = "Editar" Then
@@ -725,9 +454,8 @@
 
                     linkBtnConfirmar = tblPlanAccion.Rows(row.RowIndex).FindControl("lnkConEditPlanAcc")
                     linkBtnEditar = tblPlanAccion.Rows(row.RowIndex).FindControl("lnkEditPlanAcc")
-                    'linkBtnEliminar = tblPlanAccion.Rows(row.RowIndex).FindControl("lnkEliPlanAcc")
+                    linkBtnEliminar = tblPlanAccion.Rows(row.RowIndex).FindControl("lnkEliPlanAcc")
 
-                    'jerarquia = tblPlanAccion.Rows(row.RowIndex).FindControl("txtJerarquia")
                     nombre = tblPlanAccion.Rows(row.RowIndex).FindControl("txtNombrePlanAcc")
                     peso = tblPlanAccion.Rows(row.RowIndex).FindControl("txtPeso")
 
@@ -735,9 +463,6 @@
 
                         linkBtnEditar.Visible = False
                         linkBtnConfirmar.Visible = True
-                        'linkBtnEliminar.Visible = False
-
-                        'jerarquia.Text = row.Cells(2).Text.Trim
                         nombre.Text = HttpUtility.HtmlDecode(row.Cells(3).Text.Trim)
                         peso.Text = row.Cells(5).Text.Trim
 
@@ -748,22 +473,16 @@
                         row.Cells(6).Visible = True
                     Else
                         linkBtnEditar.Visible = False
-                        'linkBtnEliminar.Visible = False
                     End If
                 Next
 
             ElseIf e.CommandName = "Confirmar" Then
 
                 For Each row As GridViewRow In tblPlanAccion.Rows
-                    'jerarquia = tblPlanAccion.Rows(row.RowIndex).FindControl("txtJerarquia")
                     nombre = tblPlanAccion.Rows(row.RowIndex).FindControl("txtNombrePlanAcc")
                     peso = tblPlanAccion.Rows(row.RowIndex).FindControl("txtPeso")
 
                     If row.Cells(4).Visible = True Then
-                        'If jerarquia.Text = String.Empty Then
-                        '    alerta("Advertencia", "Ingrese el código de la jerarquia", "info")
-                        '    Exit Sub
-                        'End If
                         If nombre.Text = String.Empty Then
                             alerta("Advertencia", "Ingrese el nombre del plan de acción cuatrienal", "info")
                             Exit Sub
@@ -783,7 +502,7 @@
 
             ElseIf e.CommandName = "Eliminar" Then
                 ScriptManager.RegisterStartupScript(Me, GetType(Page), "alertaPlanAcc", "AlertaEliminacionPlanAcc();", True)
-                Session("idPlanAcc") = e.CommandArgument
+                Session("CodePlanAcc") = e.CommandArgument
             End If
 
         Catch ex As Exception
@@ -1021,7 +740,6 @@
                 Exit Sub
             End If
 
-            'cargarMetas(lblPac.Text.Trim, 1)
             btnMetas_Click(Nothing, Nothing)
         Catch ex As Exception
             lblError.Text = ex.Message
@@ -1061,11 +779,11 @@
         Try
             Dim code, array As String
             Dim subNivel, name As String
-
             If cmbNiveles.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione un nivel", "info", "contenedor2_cmbNiveles")
                 Exit Sub
             End If
+
             If pnlNvl1Reg.Visible = True And cmbNvl1Reg.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione la " & lblNvl1Reg.Text, "info", "contenedor2_cmbNvl1Reg")
                 Exit Sub
@@ -1139,11 +857,8 @@
                 txtCodigo.Text = String.Empty
                 txtNombrePlanAcc.Text = String.Empty
                 txtPesoPlanAcc.Text = String.Empty
-
                 limiarFiltroRegistro()
                 cmbNiveles_SelectedIndexChanged(Nothing, Nothing)
-                'cargarLineas()
-                btnConsultar_Click(Nothing, Nothing)
                 alerta("Se ha creado el item correctamente", "", "success")
             Else
                 alerta("Advertencia", "Se genero un error al grabar", "error", "")
@@ -1157,6 +872,8 @@
 
     Private Sub btnGrabarMetas_Click(sender As Object, e As EventArgs) Handles btnGrabarMetas.Click
         Try
+            Dim lastRow As DataRow
+            Dim code As String
             If txtNombreMeta.Text = String.Empty Then
                 alerta("Advertencia", "Ingrese el nombre de la meta", "info", "contenedor2_txtNombreMeta")
                 Exit Sub
@@ -1165,14 +882,30 @@
                 alerta("Advertencia", "Seleccione el tipo de meta", "info", "contenedor2_cmbTipoMeta")
                 Exit Sub
             End If
-            If cmbNivelMeta.SelectedIndex = 0 Then
-                alerta("Advertencia", "Seleccione el nivel de la meta", "info", "contenedor2_cmbNivelMeta")
+
+            If (QuantityDinamicControlsMetaReg.Rows.Count > 0) Then
+                lastRow = QuantityDinamicControlsMetaReg.Rows(QuantityDinamicControlsMetaReg.Rows.Count - 1)
+                If lastRow IsNot Nothing Then
+                    Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, "hierarchy desc")
+                    If Fila IsNot Nothing And CInt(lastRow("level")) > CInt(Fila("hierarchy")) Then
+                        code = lastRow("sublevel")
+                    Else
+                        alerta("Advertencia", "Seleccione la jerarquía completa", "info", "")
+                        Exit Sub
+                    End If
+                End If
+            End If
+
+            If txtPesoMeta.Text = String.Empty Then
+                alerta("Advertencia", "Ingrese el peso de la meta", "info", "contenedor2_txtPesoMeta")
                 Exit Sub
             End If
+
             If txtLineaBaseMeta.Text = String.Empty Then
                 alerta("Advertencia", "Ingrese la linea base", "info", "contenedor2_txtLineaBaseMeta")
                 Exit Sub
             End If
+
             If txtPriYearMeta.Text = String.Empty Then
                 alerta("Advertencia", "Ingrese la cantidad para el primer año", "info", "contenedor2_txtPriYearMeta")
                 Exit Sub
@@ -1189,6 +922,24 @@
                 alerta("Advertencia", "Ingrese la cantidad para el cuarto año", "info", "contenedor2_txtCuaYearMeta")
                 Exit Sub
             End If
+
+            If txtPriPresupuesto.Text = String.Empty Then
+                alerta("Advertencia", "Ingrese la cantidad para el " & lblPriPresupuesto.Text.Trim, "info", "contenedor2_txtPriPresupuesto")
+                Exit Sub
+            End If
+            If txtSegPresupuesto.Text = String.Empty Then
+                alerta("Advertencia", "Ingrese la cantidad para el " & lblSegPresupuesto.Text.Trim, "info", "contenedor2_txtSegPresupuesto")
+                Exit Sub
+            End If
+            If txtTerPresupuesto.Text = String.Empty Then
+                alerta("Advertencia", "Ingrese la cantidad para el " & lblTerPresupuesto.Text.Trim, "info", "contenedor2_txtTerPresupuesto")
+                Exit Sub
+            End If
+            If txtCuarPresupuesto.Text = String.Empty Then
+                alerta("Advertencia", "Ingrese la cantidad para el " & lblCuarPresupuesto.Text.Trim, "info", "contenedor2_txtCuarPresupuesto")
+                Exit Sub
+            End If
+
             If cmbResponsable.SelectedIndex = 0 Then
                 alerta("Advertencia", "Seleccione el responsable", "info", "contenedor2_cmbResponsable")
                 Exit Sub
@@ -1199,9 +950,11 @@
             End If
 
             If parametrizacion.insertGoals(lblPac.Text.Trim, txtNombreMeta.Text.Trim, cmbTipoMeta.SelectedValue,
-                                           cmbNivelMeta.SelectedValue, txtLineaBaseMeta.Text.Trim, txtPriYearMeta.Text.Trim,
+                                           code, txtLineaBaseMeta.Text.Trim, txtPriYearMeta.Text.Trim,
                                            txtSegYearMeta.Text.Trim, txtTerYearMeta.Text.Trim, txtCuaYearMeta.Text.Trim,
-                                           cmbResponsable.SelectedValue, cmbAlimentador.SelectedValue, "A") > 0 Then
+                                           cmbResponsable.SelectedValue, cmbAlimentador.SelectedValue, "A", txtPesoMeta.Text.Trim,
+                                           EliminarFormato(txtPriPresupuesto.Text.Trim), EliminarFormato(txtSegPresupuesto.Text.Trim),
+                                           EliminarFormato(txtTerPresupuesto.Text.Trim), EliminarFormato(txtCuarPresupuesto.Text.Trim)) > 0 Then
 
                 alerta("Se ha creado correctamente la meta", "", "success", "")
                 limpiarMetas()
@@ -1279,47 +1032,34 @@
         Try
             DataT = Nothing
             Dim code, level_id As String
-            If cmbLineas.SelectedIndex > 0 Then
-                level_id = "1"
-                If cmbNiv2.SelectedIndex > 0 Then
-                    level_id = "2"
-                    If cmbNiv3.SelectedIndex > 0 Then
-                        level_id = "3"
-                        If cmbNiv4.SelectedIndex > 0 Then
-                            level_id = "4"
-                            If cmbNiv5.SelectedIndex > 0 Then
-                                level_id = "5"
-                                code = cmbNiv5.SelectedValue
-                            Else
-                                level_id = "5"
-                                code = cmbNiv4.SelectedValue
-                            End If
-                        Else
-                            level_id = "4"
-                            code = cmbNiv3.SelectedValue
-                        End If
+
+            If (QuantityDinamicControls.Rows.Count > 0) Then
+                Dim lastRow As DataRow = QuantityDinamicControls.Rows(QuantityDinamicControls.Rows.Count - 1)
+                If lastRow IsNot Nothing Then
+                    If Not IsDBNull(lastRow("level")) Then
+                        level_id = lastRow("level")
                     Else
-                        level_id = "3"
-                        code = cmbNiv2.SelectedValue
+                        level_id = ""
                     End If
+                    If Not IsDBNull(lastRow("sublevel")) Then
+                        code = lastRow("sublevel")
+                    Else
+                        code = ""
+                    End If
+                End If
+
+                DataT = parametrizacion.selectContentsFiltro(lblPac.Text.Trim, code, level_id)
+                If DataT.Rows.Count > 0 Then
+                    tblPlanAccion.DataSource = DataT
+                    tblPlanAccion.DataBind()
+                    tblPlanAccion.HeaderRow.TableSection = TableRowSection.TableHeader
                 Else
-                    level_id = "2"
-                    code = cmbLineas.SelectedValue
+                    alerta("No se han encontraron registros", "", "info")
+                    tblPlanAccion.DataSource = Nothing
+                    tblPlanAccion.DataBind()
                 End If
             Else
-                level_id = "1"
-                code = String.Empty
-            End If
-
-            DataT = parametrizacion.selectContentsFiltro(lblPac.Text.Trim, code, level_id)
-            If DataT.Rows.Count > 0 Then
-                tblPlanAccion.DataSource = DataT
-                tblPlanAccion.DataBind()
-                tblPlanAccion.HeaderRow.TableSection = TableRowSection.TableHeader
-            Else
-                alerta("No se han encontraron registros", "", "info")
-                tblPlanAccion.DataSource = Nothing
-                tblPlanAccion.DataBind()
+                alerta("Debe seleccionar algun item", "", "info")
             End If
         Catch ex As Exception
             lblError.Text = ex.Message
@@ -1331,34 +1071,28 @@
             DataT = Nothing
             Dim code As String
 
-            If cmbLineasMeta.SelectedIndex > 0 Then
-                If cmbNiv2Meta.SelectedIndex > 0 Then
-                    If cmbNiv3Meta.SelectedIndex > 0 Then
-                        If cmbNiv4Meta.SelectedIndex > 0 Then
-                            code = cmbNiv4Meta.SelectedValue
-                        Else
-                            code = cmbNiv3Meta.SelectedValue
-                        End If
-                    Else
-                        code = cmbNiv2Meta.SelectedValue
-                    End If
+            If (QuantityDinamicControlsMeta.Rows.Count > 0) Then
+                Dim lastRow As DataRow = QuantityDinamicControlsMeta.Rows(QuantityDinamicControlsMeta.Rows.Count - 1)
+                If IsDBNull(lastRow("sublevel")) Then
+                    code = String.Empty
                 Else
-                    code = cmbLineasMeta.SelectedValue
+                    code = lastRow("sublevel")
+                End If
+
+                DataT = parametrizacion.selectGoalsFiltro(lblPac.Text.Trim, code)
+                If DataT.Rows.Count > 0 Then
+                    tblMetas.DataSource = DataT
+                    tblMetas.DataBind()
+                    tblMetas.HeaderRow.TableSection = TableRowSection.TableHeader
+                Else
+                    alerta("No se han encontraron registros", "", "info")
+                    tblMetas.DataSource = Nothing
+                    tblMetas.DataBind()
                 End If
             Else
-                code = String.Empty
+                alerta("Debe seleccionar algun item", "", "info")
             End If
 
-            DataT = parametrizacion.selectGoalsFiltro(lblPac.Text.Trim, code)
-            If DataT.Rows.Count > 0 Then
-                tblMetas.DataSource = DataT
-                tblMetas.DataBind()
-                tblMetas.HeaderRow.TableSection = TableRowSection.TableHeader
-            Else
-                alerta("No se han encontraron registros", "", "info")
-                tblMetas.DataSource = Nothing
-                tblMetas.DataBind()
-            End If
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True
@@ -1435,7 +1169,6 @@
         End Try
     End Sub
 
-
 #End Region
 
 #Region "Metodos - Funciones"
@@ -1456,8 +1189,8 @@
                     btnSigPac.Visible = False
 
                     cargarNiveles(lblPac.Text.Trim)
-                    'cargarPlanAccion(lblPac.Text.Trim)
                     cargarMetas(lblPac.Text.Trim, 1)
+                    cargarLabelPresupuesto()
                 End If
             Else
                 lblTituloForm.Text = "CREACIÓN DEL PAC"
@@ -1484,20 +1217,9 @@
                 cmbNiveles.DataSource = DataT
                 cmbNiveles.DataBind()
                 cmbNiveles.Items.Insert(0, New ListItem("---Seleccione---", ""))
-                If DataT(0)(3) = "1" Then
-                    lblLineas.Text = DataT(0)(1)
-                    lblLineasMeta.Text = DataT(0)(1)
-                Else
-                    lblLineas.Text = "No hay lineas"
-                    lblLineasMeta.Text = "No hay lineas"
-                End If
-
-
             Else
-                    tblNiveles.DataSource = Nothing
+                tblNiveles.DataSource = Nothing
                 tblNiveles.DataBind()
-                lblLineas.Text = "No hay lineas"
-                lblLineasMeta.Text = "No hay lineas"
             End If
         Catch ex As Exception
             lblError.Text = ex.Message
@@ -1535,24 +1257,15 @@
                     DataT = parametrizacion.selectLevels(pac, "hierarchy desc")
                     If DataT.Rows.Count > 0 Then
                         codLevel = DataT(0)(3)
-                        lblNivelMeta.Text = DataT(0)(1)
                         lblNivelMetaMdl.Text = DataT(0)(1)
                     Else
                         codLevel = "0"
-                        lblNivelMeta.Text = "No hay niveles"
                         lblNivelMetaMdl.Text = "No hay niveles"
                     End If
 
                     DataT = Nothing
                     DataT = parametrizacion.selectContents(pac, codLevel, , )
                     If DataT.Rows.Count > 0 Then
-                        cmbNivelMeta.Items.Clear()
-                        cmbNivelMeta.DataTextField = "name"
-                        cmbNivelMeta.DataValueField = "code"
-                        cmbNivelMeta.DataSource = DataT
-                        cmbNivelMeta.DataBind()
-                        cmbNivelMeta.Items.Insert(0, New ListItem("---Seleccione---", ""))
-
                         cmbNivelMetaMdl.Items.Clear()
                         cmbNivelMetaMdl.DataTextField = "name"
                         cmbNivelMetaMdl.DataValueField = "code"
@@ -1575,10 +1288,18 @@
 
     Private Sub eliminarNivel_Click(sender As Object, e As EventArgs) Handles eliminarNivel.Click
         Try
-            parametrizacion.deleteLevels(Session("idNivel"), "I")
+            DataT = Nothing
+            parametrizacion.deleteLevels(lblPac.Text.Trim, Session("idNivel"), "I")
+            DataT = parametrizacion.selectContents(lblPac.Text.Trim, Session("idNivel"), "", "")
+            parametrizacion.deleteContentsXLevels(lblPac.Text.Trim, Session("idNivel"))
+            If DataT.Rows.Count > 0 Then
+                For Each row As DataRow In DataT.Rows
+                    parametrizacion.deleteGoals(lblPac.Text.Trim, row("code"))
+                Next
+            End If
+
             Session("idNivel") = Nothing
             cargarNiveles(lblPac.Text.Trim)
-
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True
@@ -1587,9 +1308,9 @@
 
     Private Sub eliminarPlanAcc_Click(sender As Object, e As EventArgs) Handles eliminarPlanAcc.Click
         Try
-            parametrizacion.deleteContents(Session("idPlanAcc"), "I")
+            parametrizacion.deleteContents(lblPac.Text.Trim, Session("CodePlanAcc"))
             Session("idPlanAcc") = Nothing
-            cargarPlanAccion(lblPac.Text.Trim)
+            btnConsultar_Click(Nothing, Nothing)
         Catch ex As Exception
             lblError.Text = ex.Message
             lblError.Visible = True
@@ -1650,35 +1371,6 @@
                 lblSubTitulo.Text = "Editar metas"
         End Select
     End Sub
-    Public Sub cargarLineas()
-        Try
-            Fila = Nothing
-            Fila = parametrizacion.selectPacActivo
-            If Fila IsNot Nothing Then
-                'pac.Text = Fila("id")
-                DataT = Nothing
-                DataT = parametrizacion.selectNiveles(lblPac.Text.Trim)
-                If DataT.Rows.Count > 0 Then
-                    cmbLineas.Items.Clear()
-                    cmbLineas.DataTextField = "name"
-                    cmbLineas.DataValueField = "code"
-                    cmbLineas.DataSource = DataT
-                    cmbLineas.DataBind()
-                    cmbLineas.Items.Insert(0, New ListItem("---Seleccione---", ""))
-                    cmbLineasMeta.Items.Clear()
-                    cmbLineasMeta.DataTextField = "name"
-                    cmbLineasMeta.DataValueField = "code"
-                    cmbLineasMeta.DataSource = DataT
-                    cmbLineasMeta.DataBind()
-                    cmbLineasMeta.Items.Insert(0, New ListItem("---Seleccione---", ""))
-                End If
-            End If
-
-        Catch ex As Exception
-            lblError.Text = ex.Message
-            lblError.Visible = True
-        End Try
-    End Sub
 
     Public Sub limpiarForm()
         Try
@@ -1721,7 +1413,6 @@
         lblIdMeta.Text = String.Empty
         txtNombreMeta.Text = String.Empty
         cmbTipoMeta.SelectedIndex = 0
-        cmbNivelMeta.SelectedIndex = 0
         txtLineaBaseMeta.Text = String.Empty
         txtPriYearMeta.Text = String.Empty
         txtSegYearMeta.Text = String.Empty
@@ -1729,6 +1420,9 @@
         txtCuaYearMeta.Text = String.Empty
         cmbResponsable.SelectedIndex = 0
         cmbAlimentador.SelectedIndex = 0
+        QuantityDinamicControlsMetaReg = Nothing
+        phDinamicControlsMetaReg.Controls.Clear()
+        GenerateControlsMetaReg()
         'cargarMetas(lblPac.Text.Trim, 0)
     End Sub
 
@@ -1748,7 +1442,16 @@
         End Try
     End Sub
 
+    Public Sub cargarLabelPresupuesto()
+        Dim yearInit As Integer = CInt(txtYearInicial.Text.Trim)
+        Dim yearFinish As Integer = CInt(txtYearFinal.Text.Trim)
 
+        lblPriPresupuesto.Text = "Presupuesto " & yearInit
+        lblSegPresupuesto.Text = "Presupuesto " & yearInit + 1
+        lblTerPresupuesto.Text = "Presupuesto " & yearFinish - 1
+        lblCuarPresupuesto.Text = "Presupuesto " & yearFinish
+
+    End Sub
     Public Sub limiarFiltroRegistro()
         pnlNvl1Reg.Visible = False
         pnlNvl2Reg.Visible = False
@@ -1760,8 +1463,699 @@
         cmbNvl3Reg.Items.Clear()
         cmbNvl4Reg.Items.Clear()
         cmbNvl5Reg.Items.Clear()
+        QuantityDinamicControls = Nothing
+        QuantityDinamicControlsMeta = Nothing
+        phDinamicControls.Controls.Clear()
+        phDinamicControlsMeta.Controls.Clear()
+    End Sub
+
+    Public Function EliminarFormato(ByVal numeroFormateado As String) As String
+        Dim pattern As String = "[\$\,\ .]"
+        Dim replacement As String = String.Empty
+        Dim regex As New System.Text.RegularExpressions.Regex(pattern)
+
+        Return regex.Replace(numeroFormateado, replacement)
+    End Function
+
+
+#End Region
+
+#Region "Init Filtro Dinamicos"
+
+    Protected Overloads Overrides Sub CreateChildControls()
+        If Page.IsPostBack Then
+            GenerateControls()
+            GenerateControlsMeta()
+            GenerateControlsMetaReg()
+        End If
+    End Sub
+
+    Private Property QuantityDinamicControls() As DataTable
+        Get
+            If ViewState("Quantity") Is Nothing Then
+                ViewState("Quantity") = New DataTable()
+            End If
+            Return DirectCast(ViewState("Quantity"), DataTable)
+        End Get
+        Set(ByVal value As DataTable)
+            ViewState("Quantity") = value
+        End Set
+    End Property
+
+    Private Property QuantityDinamicControlsMeta() As DataTable
+        Get
+            If ViewState("QuantityMeta") Is Nothing Then
+                ViewState("QuantityMeta") = New DataTable()
+            End If
+            Return DirectCast(ViewState("QuantityMeta"), DataTable)
+        End Get
+        Set(ByVal value As DataTable)
+            ViewState("QuantityMeta") = value
+        End Set
+    End Property
+
+    Private Property QuantityDinamicControlsMetaReg() As DataTable
+        Get
+            If ViewState("QuantityMetaReg") Is Nothing Then
+                ViewState("QuantityMetaReg") = New DataTable()
+            End If
+            Return DirectCast(ViewState("QuantityMetaReg"), DataTable)
+        End Get
+        Set(ByVal value As DataTable)
+            ViewState("QuantityMetaReg") = value
+        End Set
+    End Property
+
+    Private Sub controlesDinamicos_Init(sender As Object, e As EventArgs) Handles Me.Init
+        If Not IsPostBack Then
+            Dim dt As DataTable = ViewState("Quantity")
+            Dim dt2 As DataTable = ViewState("QuantityMeta")
+            Dim dt3 As DataTable = ViewState("QuantityMetaReg")
+            Me.QuantityDinamicControls = dt
+            Me.QuantityDinamicControlsMeta = dt2
+            Me.QuantityDinamicControlsMetaReg = dt3
+            GenerateControls()
+            GenerateControlsMeta()
+            GenerateControlsMetaReg()
+        End If
+    End Sub
+
+
+#End Region
+
+#Region "Filtro Dinamico Plan Accion"
+
+    Private Sub controlNuevo(Optional nivel As String = "")
+        Dim nuevoCmb As DropDownList = New DropDownList()
+        Dim nuevoPanel As Panel = New Panel()
+
+        DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, nivel)
+        If DataT.Rows.Count > 0 Then
+            nuevoCmb.ID = "cmbNivel-" + DataT(0)(4).ToString()
+            nuevoCmb.CssClass = "form-control"
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataTextField = "codeName"
+            nuevoCmb.DataValueField = "code"
+            nuevoCmb.DataSource = DataT
+            AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmb_SelectedIndexChanged
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataBind()
+            nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+            nuevoCmb.SelectedIndex = 0
+
+            nuevoPanel.ID = "pnl-" + DataT(0)(4).ToString()
+            nuevoPanel.CssClass = "col-3"
+            nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+            nuevoPanel.Controls.Add(nuevoCmb)
+            nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+            phDinamicControls.Controls.Add(nuevoPanel)
+
+        Else
+            Dim lastRow As DataRow = QuantityDinamicControls.Rows(QuantityDinamicControls.Rows.Count - 2)
+            Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, CInt(lastRow("level")) + 1, "")
+            If Fila IsNot Nothing Then
+                alerta("El nivel " & Fila("name") & " no contiene contenido", "", "info")
+            End If
+        End If
+
+
+    End Sub
+    Private Sub GenerateControls()
+        Dim Quantity As Integer = 0
+        Dim i As Integer = 0
+        phDinamicControls.Controls.Clear()
+        If QuantityDinamicControls.Rows.Count > 0 Then
+            For Each row As DataRow In QuantityDinamicControls.Rows
+                Dim nuevoCmb As DropDownList = New DropDownList()
+                Dim nuevoPanel As Panel = New Panel()
+                DataT = Nothing
+
+                If row("level").ToString() = "1" Then
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim)
+                Else
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, row("sublevel").ToString())
+                End If
+                If DataT.Rows.Count > 0 Then
+                    nuevoCmb.ID = "cmbNivel-" + row("level")
+                    nuevoCmb.CssClass = "form-control"
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataTextField = "codeName"
+                    nuevoCmb.DataValueField = "code"
+                    nuevoCmb.DataSource = DataT
+                    AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmb_SelectedIndexChanged
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataBind()
+                    nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                    nuevoCmb.SelectedIndex = 0
+
+                    nuevoPanel.ID = "pnl-" + DataT(0)(4).ToString()
+                    nuevoPanel.CssClass = "col-3"
+                    nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+                    nuevoPanel.Controls.Add(nuevoCmb)
+                    nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                    phDinamicControls.Controls.Add(nuevoPanel)
+                End If
+            Next
+        Else
+            Dim nuevoCmb As DropDownList = New DropDownList()
+            Dim nuevoPanel As Panel = New Panel()
+            Dim dt As New DataTable()
+            dt.Columns.Add("idcontrol")
+            dt.Columns.Add("level")
+            dt.Columns.Add("sublevel")
+            Dim row As DataRow = dt.NewRow()
+            DataT = parametrizacion.selectNiveles(lblPac.Text.Trim)
+            If DataT.Rows.Count > 0 Then
+                row("level") = DataT(0)(4).ToString()
+                row("idcontrol") = "cmbNivel-" + DataT(0)(4).ToString()
+                nuevoCmb.ID = "cmbNivel-" + DataT(0)(4).ToString()
+                nuevoCmb.CssClass = "form-control"
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataTextField = "codeName"
+                nuevoCmb.DataValueField = "code"
+                nuevoCmb.DataSource = DataT
+                AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmb_SelectedIndexChanged
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataBind()
+                nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                nuevoCmb.SelectedIndex = 0
+
+                nuevoPanel.ID = "pnl-" + DataT(0)(4).ToString()
+                nuevoPanel.CssClass = "col-3"
+                nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+                nuevoPanel.Controls.Add(nuevoCmb)
+                nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                phDinamicControls.Controls.Add(nuevoPanel)
+            End If
+            dt.Rows.Add(row)
+            QuantityDinamicControls = dt
+        End If
+    End Sub
+
+
+    Private Sub nuevoCmb_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim DataT2 As New DataTable
+        Dim nivelControl As DropDownList = DirectCast(sender, DropDownList)
+        Dim row As DataRow = QuantityDinamicControls.NewRow()
+        Dim delimitadores() As String = {"-"}
+        Dim vectoraux() As String
+        Dim i As Integer = 1
+
+        vectoraux = nivelControl.ID.Split(delimitadores, StringSplitOptions.None)
+
+        If nivelControl.SelectedValue <> String.Empty Then
+            DataT2 = parametrizacion.selectNiveles(lblPac.Text.Trim, nivelControl.SelectedValue)
+
+            If DataT2.Rows.Count > 0 Then
+                row("level") = DataT2(0)(4)
+            Else
+                If QuantityDinamicControls.Rows.Count > 1 Then
+                    Dim lastRow As DataRow = QuantityDinamicControls.Rows(QuantityDinamicControls.Rows.Count - 1)
+                    row("level") = CInt(lastRow("level") + 1)
+                Else
+                    row("level") = String.Empty
+                End If
+
+            End If
+            row("sublevel") = nivelControl.SelectedValue
+            row("idcontrol") = "cmbNivel-" + row("level").ToString()
+
+            Dim result As DataRow() = QuantityDinamicControls.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltro(nivelControl)
+            End If
+            QuantityDinamicControls.Rows.Add(row)
+            controlNuevo(nivelControl.SelectedValue)
+        Else
+            Dim result As DataRow() = QuantityDinamicControls.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltro(nivelControl)
+            End If
+        End If
+    End Sub
+
+    Public Sub actualizarValoresFiltro(ByVal control As DropDownList)
+        Dim indice As Integer = -1
+        Dim i As Integer = 1
+        Dim vectorNvl() As String
+        Dim vectoraux() As String
+        Dim indicesRowsEliminar As New List(Of Integer)
+        Dim delimitadores() As String = {"-"}
+
+        vectoraux = control.ID.Split(delimitadores, StringSplitOptions.None)
+        For Each rowFilter As DataRow In QuantityDinamicControls.Rows
+            vectorNvl = rowFilter("idcontrol").Split(delimitadores, StringSplitOptions.None)
+            indice += 1
+            If rowFilter("level") = vectoraux(1) Then
+                rowFilter("sublevel") = control.SelectedValue
+            ElseIf rowFilter("level") > vectoraux(1) Then
+                indicesRowsEliminar.Add(indice)
+                Dim controlPanel As Panel = TryCast(phDinamicControls.FindControl("pnl-" & vectorNvl(1)), Panel)
+                phDinamicControls.Controls.Remove(controlPanel)
+            End If
+        Next
+
+        For x As Int32 = indicesRowsEliminar.Count - 1 To 0 Step -1
+            Dim indiceEliminar As Integer = indicesRowsEliminar.Item(x)
+            QuantityDinamicControls.Rows.RemoveAt(indiceEliminar)
+        Next
+
+        For Each rowFilter As DataRow In QuantityDinamicControls.Rows
+            If i > 1 Then
+                Dim controlCmb As DropDownList = TryCast(phDinamicControls.FindControl("cmbNivel-" & CInt(rowFilter("level")) - 1 & ""), DropDownList)
+                If controlCmb IsNot Nothing Then
+                    rowFilter("sublevel") = controlCmb.SelectedValue
+                End If
+            End If
+            i += 1
+        Next
     End Sub
 
 #End Region
+
+#Region "Fltro Dinamico Metas"
+    Private Sub controlNuevoMeta(Optional nivel As String = "")
+        Dim nuevoCmb As DropDownList = New DropDownList()
+        Dim nuevoPanel As Panel = New Panel()
+
+        DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, nivel)
+        If DataT.Rows.Count > 0 Then
+            nuevoCmb.ID = "cmbNivelMeta-" + DataT(0)(4).ToString()
+            nuevoCmb.CssClass = "form-control"
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataTextField = "codeName"
+            nuevoCmb.DataValueField = "code"
+            nuevoCmb.DataSource = DataT
+            AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmbMeta_SelectedIndexChanged
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataBind()
+            nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+            nuevoCmb.SelectedIndex = 0
+
+            nuevoPanel.ID = "pnlMeta-" + DataT(0)(4).ToString()
+            nuevoPanel.CssClass = "col-3"
+            nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+            nuevoPanel.Controls.Add(nuevoCmb)
+            nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+            phDinamicControlsMeta.Controls.Add(nuevoPanel)
+
+        Else
+            Dim lastRow As DataRow = QuantityDinamicControlsMeta.Rows(QuantityDinamicControlsMeta.Rows.Count - 2)
+            Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, CInt(lastRow("level")) + 1, "")
+            If Fila IsNot Nothing Then
+                alerta("El nivel " & Fila("name") & " no contiene contenido", "", "info")
+            End If
+        End If
+
+
+    End Sub
+    Private Sub GenerateControlsMeta()
+        Dim Quantity As Integer = 0
+        Dim i As Integer = 0
+        phDinamicControlsMeta.Controls.Clear()
+        If QuantityDinamicControlsMeta.Rows.Count > 0 Then
+            For Each row As DataRow In QuantityDinamicControlsMeta.Rows
+                Dim nuevoCmb As DropDownList = New DropDownList()
+                Dim nuevoPanel As Panel = New Panel()
+                DataT = Nothing
+
+                If row("level").ToString() = "1" Then
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim)
+                Else
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, row("sublevel").ToString())
+                End If
+                If DataT.Rows.Count > 0 Then
+                    nuevoCmb.ID = "cmbNivelMeta-" + row("level")
+                    nuevoCmb.CssClass = "form-control"
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataTextField = "codeName"
+                    nuevoCmb.DataValueField = "code"
+                    nuevoCmb.DataSource = DataT
+                    AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmbMeta_SelectedIndexChanged
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataBind()
+                    nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                    nuevoCmb.SelectedIndex = 0
+
+                    nuevoPanel.ID = "pnlMeta-" + DataT(0)(4).ToString()
+                    nuevoPanel.CssClass = "col-3"
+                    nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+                    nuevoPanel.Controls.Add(nuevoCmb)
+                    nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                    phDinamicControlsMeta.Controls.Add(nuevoPanel)
+                End If
+            Next
+        Else
+            Dim nuevoCmb As DropDownList = New DropDownList()
+            Dim nuevoPanel As Panel = New Panel()
+            Dim dt As New DataTable()
+            dt.Columns.Add("idcontrol")
+            dt.Columns.Add("level")
+            dt.Columns.Add("sublevel")
+            Dim row As DataRow = dt.NewRow()
+            DataT = parametrizacion.selectNiveles(lblPac.Text.Trim)
+            If DataT.Rows.Count > 0 Then
+                row("level") = DataT(0)(4).ToString()
+                row("idcontrol") = "cmbNivelMeta-" + DataT(0)(4).ToString()
+                nuevoCmb.ID = "cmbNivelMeta-" + DataT(0)(4).ToString()
+                nuevoCmb.CssClass = "form-control"
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataTextField = "codeName"
+                nuevoCmb.DataValueField = "code"
+                nuevoCmb.DataSource = DataT
+                AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmbMeta_SelectedIndexChanged
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataBind()
+                nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                nuevoCmb.SelectedIndex = 0
+
+                nuevoPanel.ID = "pnlMeta-" + DataT(0)(4).ToString()
+                nuevoPanel.CssClass = "col-3"
+                nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+                nuevoPanel.Controls.Add(nuevoCmb)
+                nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                phDinamicControlsMeta.Controls.Add(nuevoPanel)
+            End If
+            dt.Rows.Add(row)
+            QuantityDinamicControlsMeta = dt
+        End If
+    End Sub
+
+
+    Private Sub nuevoCmbMeta_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim DataT2 As New DataTable
+        Dim nivelControl As DropDownList = DirectCast(sender, DropDownList)
+        Dim row As DataRow = QuantityDinamicControlsMeta.NewRow()
+        Dim delimitadores() As String = {"-"}
+        Dim vectoraux() As String
+        Dim i As Integer = 1
+
+        vectoraux = nivelControl.ID.Split(delimitadores, StringSplitOptions.None)
+
+        If nivelControl.SelectedValue <> String.Empty Then
+            DataT2 = parametrizacion.selectNiveles(lblPac.Text.Trim, nivelControl.SelectedValue)
+
+            If DataT2.Rows.Count > 0 Then
+                row("level") = DataT2(0)(4)
+            Else
+                If QuantityDinamicControlsMeta.Rows.Count > 1 Then
+                    Dim lastRow As DataRow = QuantityDinamicControlsMeta.Rows(QuantityDinamicControlsMeta.Rows.Count - 1)
+                    row("level") = CInt(lastRow("level") + 1)
+                Else
+                    row("level") = String.Empty
+                End If
+
+            End If
+            row("sublevel") = nivelControl.SelectedValue
+            row("idcontrol") = "cmbNivelMeta-" + row("level").ToString()
+
+            Dim result As DataRow() = QuantityDinamicControlsMeta.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltroMeta(nivelControl)
+            End If
+            QuantityDinamicControlsMeta.Rows.Add(row)
+            controlNuevoMeta(nivelControl.SelectedValue)
+        Else
+            Dim result As DataRow() = QuantityDinamicControlsMeta.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltroMeta(nivelControl)
+            End If
+        End If
+    End Sub
+
+    Public Sub actualizarValoresFiltroMeta(ByVal control As DropDownList)
+        Dim indice As Integer = -1
+        Dim i As Integer = 1
+        Dim vectorNvl() As String
+        Dim vectoraux() As String
+        Dim indicesRowsEliminar As New List(Of Integer)
+        Dim delimitadores() As String = {"-"}
+
+        vectoraux = control.ID.Split(delimitadores, StringSplitOptions.None)
+        For Each rowFilter As DataRow In QuantityDinamicControlsMeta.Rows
+            vectorNvl = rowFilter("idcontrol").Split(delimitadores, StringSplitOptions.None)
+            indice += 1
+            If rowFilter("level") = vectoraux(1) Then
+                rowFilter("sublevel") = control.SelectedValue
+            ElseIf rowFilter("level") > vectoraux(1) Then
+                indicesRowsEliminar.Add(indice)
+                Dim controlPanel As Panel = TryCast(phDinamicControlsMeta.FindControl("pnlMeta-" & vectorNvl(1)), Panel)
+                phDinamicControlsMeta.Controls.Remove(controlPanel)
+            End If
+        Next
+        For x As Int32 = indicesRowsEliminar.Count - 1 To 0 Step -1
+            Dim indiceEliminar As Integer = indicesRowsEliminar.Item(x)
+            QuantityDinamicControlsMeta.Rows.RemoveAt(indiceEliminar)
+        Next
+
+        For Each rowFilter As DataRow In QuantityDinamicControlsMeta.Rows
+            If i > 1 Then
+                Dim controlCmb As DropDownList = TryCast(phDinamicControlsMeta.FindControl("cmbNivelMeta-" & CInt(rowFilter("level")) - 1 & ""), DropDownList)
+                If controlCmb IsNot Nothing Then
+                    rowFilter("sublevel") = controlCmb.SelectedValue
+                End If
+            End If
+            i += 1
+        Next
+    End Sub
+
+#End Region
+
+#Region "Fltro Dinamico Metas Registro"
+    Private Sub controlNuevoMetaReg(Optional nivel As String = "")
+        Dim nuevoCmb As DropDownList = New DropDownList()
+        Dim nuevoPanel As Panel = New Panel()
+
+        DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, nivel)
+        If DataT.Rows.Count > 0 Then
+            nuevoCmb.ID = "cmbNivelMetaReg-" + DataT(0)(4).ToString()
+            nuevoCmb.CssClass = "form-control"
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataTextField = "codeName"
+            nuevoCmb.DataValueField = "code"
+            nuevoCmb.DataSource = DataT
+            AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmbMetaReg_SelectedIndexChanged
+            nuevoCmb.AutoPostBack = True
+            nuevoCmb.DataBind()
+            nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+            nuevoCmb.SelectedIndex = 0
+
+            nuevoPanel.ID = "pnlMetaReg-" + DataT(0)(4).ToString()
+            nuevoPanel.CssClass = "col-3"
+            nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                        <label>" & DataT(0)(5).ToString() & "</label>"))
+            nuevoPanel.Controls.Add(nuevoCmb)
+            nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+            phDinamicControlsMetaReg.Controls.Add(nuevoPanel)
+
+        Else
+            Dim lastRow As DataRow = QuantityDinamicControlsMetaReg.Rows(QuantityDinamicControlsMetaReg.Rows.Count - 2)
+            Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, CInt(lastRow("level")) + 1, "")
+            If Fila IsNot Nothing Then
+                alerta("El nivel " & Fila("name") & " no contiene contenido", "", "info")
+            End If
+        End If
+
+
+    End Sub
+    Private Sub GenerateControlsMetaReg()
+        Dim Quantity As Integer = 0
+        Dim i As Integer = 0
+        phDinamicControlsMetaReg.Controls.Clear()
+        If QuantityDinamicControlsMetaReg.Rows.Count > 0 Then
+            For Each row As DataRow In QuantityDinamicControlsMetaReg.Rows
+                Dim nuevoCmb As DropDownList = New DropDownList()
+                Dim nuevoPanel As Panel = New Panel()
+
+                DataT = Nothing
+
+                If row("level").ToString() = "1" Then
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim)
+                Else
+                    DataT = parametrizacion.selectNiveles(lblPac.Text.Trim, row("sublevel").ToString())
+                End If
+                If DataT.Rows.Count > 0 Then
+                    nuevoCmb.ID = "cmbNivelMetaReg-" + row("level")
+                    nuevoCmb.CssClass = "form-control"
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataTextField = "codeName"
+                    nuevoCmb.DataValueField = "code"
+                    nuevoCmb.DataSource = DataT
+                    AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmbMetaReg_SelectedIndexChanged
+                    nuevoCmb.AutoPostBack = True
+                    nuevoCmb.DataBind()
+                    nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                    nuevoCmb.SelectedIndex = 0
+
+                    nuevoPanel.ID = "pnlMetaReg-" + row("level")
+                    nuevoPanel.CssClass = "col-3"
+                    nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                                <label>" & DataT(0)(5).ToString() & "</label>"))
+                    nuevoPanel.Controls.Add(nuevoCmb)
+                    nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                    phDinamicControlsMetaReg.Controls.Add(nuevoPanel)
+                End If
+            Next
+        Else
+            Dim nuevoCmb As DropDownList = New DropDownList()
+            Dim nuevoPanel As Panel = New Panel()
+            Dim dt As New DataTable()
+            dt.Columns.Add("idcontrol")
+            dt.Columns.Add("level")
+            dt.Columns.Add("sublevel")
+            Dim row As DataRow = dt.NewRow()
+            DataT = parametrizacion.selectNiveles(lblPac.Text.Trim)
+            If DataT.Rows.Count > 0 Then
+                row("level") = DataT(0)(4).ToString()
+                row("idcontrol") = "cmbNivelMetaReg-" + DataT(0)(4).ToString()
+                nuevoCmb.ID = "cmbNivelMetaReg-" + DataT(0)(4).ToString()
+                nuevoCmb.CssClass = "form-control"
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataTextField = "codeName"
+                nuevoCmb.DataValueField = "code"
+                nuevoCmb.DataSource = DataT
+                AddHandler nuevoCmb.SelectedIndexChanged, AddressOf nuevoCmbMetaReg_SelectedIndexChanged
+                nuevoCmb.AutoPostBack = True
+                nuevoCmb.DataBind()
+                nuevoCmb.Items.Insert(0, New ListItem("Todos", ""))
+                nuevoCmb.SelectedIndex = 0
+                nuevoPanel.ID = "pnlMetaReg-" + row("level")
+                nuevoPanel.CssClass = "col-3"
+                nuevoPanel.Controls.Add(New LiteralControl("<div class=""form-group"">
+                                                                <label>" & DataT(0)(5).ToString() & "</label>"))
+                nuevoPanel.Controls.Add(nuevoCmb)
+                nuevoPanel.Controls.Add(New LiteralControl("</div>"))
+
+                phDinamicControlsMetaReg.Controls.Add(nuevoPanel)
+            End If
+            dt.Rows.Add(row)
+            QuantityDinamicControlsMetaReg = dt
+        End If
+    End Sub
+
+
+    Private Sub nuevoCmbMetaReg_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim DataT2 As New DataTable
+        Dim nivelControl As DropDownList = DirectCast(sender, DropDownList)
+        Dim row As DataRow = QuantityDinamicControlsMetaReg.NewRow()
+        Dim delimitadores() As String = {"-"}
+        Dim vectoraux() As String
+        Dim i As Integer = 1
+
+        vectoraux = nivelControl.ID.Split(delimitadores, StringSplitOptions.None)
+
+        If nivelControl.SelectedValue <> String.Empty Then
+            DataT2 = parametrizacion.selectNiveles(lblPac.Text.Trim, nivelControl.SelectedValue)
+
+            If DataT2.Rows.Count > 0 Then
+                row("level") = DataT2(0)(4)
+            Else
+                If QuantityDinamicControlsMetaReg.Rows.Count > 1 Then
+                    Dim lastRow As DataRow = QuantityDinamicControlsMetaReg.Rows(QuantityDinamicControlsMetaReg.Rows.Count - 1)
+                    row("level") = CInt(lastRow("level") + 1)
+                Else
+                    row("level") = String.Empty
+                End If
+
+            End If
+            row("sublevel") = nivelControl.SelectedValue
+            row("idcontrol") = "cmbNivelMetaReg-" + row("level").ToString()
+
+            Dim result As DataRow() = QuantityDinamicControlsMetaReg.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltroMetaReg(nivelControl)
+            End If
+            QuantityDinamicControlsMetaReg.Rows.Add(row)
+            controlNuevoMetaReg(nivelControl.SelectedValue)
+        Else
+            Dim result As DataRow() = QuantityDinamicControlsMetaReg.Select("level = '" & vectoraux(1) & "'")
+            If result.Length >= 1 Then
+                actualizarValoresFiltroMetaReg(nivelControl)
+            End If
+        End If
+    End Sub
+
+    Public Sub actualizarValoresFiltroMetaReg(ByVal control As DropDownList)
+        Dim indice As Integer = -1
+        Dim i As Integer = 1
+        Dim vectorNvl() As String
+        Dim vectoraux() As String
+        Dim indicesRowsEliminar As New List(Of Integer)
+        Dim delimitadores() As String = {"-"}
+
+        vectoraux = control.ID.Split(delimitadores, StringSplitOptions.None)
+        For Each rowFilter As DataRow In QuantityDinamicControlsMetaReg.Rows
+            vectorNvl = rowFilter("idcontrol").Split(delimitadores, StringSplitOptions.None)
+            indice += 1
+            If rowFilter("level") = vectoraux(1) Then
+                rowFilter("sublevel") = control.SelectedValue
+            ElseIf rowFilter("level") > vectoraux(1) Then
+                indicesRowsEliminar.Add(indice)
+                Dim controlPanel As Panel = TryCast(phDinamicControlsMetaReg.FindControl("pnlMetaReg-" & vectorNvl(1)), Panel)
+                phDinamicControlsMetaReg.Controls.Remove(controlPanel)
+            End If
+        Next
+        For x As Int32 = indicesRowsEliminar.Count - 1 To 0 Step -1
+            Dim indiceEliminar As Integer = indicesRowsEliminar.Item(x)
+            QuantityDinamicControlsMetaReg.Rows.RemoveAt(indiceEliminar)
+        Next
+
+        For Each rowFilter As DataRow In QuantityDinamicControlsMetaReg.Rows
+            If i > 1 Then
+                Dim controlCmb As DropDownList = TryCast(phDinamicControlsMetaReg.FindControl("cmbNivelMetaReg-" & CInt(rowFilter("level")) - 1 & ""), DropDownList)
+                If controlCmb IsNot Nothing Then
+                    rowFilter("sublevel") = controlCmb.SelectedValue
+                End If
+            End If
+            i += 1
+        Next
+    End Sub
+
+    Private Sub txtPriPresupuesto_TextChanged(sender As Object, e As EventArgs) Handles txtPriPresupuesto.TextChanged
+        calcularPresupuesto()
+        txtSegPresupuesto.Focus()
+    End Sub
+
+    Private Sub txtSegPresupuesto_TextChanged(sender As Object, e As EventArgs) Handles txtSegPresupuesto.TextChanged
+        calcularPresupuesto()
+        txtTerPresupuesto.Focus()
+    End Sub
+
+    Private Sub txtTerPresupuesto_TextChanged(sender As Object, e As EventArgs) Handles txtTerPresupuesto.TextChanged
+        calcularPresupuesto()
+        txtCuarPresupuesto.Focus()
+    End Sub
+
+    Private Sub txtCuarPresupuesto_TextChanged(sender As Object, e As EventArgs) Handles txtCuarPresupuesto.TextChanged
+        calcularPresupuesto()
+        txtAcumulado.Focus()
+    End Sub
+
+#End Region
+
+    Public Sub calcularPresupuesto()
+        Dim priPresupuesto, segPresupuesto, terPresupuesto, cuarPresupuesto, total As Decimal
+        If txtPriPresupuesto.Text <> String.Empty Then priPresupuesto = EliminarFormato(txtPriPresupuesto.Text.Trim) Else priPresupuesto = 0
+        If txtSegPresupuesto.Text <> String.Empty Then segPresupuesto = EliminarFormato(txtSegPresupuesto.Text.Trim) Else segPresupuesto = 0
+        If txtTerPresupuesto.Text <> String.Empty Then terPresupuesto = EliminarFormato(txtTerPresupuesto.Text.Trim) Else terPresupuesto = 0
+        If txtCuarPresupuesto.Text <> String.Empty Then cuarPresupuesto = EliminarFormato(txtCuarPresupuesto.Text.Trim) Else cuarPresupuesto = 0
+        total = priPresupuesto + segPresupuesto + terPresupuesto + cuarPresupuesto
+        txtAcumulado.Text = total
+    End Sub
+
 
 End Class

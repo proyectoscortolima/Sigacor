@@ -68,7 +68,7 @@ Public Class clParametrizacion
 
     Public Function selectPac(ByVal id As String) As DataRow
 
-        QRY = "select id, name, initial_year, final_year, number_years, state from SCMPAC where id = " & id
+        QRY = "select * from SCMPAC where id = " & id
 
         Return Data.OpenRow(QRY)
     End Function
@@ -121,6 +121,17 @@ Public Class clParametrizacion
         Return Data.OpenRow(QRY)
     End Function
 
+    Public Function selectLevelsFila(ByVal pac_id As String, ByVal order As String) As DataRow
+
+        QRY = "select id, name, pac_id, hierarchy, state from SCRNIVLS where pac_id = " & pac_id & " and state = 'A' "
+
+        If order <> String.Empty Then
+            QRY &= " order by " & order
+        End If
+
+        Return Data.OpenRow(QRY)
+    End Function
+
     Public Function insertLevels(ByVal name As String, ByVal pac_id As String, ByVal hierarchy As String, ByVal state As String) As Integer
 
         QRY = "insert into SCRNIVLS(name, pac_id, hierarchy,  state) values (" &
@@ -136,7 +147,7 @@ Public Class clParametrizacion
         Return Data.Execute(QRY)
     End Function
 
-    Public Function deleteLevels(ByVal id As String, ByVal state As String) As Integer
+    Public Function deleteLevels(ByVal pac_id As String, ByVal id As String, ByVal state As String) As Integer
 
         QRY = "update SCRNIVLS set  state = '" & state & "' where id = " & id & ""
 
@@ -145,8 +156,8 @@ Public Class clParametrizacion
 
     Public Function selectNiveles(ByVal pac_id As String, Optional ByVal sublevel As String = "") As DataTable
 
-        QRY = "select c.code, c.name, l.name,  l.hierarchy, l.name from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where 
-               c.state = 'A' and  c.pac_id = " & pac_id & " and c.sublevel = '" & sublevel & "'"
+        QRY = "select c.code, c.name, l.name, CONCAT(c.code, ' ', c.name) as codeName,  l.hierarchy, l.name from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where 
+               c.state = 'A' and l.state = 'A' and  c.pac_id = " & pac_id & " and c.sublevel = '" & sublevel & "'"
 
         Return Data.OpenData(QRY)
     End Function
@@ -223,9 +234,16 @@ Public Class clParametrizacion
 
         Return Data.Execute(QRY)
     End Function
-    Public Function deleteContents(ByVal id As String, ByVal state As String) As Integer
 
-        QRY = "update SCRCONTND set state = '" & state & "' where id = '" & id & "' "
+    Public Function deleteContentsXLevels(ByVal pac_id As String, ByVal level_id As String) As Integer
+
+        QRY = "update SCRCONTND set state = 'I' where pac_id = " & pac_id & " and level_id = '" & level_id & "' "
+
+        Return Data.Execute(QRY)
+    End Function
+    Public Function deleteContents(ByVal pac_id As String, ByVal code As String) As Integer
+
+        QRY = "update SCRCONTND set state = 'I' where pac_id = " & pac_id & " and code like '" & code & "%' and state = 'A' "
 
         Return Data.Execute(QRY)
     End Function
@@ -236,13 +254,17 @@ Public Class clParametrizacion
     Public Function insertGoals(ByVal pac_id As String, ByVal name As String, ByVal type_goal As String,
                                 ByVal subactivity As String, ByVal line_base As String, ByVal value_one_year As String,
                                 ByVal value_two_year As String, ByVal value_three_year As String, ByVal value_four_year As String,
-                                ByVal responsable_id As String, ByVal feeder_id As String, ByVal state As String) As Integer
+                                ByVal responsable_id As String, ByVal feeder_id As String, ByVal state As String,
+                                ByVal weight As String, ByVal value_one_budget As String, ByVal value_two_budget As String,
+                                ByVal value_three_budget As String, ByVal value_four_budget As String) As Integer
 
         QRY = "insert into SCRMET (pac_id, name, type_goal, subactivity, line_base, value_one_year, value_two_year,
-               value_three_year, value_four_year, responsable_id, feeder_id, state, value_progress) values ( " & pac_id & ", 
+               value_three_year, value_four_year, responsable_id, feeder_id, state, value_progress, weight,
+               value_one_budget, value_two_budget, value_three_budget, value_four_budget) values ( " & pac_id & ", 
                '" & name & "', '" & type_goal & "', '" & subactivity & "', " & line_base & ", " & value_one_year & ", 
                " & value_two_year & ", " & value_three_year & ",  " & value_four_year & ", '" & responsable_id & "',
-               '" & feeder_id & "', '" & state & "', 0) "
+               '" & feeder_id & "', '" & state & "', 0, " & weight & ", " & value_one_budget & ", " & value_two_budget & ",
+               " & value_three_budget & ", " & value_four_budget & ") "
 
         Return Data.Execute(QRY)
     End Function
@@ -260,9 +282,23 @@ Public Class clParametrizacion
         Return Data.Execute(QRY)
     End Function
 
+    Public Function deleteGoals(ByVal pac_id As String, ByVal subactivity As String) As Integer
+
+        QRY = "update SCRMET set state = 'I' where pac_id = " & pac_id & " and subactivity = '" & subactivity & "' "
+
+        Return Data.Execute(QRY)
+    End Function
+
     Public Function updateStateGoals(ByVal id As String) As Integer
 
         QRY = "update SCRMET  set state = 'I' where  id = " & id
+
+        Return Data.Execute(QRY)
+    End Function
+
+    Public Function updateProgressGoal(ByVal id As String, ByVal campo As String, ByVal valor As String) As Integer
+
+        QRY = "update SCRMET set " & campo & " = " & valor & " where id = " & id & ""
 
         Return Data.Execute(QRY)
     End Function

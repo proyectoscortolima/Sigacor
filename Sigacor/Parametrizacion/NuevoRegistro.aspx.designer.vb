@@ -473,130 +473,13 @@ Partial Public Class NuevoRegistro
     Protected WithEvents pnlFiltro As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control lblLineas.
+    '''Control phDinamicControls.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblLineas As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbLineas.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbLineas As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv2.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv2.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv2 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv2.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv2 As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv3.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv3.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv3 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv3.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv3 As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv4.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv4 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv4.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv4 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv4.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv4 As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv5.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv5 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv5.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv5 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv5.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv5 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents phDinamicControls As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
     '''Control btnConsultar.
@@ -689,22 +572,13 @@ Partial Public Class NuevoRegistro
     Protected WithEvents cmbTipoMeta As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control lblNivelMeta.
+    '''Control phDinamicControlsMetaReg.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblNivelMeta As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNivelMeta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNivelMeta As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents phDinamicControlsMetaReg As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
     '''Control txtLineaBaseMeta.
@@ -714,6 +588,15 @@ Partial Public Class NuevoRegistro
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtLineaBaseMeta As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtPesoMeta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtPesoMeta As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control txtPriYearMeta.
@@ -750,6 +633,87 @@ Partial Public Class NuevoRegistro
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtCuaYearMeta As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblPriPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblPriPresupuesto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtPriPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtPriPresupuesto As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblSegPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblSegPresupuesto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtSegPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtSegPresupuesto As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblTerPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTerPresupuesto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtTerPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtTerPresupuesto As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblCuarPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCuarPresupuesto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtCuarPresupuesto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtCuarPresupuesto As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtAcumulado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtAcumulado As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control cmbResponsable.
@@ -806,130 +770,13 @@ Partial Public Class NuevoRegistro
     Protected WithEvents pnlFiltroMeta As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control lblLineasMeta.
+    '''Control phDinamicControlsMeta.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblLineasMeta As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbLineasMeta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbLineasMeta As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv2Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv2Meta As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv2Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv2Meta As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv2Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv2Meta As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv3Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv3Meta As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv3Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv3Meta As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv3Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv3Meta As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv4Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv4Meta As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv4Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv4Meta As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv4Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv4Meta As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control pnlNiv5Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlNiv5Meta As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control lblNiv5Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblNiv5Meta As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control cmbNiv5Meta.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cmbNiv5Meta As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents phDinamicControlsMeta As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
     '''Control btnConsultarMeta.

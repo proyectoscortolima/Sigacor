@@ -59,40 +59,112 @@ Partial Public Class DetallePac
     Protected WithEvents pnlDescripcionJerarquia As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control lblLineaBase.
+    '''Control lblMetaOneYear.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblLineaBase As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblMetaOneYear As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblMeta.
+    '''Control progressbarEjecucionOne.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblMeta As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents progressbarEjecucionOne As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control progressbarEjecucion.
+    '''Control lblValorProgressOne.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents progressbarEjecucion As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents lblValorProgressOne As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblValorProgress.
+    '''Control lblMetaTwoYear.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblValorProgress As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblMetaTwoYear As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control progressbarEjecucionTwo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents progressbarEjecucionTwo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control lblValorProgressTwo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblValorProgressTwo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblMetaThreeYear.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMetaThreeYear As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control progressbarEjecucionThree.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents progressbarEjecucionThree As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control lblValorProgressThree.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblValorProgressThree As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblMetaFourYear.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMetaFourYear As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control progressbarEjecucionFour.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents progressbarEjecucionFour As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control lblValorProgressFour.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblValorProgressFour As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control pnlAvances.

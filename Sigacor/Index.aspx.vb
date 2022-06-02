@@ -48,12 +48,6 @@ Public Class Index
                 alerta("Advertencia", "El usuario se encuentra retirado", "info", "")
                 Exit Sub
             End If
-            'fila2 = Nothing
-            'fila2 = login.selectUsuario(txtUsuario.Text.Trim, "2")
-            'If fila2 Is Nothing Then
-            '    alerta("Advertencia", "El usuario tiene el contrato vencido", "info", "")
-            '    Exit Sub
-            'End If
         Else
             alerta("Advertencia", "El usuario no se encuentra registrado", "error", "")
             Exit Sub
