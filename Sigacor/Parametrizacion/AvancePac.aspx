@@ -267,7 +267,7 @@
                 }//Hide tooltip		  
             }).mousemove(function (e) {
                 var mousex = 80; //Get X coodrinates
-                var mousey = 0; //Get Y coordinates                
+                var mousey = -150; //Get Y coordinates                
                 var tipWidth = tip.width(); //Find width of tooltip
                 var tipHeight = tip.height(); //Find height of tooltip
 

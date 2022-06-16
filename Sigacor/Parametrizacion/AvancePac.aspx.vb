@@ -137,6 +137,7 @@ Public Class AvancePac
 
 
                     Dim code, botonRedireccionar As String
+                    Dim progress As Double = 0
 
                     filaPac = parametrizacion.selectPac(cmbPac.SelectedValue)
 
@@ -209,6 +210,7 @@ Public Class AvancePac
                                 nombreMetaThreeYear = "Meta " & (CInt(filaPac("final_year")) - 1)
                                 nombreMetaFourYear = "Meta " & filaPac("final_year")
 
+
                                 If Not IsDBNull(filaMeta("progress_one_year")) Then
                                     porcentajeOne = (CDbl(filaMeta("progress_one_year")) / CDbl(filaMeta("value_one_year"))) * 100
                                     If porcentajeOne > 100 Then
@@ -232,6 +234,21 @@ Public Class AvancePac
                                     If porcentajeFour > 100 Then
                                         porcentajeFour = 100
                                     End If
+                                End If
+
+                                Dim fechaOne As Date = New Date(filaPac("initial_year"), 12, 31).AddMonths(1)
+                                Dim fechaTwo As Date = New Date((CInt(filaPac("initial_year")) + 1), 12, 31).AddMonths(1)
+                                Dim fechaThree As Date = New Date((CInt(filaPac("final_year")) - 1), 12, 31).AddMonths(1)
+                                Dim fechaFour As Date = New Date(CInt(filaPac("final_year")), 12, 31).AddMonths(1)
+
+                                If Now <= fechaOne Then
+                                    progress = porcentajeOne
+                                ElseIf Now > fechaOne And Now <= fechaTwo Then
+                                    progress = porcentajeTwo
+                                ElseIf Now > fechaTwo And Now <= fechaThree Then
+                                    progress = porcentajeThree
+                                ElseIf Now > fechaThree And Now <= fechaFour Then
+                                    progress = porcentajeFour
                                 End If
 
 
@@ -259,7 +276,7 @@ Public Class AvancePac
                                                     " & nombreMetaThreeYear & "
                                                     <div class=""progress mt-2"">
                                                         <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeThree & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
-                                                        " & porcentajeFour & "%
+                                                        " & porcentajeThree & "%
                                                         </div>
                                                     </div>
                                                 </div>
@@ -282,6 +299,7 @@ Public Class AvancePac
                                 porcentajeTwo = 0
                                 porcentajeThree = 0
                                 porcentajeFour = 0
+
                             End If
 
 
@@ -294,7 +312,7 @@ Public Class AvancePac
                             If arrayCode <> String.Empty Then
                                 pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(filaMeta("value_progress")) & """>
+                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(progress) & """>
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
@@ -315,7 +333,7 @@ Public Class AvancePac
                                 If row("code") = row2("code") Then
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(filaMeta("value_progress")) & """>
+                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(progress) & """>
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
@@ -335,7 +353,7 @@ Public Class AvancePac
                                 End If
                             End If
 
-
+                            progress = 0
                             i2 += 1
                         Next
                     Else
@@ -756,11 +774,26 @@ Public Class AvancePac
                                                                    <div class=""card-body"">
                                                                        <div class=""row"">                                                                                                                                                  
                                                           "))
+            Dim campoYear As String
+            Dim fila2 = parametrizacion.selectPac(cmbPac.SelectedValue)
+            Dim fechaOne As Date = New Date(fila2("initial_year"), 12, 31).AddMonths(1)
+            Dim fechaTwo As Date = New Date((CInt(fila2("initial_year")) + 1), 12, 31).AddMonths(1)
+            Dim fechaThree As Date = New Date((CInt(fila2("final_year")) - 1), 12, 31).AddMonths(1)
+            Dim fechaFour As Date = New Date(CInt(fila2("final_year")), 12, 31).AddMonths(1)
+
+            If Now <= fechaOne Then
+                campoYear = "one"
+            ElseIf Now > fechaOne And Now <= fechaTwo Then
+                campoYear = "two"
+            ElseIf Now > fechaTwo And Now <= fechaThree Then
+                campoYear = "three"
+            ElseIf Now > fechaThree And Now <= fechaFour Then
+                campoYear = "four"
+            End If
 
             DataT = Nothing
-
             DataT = reportPac.selectGoals(True, cmbPac.SelectedValue, chkNoProgramado.Checked, chkEjecMenos25.Checked, chkEjec25Al49.Checked,
-                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked)
+                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked, campoYear)
             If DataT.Rows.Count > 0 Then
                 Dim vectorHistorial(DataT.Rows.Count - 1) As String
                 For Each row As DataRow In DataT.Rows
@@ -813,7 +846,7 @@ Public Class AvancePac
 
 
                     dataT2 = reportPac.selectGoals(False, cmbPac.SelectedValue, chkNoProgramado.Checked, chkEjecMenos25.Checked, chkEjec25Al49.Checked,
-                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked, Fila("code"))
+                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked, campoYear, Fila("code"))
                     filaPac = parametrizacion.selectPac(cmbPac.SelectedValue)
                     If dataT2.Rows.Count > 0 Then
                         For Each row2 As DataRow In dataT2.Rows
@@ -844,23 +877,11 @@ Public Class AvancePac
                                 End If
 
                             End If
-
+                            Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour, valueProgress As Double
                             botonRedireccionar = "<a href=""detallepac.aspx?meta=" & row2("id") & "&pac=" & row2("pac_id") & """>Leer más</a>"
                             filaMeta = parametrizacion.selectGoalsFila(row2("id"))
                             If filaMeta IsNot Nothing Then
-                                Dim valorTipoMeta, avances, nomMeta As String
-                                nomMeta = filaMeta("name")
-                                If filaMeta("type_goal") = "I" Then
-                                    valorTipoMeta = CInt(filaMeta("value_one_year")) + CInt(filaMeta("value_two_year")) +
-                                           CInt(filaMeta("value_three_year")) + CInt(filaMeta("value_four_year"))
-                                ElseIf filaMeta("type_goal") = "M" Then
-                                    valorTipoMeta = filaMeta("line_base")
-                                ElseIf filaMeta("type_goal") = "R" Then
-                                    valorTipoMeta = CInt(filaMeta("value_one_year")) - CInt(filaMeta("value_two_year")) -
-                                           CInt(filaMeta("value_three_year")) - CInt(filaMeta("value_four_year"))
-                                End If
-
-                                Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour As Double
+                                Dim avances, nomMeta As String
                                 Dim nombreMetaOneYear, nombreMetaTwoYear, nombreMetaThreeYear, nombreMetaFourYear As String
 
                                 nombreMetaOneYear = "Meta " & filaPac("initial_year")
@@ -891,6 +912,16 @@ Public Class AvancePac
                                     If porcentajeFour > 100 Then
                                         porcentajeFour = 100
                                     End If
+                                End If
+
+                                If Now <= fechaOne Then
+                                    valueProgress = porcentajeOne
+                                ElseIf Now > fechaOne And Now <= fechaTwo Then
+                                    valueProgress = porcentajeTwo
+                                ElseIf Now > fechaTwo And Now <= fechaThree Then
+                                    valueProgress = porcentajeThree
+                                ElseIf Now > fechaThree And Now <= fechaFour Then
+                                    valueProgress = porcentajeFour
                                 End If
 
                                 dataAvance = parametrizacion.selectReport(cmbPac.SelectedValue)
@@ -931,7 +962,7 @@ Public Class AvancePac
                                                     " & nombreMetaThreeYear & "
                                                     <div class=""progress mt-2"">
                                                         <div class=""progress-bar progress-bar-striped bg-success"" role=""progressbar"" style=""width: " & porcentajeThree & "%; aria-valuenow=""25""; aria-valuemin=""0""; aria-valuemax=""100"";"" >                                                
-                                                        " & porcentajeFour & "%
+                                                        " & porcentajeThree & "%
                                                         </div>
                                                     </div>
                                                 </div>
@@ -950,10 +981,6 @@ Public Class AvancePac
                                            " & avances & "
                                            </div>
                                            "
-                                porcentajeOne = 0
-                                porcentajeTwo = 0
-                                porcentajeThree = 0
-                                porcentajeFour = 0
                             End If
                             i = 0
                             enumerador += 1
@@ -963,7 +990,7 @@ Public Class AvancePac
                             If arrayCode IsNot Nothing Then
                                 pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(row2("value_progress")) & """>
+                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(valueProgress) & """>
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
@@ -984,7 +1011,7 @@ Public Class AvancePac
                                 If row("code") = row2("code") Then
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                         <a class=""card-report-2 tip_trigger""  style=""text-decoration: none; border:none !important; "">
-                                                                                            <div class=""card-header-report"" style=""" & cargarColorConveciones(row2("value_progress")) & """>
+                                                                                            <div class=""card-header-report"" style=""" & cargarColorConveciones(valueProgress) & """>
                                                                                                 <div class=""row"" style=""justify-content: center;"">
                                                                                                     <div class=""col-12 text-center"">                                                                                               
                                                                                                         <h5 class=""mb-0"">                                                                                                   
@@ -1003,8 +1030,11 @@ Public Class AvancePac
                                                                                    "))
                                 End If
                             End If
-
-
+                            porcentajeOne = 0
+                            porcentajeTwo = 0
+                            porcentajeThree = 0
+                            porcentajeFour = 0
+                            valueProgress = 0
                             i2 += 1
                         Next
                     Else

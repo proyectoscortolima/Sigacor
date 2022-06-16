@@ -164,14 +164,49 @@
                             jerarquia = String.Empty
                             subLevel = String.Empty
 
-                            If Not IsDBNull(row2("value_progress")) Then
-                                If row2("value_progress") <> String.Empty Then
-                                    valueProgress = row2("value_progress")
-                                Else
-                                    valueProgress = 0
+                            Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour As Double
+
+                            If cmbNivel.SelectedValue = dataNiveles.Rows.Count + 1 Then
+                                If Not IsDBNull(row2("progress_one_year")) Then
+                                    porcentajeOne = (CDbl(row2("progress_one_year")) / CDbl(row2("value_one_year"))) * 100
+                                    If porcentajeOne > 100 Then
+                                        porcentajeOne = 100
+                                    End If
                                 End If
-                            Else
-                                valueProgress = 0
+                                If Not IsDBNull(row2("progress_two_year")) Then
+                                    porcentajeTwo = (CDbl(row2("progress_two_year")) / CDbl(row2("value_two_year"))) * 100
+                                    If porcentajeTwo > 100 Then
+                                        porcentajeTwo = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(row2("progress_three_year")) Then
+                                    porcentajeThree = (CDbl(row2("progress_three_year")) / CDbl(row2("value_three_year"))) * 100
+                                    If porcentajeThree > 100 Then
+                                        porcentajeThree = 100
+                                    End If
+                                End If
+                                If Not IsDBNull(row2("progress_four_year")) Then
+                                    porcentajeFour = (CDbl(row2("progress_four_year")) / CDbl(row2("value_four_year"))) * 100
+                                    If porcentajeFour > 100 Then
+                                        porcentajeFour = 100
+                                    End If
+                                End If
+
+                                Dim fila2 = parametrizacion.selectPac(cmbPac.SelectedValue)
+                                Dim fechaOne As Date = New Date(fila2("initial_year"), 12, 31).AddMonths(1)
+                                Dim fechaTwo As Date = New Date((CInt(fila2("initial_year")) + 1), 12, 31).AddMonths(1)
+                                Dim fechaThree As Date = New Date((CInt(fila2("final_year")) - 1), 12, 31).AddMonths(1)
+                                Dim fechaFour As Date = New Date(CInt(fila2("final_year")), 12, 31).AddMonths(1)
+
+                                If Now <= fechaOne Then
+                                    valueProgress = porcentajeOne
+                                ElseIf Now > fechaOne And Now <= fechaTwo Then
+                                    valueProgress = porcentajeTwo
+                                ElseIf Now > fechaTwo And Now <= fechaThree Then
+                                    valueProgress = porcentajeThree
+                                ElseIf Now > fechaThree And Now <= fechaFour Then
+                                    valueProgress = porcentajeFour
+                                End If
                             End If
 
                             If arrayCode <> String.Empty Then
@@ -244,6 +279,11 @@
                                 End If
                             End If
 
+                            valueProgress = 0
+                            porcentajeOne = 0
+                            porcentajeTwo = 0
+                            porcentajeThree = 0
+                            porcentajeFour = 0
 
                             i2 += 1
                         Next
@@ -740,7 +780,7 @@
 
     Public Sub alerta(ByVal mensaje As String, ByVal subMensaje As String, ByVal tipo As String, Optional foco As String = "")
         Dim Script As String = "<script type='text/javascript'> swal({title:'" + mensaje.Replace("'", " | ") + "', text:'" + subMensaje.Replace("'", " | ") + "' , type:'" + tipo + "', confirmButtonText:'OK'})"
-            If foco.Trim <> "" Then
+        If foco.Trim <> "" Then
             Script &= ".then((result) => {if (result.value) {document.getElementById('" + foco + "').focus();}});"
         End If
         Script &= " </script>"
@@ -772,9 +812,26 @@
                                                           "))
 
             DataT = Nothing
+            Dim campoYear As String
+            Dim fila2 = parametrizacion.selectPac(cmbPac.SelectedValue)
+            Dim fechaOne As Date = New Date(fila2("initial_year"), 12, 31).AddMonths(1)
+            Dim fechaTwo As Date = New Date((CInt(fila2("initial_year")) + 1), 12, 31).AddMonths(1)
+            Dim fechaThree As Date = New Date((CInt(fila2("final_year")) - 1), 12, 31).AddMonths(1)
+            Dim fechaFour As Date = New Date(CInt(fila2("final_year")), 12, 31).AddMonths(1)
+
+            If Now <= fechaOne Then
+                campoYear = "one"
+            ElseIf Now > fechaOne And Now <= fechaTwo Then
+                campoYear = "two"
+            ElseIf Now > fechaTwo And Now <= fechaThree Then
+                campoYear = "three"
+            ElseIf Now > fechaThree And Now <= fechaFour Then
+                campoYear = "four"
+            End If
+
 
             DataT = reportPac.selectGoals(True, cmbPac.SelectedValue, chkNoProgramado.Checked, chkEjecMenos25.Checked, chkEjec25Al49.Checked,
-                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked)
+                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked, campoYear)
             If DataT.Rows.Count > 0 Then
                 Dim vectorHistorial(DataT.Rows.Count - 1) As String
                 For Each row As DataRow In DataT.Rows
@@ -796,7 +853,7 @@
                         pnlResultados.Controls.Add(New LiteralControl("<div class=""col-12 mt-2""> 
                                                                        <a class=""card-report-2"" data-toggle=""collapse"" href=""#rpt-" & Fila("code") & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"">
                                                                            <div class=""card-header-report"" id=""headingOne"">
-                                                                               <div class=""row"">
+                                                                               <div class=""row"" style=""justify-content: center;"">
                                                                                    <div class=""col-12"">
                                                                                        <h5 class=""mb-0"">
                                                                                            <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
@@ -821,7 +878,7 @@
 
 
                     dataT2 = reportPac.selectGoals(False, cmbPac.SelectedValue, chkNoProgramado.Checked, chkEjecMenos25.Checked, chkEjec25Al49.Checked,
-                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked, Fila("code"))
+                                          chkEjec50Al74.Checked, chkEjec75Al99.Checked, chkEjecMas100.Checked, campoYear, Fila("code"))
                     If dataT2.Rows.Count > 0 Then
                         For Each row2 As DataRow In dataT2.Rows
                             arrayCode = row2("code").Split(delimitadores, StringSplitOptions.None)
@@ -856,13 +913,52 @@
                             jerarquia = String.Empty
                             subLevel = String.Empty
 
+
+                            Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour, valueProgress As Double
+
+                            Dim filaMeta As DataRow = parametrizacion.selectGoalsFila(row2("id"))
+                            If Not IsDBNull(filaMeta("progress_one_year")) Then
+                                porcentajeOne = (CDbl(filaMeta("progress_one_year")) / CDbl(filaMeta("value_one_year"))) * 100
+                                If porcentajeOne > 100 Then
+                                    porcentajeOne = 100
+                                End If
+                            End If
+                            If Not IsDBNull(filaMeta("progress_two_year")) Then
+                                porcentajeTwo = (CDbl(filaMeta("progress_two_year")) / CDbl(filaMeta("value_two_year"))) * 100
+                                If porcentajeTwo > 100 Then
+                                    porcentajeTwo = 100
+                                End If
+                            End If
+                            If Not IsDBNull(filaMeta("progress_three_year")) Then
+                                porcentajeThree = (CDbl(filaMeta("progress_three_year")) / CDbl(filaMeta("value_three_year"))) * 100
+                                If porcentajeThree > 100 Then
+                                    porcentajeThree = 100
+                                End If
+                            End If
+                            If Not IsDBNull(filaMeta("progress_four_year")) Then
+                                porcentajeFour = (CDbl(filaMeta("progress_four_year")) / CDbl(filaMeta("value_four_year"))) * 100
+                                If porcentajeFour > 100 Then
+                                    porcentajeFour = 100
+                                End If
+                            End If
+
+                            If Now <= fechaOne Then
+                                valueProgress = porcentajeOne
+                            ElseIf Now > fechaOne And Now <= fechaTwo Then
+                                valueProgress = porcentajeTwo
+                            ElseIf Now > fechaTwo And Now <= fechaThree Then
+                                valueProgress = porcentajeThree
+                            ElseIf Now > fechaThree And Now <= fechaFour Then
+                                valueProgress = porcentajeFour
+                            End If
+
                             If arrayCode IsNot Nothing Then
-                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none;"">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
-                                                                                       <div class=""row"">
+                                                                                       <div class=""row"" style=""justify-content: center;"">
                                                                                            <div class=""col-12 text-center"">
-                                                                                               <img src=""" & cargarImagenConveciones(row2("value_progress")) & """ width=""70""/>
+                                                                                               <img src=""" & cargarImagenConveciones(valueProgress) & """ width=""70""/>
                                                                                                <h5 class=""mb-0"">
                                                                                                    <button class=""btn"" data-toggle=""collapse"" data-target=""#collapseOne"" aria-expanded=""True"" aria-controls=""collapseOne"">
                                                                                                        <b>" & row2("name_level") & ": </b>" & row2("name") & " <i class=""fa fa-arrow-down ml-3""></i>
@@ -891,10 +987,10 @@
                                                                            "))
                             Else
                                 If row("code") = row2("code") Then
-                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-3"">
+                                    pnlResultados.Controls.Add(New LiteralControl("<div class=""col-2"">
                                                                                 <a class=""card-report-2"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" aria-expanded=""False"" aria-controls=""collapseExample"" style=""text-decoration: none; border:none !important; "">
                                                                                    <div class=""card-header-report"" id=""headingOne"">
-                                                                                       <div class=""row"">
+                                                                                       <div class=""row"" style=""justify-content: center;"">
                                                                                            <div class=""col-12 text-center"">
                                                                                                <img src=""" & cargarImagenConveciones(row2("value_progress")) & """ width=""70""/>
                                                                                                <h5 class=""mb-0"">
@@ -926,7 +1022,11 @@
                                 End If
                             End If
 
-
+                            porcentajeOne = 0
+                            porcentajeTwo = 0
+                            porcentajeThree = 0
+                            porcentajeFour = 0
+                            valueProgress = 0
                             i2 += 1
                         Next
                     Else

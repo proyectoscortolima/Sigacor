@@ -97,13 +97,17 @@ Public Class clReportPac
 
     Public Function selectGoals(ByVal pac_id As String) As DataTable
 
-        QRY = "select id, name, subactivity as sublevel from SCRMET where pac_id = " & pac_id & " and state = 'A' order by  subactivity "
+        QRY = "select id, name, subactivity as sublevel, progress_one_year, progress_two_year, 
+               progress_three_year, progress_four_year, value_one_year,value_two_year, value_three_year, value_four_year 
+               from SCRMET where pac_id = " & pac_id & " and state = 'A' order by  subactivity "
 
         Return Data.OpenData(QRY)
     End Function
     Public Function selectGoalsFiltroGeneral(ByVal pac_id As String, ByVal subactivity As String) As DataTable
 
-        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id, value_progress from SCRMET where pac_id = " & pac_id & " and 
+        QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id, value_progress, progress_one_year, progress_two_year, 
+               progress_three_year, progress_four_year, value_one_year,value_two_year, value_three_year, value_four_year 
+               from SCRMET where pac_id = " & pac_id & " and 
                subactivity like '" & subactivity & "%' and state = 'A' order by  subactivity"
 
         Return Data.OpenData(QRY)
@@ -118,30 +122,30 @@ Public Class clReportPac
     End Function
 
     Public Function selectGoals(ByVal campos As Boolean, ByVal pac_id As String, ByVal noProgramado As Boolean, ByVal ejecMenos25 As Boolean, ByVal ejec25Al49 As Boolean,
-                                ByVal ejec50Al74 As Boolean, ByVal ejec75Al99 As Boolean, ByVal ejecMas100 As Boolean, Optional subactivity As String = "") As DataTable
+                                ByVal ejec50Al74 As Boolean, ByVal ejec75Al99 As Boolean, ByVal ejecMas100 As Boolean, ByVal campoYear As String, Optional subactivity As String = "") As DataTable
         If campos Then
             QRY = "select id, name, subactivity as sublevel, value_progress from SCRMET where pac_id = " & pac_id & " and state = 'A' and ("
         Else
-            QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id, value_progress from SCRMET where pac_id = " & pac_id & " and state = 'A' and subactivity like '" & subactivity & "%' and ("
+            QRY = "select id, name, subactivity as code, 'Metas' as name_level, pac_id from SCRMET where pac_id = " & pac_id & " and state = 'A' and subactivity like '" & subactivity & "%' and ("
         End If
 
         If noProgramado Then
-            QRY &= " or value_progress = 0 "
+            QRY &= " or CAST(((progress_" & campoYear & "_year / value_" & campoYear & "_year) * 100) AS INT) = 0 "
         End If
         If ejecMenos25 Then
-            QRY &= " or value_progress < 25 "
+            QRY &= " or CAST(((progress_" & campoYear & "_year / value_" & campoYear & "_year) * 100) AS INT) < 25 "
         End If
         If ejec25Al49 Then
-            QRY &= " or value_progress BETWEEN 25 and 49 "
+            QRY &= " or CAST(((progress_" & campoYear & "_year / value_" & campoYear & "_year) * 100) AS INT) BETWEEN 25 and 49 "
         End If
         If ejec50Al74 Then
-            QRY &= " or value_progress BETWEEN 50 and 74 "
+            QRY &= " or CAST(((progress_" & campoYear & "_year / value_" & campoYear & "_year) * 100) AS INT) BETWEEN 50 and 74 "
         End If
         If ejec75Al99 Then
-            QRY &= " or value_progress BETWEEN 75 and 99 "
+            QRY &= " or CAST(((progress_" & campoYear & "_year / value_" & campoYear & "_year) * 100) AS INT) BETWEEN 75 and 99 "
         End If
         If ejecMas100 Then
-            QRY &= " or value_progress >= 100 "
+            QRY &= " or CAST(((progress_" & campoYear & "_year / value_" & campoYear & "_year) * 100) AS INT) >= 100 "
         End If
 
         QRY &= " )"

@@ -326,7 +326,7 @@ Public Class clParametrizacion
 
     Public Function selectGoalsXPacActivo() As DataTable
 
-        QRY = "select m.id, type_goal, subactivity, m.name, line_base from SCRMET m join SCMPAC p on m.pac_id = p.id  where p.state = 'A' "
+        QRY = "select m.id, type_goal, subactivity, m.name, line_base from SCRMET m join SCMPAC p on m.pac_id = p.id  where p.state = 'A' and m.state = 'A' "
 
         Return Data.OpenData(QRY)
     End Function

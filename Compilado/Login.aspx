@@ -13,6 +13,7 @@
         rel="stylesheet" />
     <link href="Componentes/css/sb-admin-2.min.css" rel="stylesheet" />
     <script src="Componentes/sweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="Componentes/vendor/jquery/jquery.min.js"></script>
 
 </head>
 <body style="background-image: url('Componentes/img/imagen_cortolima.png'); background-size: cover;">

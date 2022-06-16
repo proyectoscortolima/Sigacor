@@ -6,7 +6,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="contenedor2" runat="server">
     <script src="../Componentes/vendor/jquery/jquery.min.js"></script>
-
     <div class="container">
 
         <div class="row">
@@ -41,16 +40,10 @@
             <div class="card mb-4 py-3 border-bottom-info" style="box-shadow: 4px 4px 8px #bdbdbd;">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label>Nombre del PAC</label>
                                 <asp:TextBox ID="txtNomPac" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Slogan</label>
-                                <asp:TextBox ID="txtSlogan" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
                             </div>
                         </div>
                         <div class="col-4">
@@ -101,11 +94,6 @@
                                 <Columns>
                                     <asp:BoundField DataField="id" />
                                     <asp:BoundField DataField="hierarchy" HeaderText="Código" />
-                                    <%--<asp:TemplateField HeaderText="Código">
-                                        <ItemTemplate>
-                                            <asp:TextBox TextMode="Number" ID="txtCodigo" class="form-control" runat="server"></asp:TextBox>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>--%>
                                     <asp:BoundField DataField="name" HeaderText="Nombre" />
                                     <asp:TemplateField HeaderText="Nombre">
                                         <ItemTemplate>
@@ -124,11 +112,11 @@
                                                 Style="display: inline-grid" title="Confirmar" class="btn btn-success btn-circle">                                            
                                             <i class="fas fa-check"></i>                                   
                                             </asp:LinkButton>
-                                            <%--<asp:LinkButton ID="lnkEliNiv" runat="server" data-placement="top"
+                                            <asp:LinkButton ID="lnkEliminar" runat="server" data-placement="top"
                                                 data-toggle="tooltip" Height="30px" Width="30px" CommandName="Eliminar"
-                                                Style="display: inline-grid" title="Eliminar niveles" class="btn btn-success btn-circle">                                            
-                                            <i class="fas fa-backspace"></i>
-                                            </asp:LinkButton>--%>
+                                                Style="display: inline-grid" title="Confirmar" class="btn btn-warning btn-circle">                                            
+                                            <i class="fa fa-times"></i>                                   
+                                            </asp:LinkButton>
                                         </ItemTemplate>
                                         <ItemStyle Width="20%" VerticalAlign="Middle" HorizontalAlign="Center" />
                                     </asp:TemplateField>
@@ -161,6 +149,38 @@
                                 <asp:DropDownList ID="cmbNiveles" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
                             </div>
                         </div>
+
+                        <div class="col-4 mt-2" id="pnlNvl1Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl1Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl1Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl2Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl2Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl2Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl3Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl3Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl3Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl4Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl4Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl4Reg" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-2" id="pnlNvl5Reg" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="lblNvl5Reg" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNvl5Reg" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                            </div>
+                        </div>
+
                         <div class="col-4" id="pnlSubNivel" runat="server">
                             <div class="form-group">
                                 <asp:Label ID="lblSubNivel" runat="server" CssClass="labelAccionCua"></asp:Label>
@@ -199,101 +219,85 @@
                         </div>
                     </div>
                     <br />
-                    <asp:Panel ID="pnlFiltro" CssClass="row" runat="server">                        
-                        <div class="col-2">
-                            <h5>Filtro</h5>
-                        </div>
-                        <div class="col-10">
-                            <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
-                        </div>
-                        <div class="col-3 mt-2">
-                            <div class="form-group">
-                                <asp:Label ID="lblLineas" runat="server" Text="Lineas"></asp:Label>
-                                <asp:DropDownList ID="cmbLineas" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+                    <asp:Panel ID="pnlFiltro" runat="server">
+                        <div class="row">
+                            <div class="col-2">
+                                <h5>Filtro</h5>
                             </div>
-                        </div>
-                        <div class="col-3 mt-2" id="pnlNiv2" runat="server">
-                            <div class="form-group">
-                                <asp:Label ID="lblNiv2" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv2" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="col-3 mt-2" id="pnlNiv3" runat="server">
-                            <div class="form-group">
-                                <asp:Label ID="lblNiv3" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv3" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="col-3 mt-2">
-                            <div class="form-group" id="pnlNiv4" runat="server">
-                                <asp:Label ID="lblNiv4" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv4" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                            <div class="col-10">
+                                <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
                             </div>
                         </div>
 
-                        <div class="col-12 mt-2 text-center">
-                            <asp:LinkButton ID="btnConsultar" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
+                        <div class="row">
+                            <asp:PlaceHolder ID="phDinamicControls" runat="server"></asp:PlaceHolder>
                         </div>
-
-
-                        <div class="col-2 mt-2">
-                            <h5>Resultados</h5>
+                        <div class="row">
+                            <div class="col-12 mt-2 text-center">
+                                <asp:LinkButton ID="btnConsultar" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
+                            </div>
                         </div>
-                        <div class="col-10 mt-2">
-                            <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
-                        </div>
+                        <div class="row">
 
-                        <div class="col-12" style="overflow-x: auto; overflow-y: auto;">
-                            <asp:GridView ID="tblPlanAccion" runat="server" CssClass="table" Width="100%" AutoGenerateColumns="False">
-                                <Columns>
-                                    <asp:BoundField DataField="id" HeaderText="id" />
-                                    <asp:BoundField DataField="level_id" HeaderText="Nivel" />
-                                    <asp:BoundField DataField="code" HeaderText="Jerarquia" />
-                                    <%-- <asp:TemplateField HeaderText="Jerarquia">
+                            <div class="col-2 mt-2">
+                                <h5>Resultados</h5>
+                            </div>
+                            <div class="col-10 mt-2">
+                                <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
+                            </div>
+
+                            <div class="col-12" style="overflow-x: auto; overflow-y: auto;">
+                                <asp:GridView ID="tblPlanAccion" runat="server" CssClass="table" Width="100%" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <asp:BoundField DataField="id" HeaderText="id" />
+                                        <asp:BoundField DataField="level_id" HeaderText="Nivel" />
+                                        <asp:BoundField DataField="code" HeaderText="Jerarquia" />
+                                        <%-- <asp:TemplateField HeaderText="Jerarquia">
                                         <ItemTemplate>
                                             <asp:TextBox ID="txtJerarquia" class="form-control" runat="server"></asp:TextBox>
                                         </ItemTemplate>
                                     </asp:TemplateField>--%>
-                                    <asp:BoundField DataField="name" HeaderText="Nombre" />
-                                    <asp:TemplateField HeaderText="Nombre">
-                                        <ItemTemplate>
-                                            <asp:TextBox ID="txtNombrePlanAcc" class="form-control" runat="server"></asp:TextBox>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="weigth" HeaderText="Peso" />
-                                    <asp:TemplateField HeaderText="Peso">
-                                        <ItemTemplate>
-                                            <asp:TextBox TextMode="Number" ID="txtPeso" class="form-control" runat="server"></asp:TextBox>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px" HeaderText="Acciones">
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="lnkEditPlanAcc" runat="server" data-placement="top"
-                                                data-toggle="tooltip" Height="30px" Width="30px" CommandName="Editar"
-                                                Style="display: inline-grid" title="Editar plan de acción" class="btn btn-success btn-circle">                                            
+                                        <asp:BoundField DataField="name" HeaderText="Nombre" />
+                                        <asp:TemplateField HeaderText="Nombre">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="txtNombrePlanAcc" class="form-control" runat="server"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="weigth" HeaderText="Peso" />
+                                        <asp:TemplateField HeaderText="Peso">
+                                            <ItemTemplate>
+                                                <asp:TextBox TextMode="Number" ID="txtPeso" class="form-control" runat="server"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px" HeaderText="Acciones">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkEditPlanAcc" runat="server" data-placement="top"
+                                                    data-toggle="tooltip" Height="30px" Width="30px" CommandName="Editar"
+                                                    Style="display: inline-grid" title="Editar plan de acción" class="btn btn-success btn-circle">                                            
                                             <i class="fas fa-edit"></i>                                        
-                                            </asp:LinkButton>
-                                            <asp:LinkButton ID="lnkConEditPlanAcc" runat="server" data-placement="top"
-                                                data-toggle="tooltip" Height="30px" Width="30px" CommandName="Confirmar"
-                                                Style="display: inline-grid" title="Confirmar" class="btn btn-success btn-circle">                                            
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="lnkConEditPlanAcc" runat="server" data-placement="top"
+                                                    data-toggle="tooltip" Height="30px" Width="30px" CommandName="Confirmar"
+                                                    Style="display: inline-grid" title="Confirmar" class="btn btn-success btn-circle">                                            
                                             <i class="fas fa-check"></i>                                   
-                                            </asp:LinkButton>
-                                            <%--<asp:LinkButton ID="lnkEliPlanAcc" runat="server" data-placement="top"
-                                                data-toggle="tooltip" Height="30px" Width="30px" CommandName="Eliminar"
-                                                Style="display: inline-grid" title="Eliminar plan de acción" class="btn btn-success btn-circle">                                            
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="lnkEliPlanAcc" runat="server" data-placement="top"
+                                                    data-toggle="tooltip" Height="30px" Width="30px" CommandName="Eliminar"
+                                                    Style="display: inline-grid" title="Eliminar plan de acción" class="btn btn-warning btn-circle">                                            
                                             <i class="fas fa-backspace"></i>
-                                            </asp:LinkButton>--%>
-                                        </ItemTemplate>
-                                        <ItemStyle Width="20%" VerticalAlign="Middle" HorizontalAlign="Center" />
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="20%" VerticalAlign="Middle" HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
                         </div>
 
                     </asp:Panel>
                     <br />
                     <div class="row">
-                         <div class="col-12 text-center">
+                        <div class="col-12 text-center">
                             <asp:LinkButton ID="btnAtrasPlanAcc" runat="server" class="btn btn-primary">Atrás</asp:LinkButton>
                             <asp:LinkButton ID="btnSigPlanAcc" runat="server" class="btn btn-primary">Siguiente</asp:LinkButton>
                         </div>
@@ -325,42 +329,94 @@
                                 <asp:DropDownList ID="cmbTipoMeta" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Sub actividades</label>
-                                <asp:DropDownList ID="cmbSubActividad" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
-                            </div>
-                        </div>
+                        <asp:PlaceHolder ID="phDinamicControlsMetaReg" runat="server"></asp:PlaceHolder>
+
+
                         <div class="col-2">
                             <div class="form-group">
                                 <label>Linea Base</label>
                                 <asp:TextBox TextMode="Number" ID="txtLineaBaseMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-1">
                             <div class="form-group">
-                                <label>Primer año</label>
-                                <asp:TextBox TextMode="Number" ID="txtPriYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
+                                <label>Peso</label>
+                                <asp:TextBox TextMode="Number" ID="txtPesoMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label>Segundo año</label>
-                                <asp:TextBox TextMode="Number" ID="txtSegYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
+
+                        <div class="row">
+                            <div class="col-3 mt-4">
+                                <h4>Metas Anuales</h4>
+                            </div>
+                            <div class="col-9 mt-4">
+                                <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label>Primer año</label>
+                                    <asp:TextBox TextMode="Number" ID="txtPriYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label>Segundo año</label>
+                                    <asp:TextBox TextMode="Number" ID="txtSegYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label>Tercer año</label>
+                                    <asp:TextBox TextMode="Number" ID="txtTerYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label>Cuarto año</label>
+                                    <asp:TextBox TextMode="Number" ID="txtCuaYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label>Tercer año</label>
-                                <asp:TextBox TextMode="Number" ID="txtTerYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
+
+                        <div class="row">
+                            <div class="col-3 mt-4">
+                                <h4>Metas financieras</h4>
+                            </div>
+                            <div class="col-9 mt-4">
+                                <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <asp:Label ID="lblPriPresupuesto" runat="server" Text=""></asp:Label>                                    
+                                    <asp:TextBox ID="txtPriPresupuesto" class="form-control mt-2" runat="server" AutoComplete="Off" onkeyup="validarDinero(this)" onclick="validarNumero(this)" onblur="validarDinero(this)" AutoPostBack="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <asp:Label ID="lblSegPresupuesto" runat="server" Text=""></asp:Label>                                    
+                                    <asp:TextBox ID="txtSegPresupuesto" class="form-control mt-2" runat="server" AutoComplete="Off" onkeyup="validarDinero(this)" onclick="validarNumero(this)" onblur="validarDinero(this)" AutoPostBack="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <asp:Label ID="lblTerPresupuesto" runat="server" Text=""></asp:Label>     
+                                    <asp:TextBox ID="txtTerPresupuesto" class="form-control mt-2" runat="server" AutoComplete="Off" onkeyup="validarDinero(this)" onclick="validarNumero(this)" onblur="validarDinero(this)" AutoPostBack="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <asp:Label ID="lblCuarPresupuesto" runat="server" Text=""></asp:Label>     
+                                    <asp:TextBox ID="txtCuarPresupuesto" class="form-control mt-2" runat="server" AutoComplete="Off" onkeyup="validarDinero(this)" onclick="validarNumero(this)" onblur="validarDinero(this)" AutoPostBack="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label>Acumulado presupuestal</label>
+                                    <asp:TextBox ID="txtAcumulado" class="form-control" runat="server" AutoComplete="Off" onkeyup="validarDinero(this)" onclick="validarNumero(this)" onblur="validarDinero(this)" ReadOnly="true"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label>Cuarto año</label>
-                                <asp:TextBox TextMode="Number" ID="txtCuaYearMeta" class="form-control" runat="server" AutoComplete="Off"></asp:TextBox>
-                            </div>
-                        </div>
+
                         <div class="col-3 mt-4">
                             <h4>Responsables</h4>
                         </div>
@@ -393,76 +449,59 @@
                         <div class="col-12 text-left">
                             <asp:LinkButton ID="btnFiltroMeta" runat="server" class="btn btn-primary">Aplicar filtro</asp:LinkButton>
                         </div>
-                    </div>                    
+                    </div>
                     <br />
-                    <asp:Panel ID="pnlFiltroMeta" CssClass="row" runat="server">  
-                        <div class="col-2">
-                            <h5>Filtro</h5>
-                        </div>
-                        <div class="col-10">
-                            <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
-                        </div>
-                        <div class="col-3 mt-2">
-                            <div class="form-group">
-                                <asp:Label ID="lblLineasMeta" runat="server" Text="Lineas"></asp:Label>
-                                <asp:DropDownList ID="cmbLineasMeta" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
+
+                    <asp:Panel ID="pnlFiltroMeta" runat="server">
+
+                        <div class="row">
+                            <div class="col-2">
+                                <h5>Filtro</h5>
                             </div>
-                        </div>
-                        <div class="col-3 mt-2" id="pnlNiv2Meta" runat="server">
-                            <div class="form-group">
-                                <asp:Label ID="lblNiv2Meta" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv2Meta" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="col-3 mt-2" id="pnlNiv3Meta" runat="server">
-                            <div class="form-group">
-                                <asp:Label ID="lblNiv3Meta" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv3Meta" class="form-control" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="col-3 mt-2">
-                            <div class="form-group" id="pnlNiv4Meta" runat="server">
-                                <asp:Label ID="lblNiv4Meta" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv4Meta" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                            <div class="col-10">
+                                <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
                             </div>
                         </div>
 
-                        <div class="col-12 mt-2 text-center">
-                            <asp:LinkButton ID="btnConsultarMeta" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
+                        <div class="row">
+                            <asp:PlaceHolder ID="phDinamicControlsMeta" runat="server"></asp:PlaceHolder>
                         </div>
+                        <div class="row">
+                            <div class="col-12 mt-2 text-center">
+                                <asp:LinkButton ID="btnConsultarMeta" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
+                            </div>
+                        </div>
+                        <div class="row">
 
-                        <div class="col-2 mt-2">
-                            <h5>Resultados</h5>
-                        </div>
-                        <div class="col-10 mt-2">
-                            <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
-                        </div>
+                            <div class="col-2 mt-2">
+                                <h5>Resultados</h5>
+                            </div>
+                            <div class="col-10 mt-2">
+                                <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
+                            </div>
 
-                        <div class="col-12 mt-4" style="overflow-x: auto; overflow-y: auto;">
-                            <asp:GridView ID="tblMetas" runat="server" CssClass="table" Width="100%" AutoGenerateColumns="False">
-                                <Columns>
-                                    <asp:BoundField DataField="id" HeaderText="id" />
-                                    <asp:BoundField DataField="type_goal" HeaderText="Tipo Meta" />
-                                    <asp:BoundField DataField="subactivity" HeaderText="Sub Activ." />
-                                    <asp:BoundField DataField="name" HeaderText="Nombre" />
-                                    <asp:BoundField DataField="line_base" HeaderText="Linea Base" />
-                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px" HeaderText="Acciones">
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="lnkEditarMeta" runat="server" data-placement="top"
-                                                data-toggle="tooltip" Height="30px" Width="30px" CommandName="Editar"
-                                                Style="display: inline-grid" title="Editar meta" class="btn btn-success btn-circle">                                            
+                            <div class="col-12 mt-4" style="overflow-x: auto; overflow-y: auto;">
+                                <asp:GridView ID="tblMetas" runat="server" CssClass="table" Width="100%" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <asp:BoundField DataField="id" HeaderText="id" />
+                                        <asp:BoundField DataField="type_goal" HeaderText="Tipo Meta" />
+                                        <asp:BoundField DataField="subactivity" HeaderText="Sub Activ." />
+                                        <asp:BoundField DataField="name" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="line_base" HeaderText="Linea Base" />
+                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px" HeaderText="Acciones">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkEditarMeta" runat="server" data-placement="top"
+                                                    data-toggle="tooltip" Height="30px" Width="30px" CommandName="Editar"
+                                                    Style="display: inline-grid" title="Editar meta" class="btn btn-success btn-circle">                                            
                                             <i class="fas fa-edit"></i>                                        
-                                            </asp:LinkButton>
-                                            <%--<asp:LinkButton ID="lnkEliminarMeta" runat="server" data-placement="top"
-                                                data-toggle="tooltip" Height="30px" Width="30px" CommandName="Eliminar"
-                                                Style="display: inline-grid" title="Eliminar meta" class="btn btn-success btn-circle">                                            
-                                            <i class="fas fa-backspace"></i>
-                                            </asp:LinkButton>--%>
-                                        </ItemTemplate>
-                                        <ItemStyle Width="20%" VerticalAlign="Middle" HorizontalAlign="Center" />
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
+                                                </asp:LinkButton>
+
+                                            </ItemTemplate>
+                                            <ItemStyle Width="20%" VerticalAlign="Middle" HorizontalAlign="Center" />
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
                         </div>
                     </asp:Panel>
 
@@ -506,8 +545,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label>Sub actividades</label>
-                                <asp:DropDownList ID="cmbSubActividadMetaMdl" class="form-control" runat="server" AutoComplete="Off"></asp:DropDownList>
+                                <asp:Label ID="lblNivelMetaMdl" runat="server"></asp:Label>
+                                <asp:DropDownList ID="cmbNivelMetaMdl" class="form-control mt-2" runat="server" AutoComplete="Off"></asp:DropDownList>
                             </div>
                         </div>
                         <div class="col-2">
@@ -661,6 +700,40 @@
                 }
             })
         };
+
+        function validarNumero(campo) {
+            var decimals;
+            var num = campo.value;
+            num += '';
+            num = parseFloat(num.replace(/[^0-9]/g, ''));
+            decimals = decimals || 0;
+            if (isNaN(num) || num === 0) {
+                campo.value = "";
+            } else {
+                campo.value = num;
+            }
+        };
+        function validarDinero(campo) {
+            var tar = campo.value;
+            var v = '$' + number_format(tar);
+            campo.value = v;
+        };
+        function number_format(amount, decimals) {
+            amount += ''; // por si pasan un numero en vez de un string
+            amount = parseFloat(amount.replace(/[^0-9\.\-]/g, '')); // elimino cualquier cosa que no sea numero o punto
+            decimals = decimals || 0; // por si la variable no fue fue pasada
+            // si no es un numero o es igual a cero retorno el mismo cero
+            if (isNaN(amount) || amount === 0)
+                return parseFloat(0).toFixed(decimals);
+            // si es mayor o menor que cero retorno el valor formateado como numero
+            amount = '' + amount.toFixed(decimals);
+            var amount_parts = amount.split('.'),
+                regexp = /(\d+)(\d{3})/;
+            while (regexp.test(amount_parts[0]))
+                amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+            return amount_parts.join('.');
+        };
+
 
 
         window.onload = function () {

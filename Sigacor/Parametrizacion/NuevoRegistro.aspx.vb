@@ -352,7 +352,7 @@
 
                 Fila = parametrizacion.selectLevelsFila(lblPac.Text.Trim, "hierarchy desc")
                 If Fila IsNot Nothing Then
-                    If Fila("hierarchy") = e.Row.Cells(0).Text.Trim Then
+                    If Fila("id") = e.Row.Cells(0).Text.Trim Then
                         linkBtnEliminar.Visible = True
                     Else
                         linkBtnEliminar.Visible = False

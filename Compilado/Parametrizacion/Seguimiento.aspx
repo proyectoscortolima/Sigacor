@@ -7,7 +7,7 @@
     <script src="../Componentes/vendor/jquery/jquery.min.js"></script>
 
     <asp:Label ID="idReport" runat="server" CssClass="d-none"></asp:Label>
-    <asp:Label ID="pac" runat="server" CssClass="d-none"></asp:Label>    
+    <asp:Label ID="pac" runat="server" CssClass="d-none"></asp:Label>
     <asp:Label ID="meta" runat="server" CssClass="d-none"></asp:Label>
 
     <div class="container">
@@ -42,6 +42,7 @@
         <asp:Panel ID="Panel" runat="server" class="card mb-4 py-3 border-bottom-info" Style="box-shadow: 4px 4px 8px #bdbdbd; padding: 2rem;">
             <asp:Panel ID="pnlMetas" runat="server" class="card mb-4 py-3 border-bottom-info">
                 <div class="card-body">
+
                     <div class="row">
                         <div class="col-2">
                             <h5>Filtro</h5>
@@ -49,36 +50,19 @@
                         <div class="col-10">
                             <hr style="border-top: 3px solid rgba(0, 0, 0, .1);" />
                         </div>
-                        <div class="col-3 mt-4">
-                            <div class="form-group">
-                                <asp:Label ID="lblLineas" runat="server" Text="Lineas"></asp:Label>
-                                <asp:DropDownList ID="cmbLineas" class="form-control mt-1" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="col-3 mt-4" id="pnlNiv2" runat="server">
-                            <div class="form-group">
-                                <asp:Label ID="lblNiv2" runat="server" class=""></asp:Label>
-                                <asp:DropDownList ID="cmbNiv2" class="form-control mt-1" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="col-3 mt-4" id="pnlNiv3" runat="server">
-                            <div class="form-group">
-                                <asp:Label ID="lblNiv3" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv3" class="form-control mt-1" runat="server" AutoComplete="Off" AutoPostBack="true"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="col-3 mt-4">
-                            <div class="form-group" id="pnlNiv4" runat="server">
-                                <asp:Label ID="lblNiv4" runat="server"></asp:Label>
-                                <asp:DropDownList ID="cmbNiv4" class="form-control mt-1" runat="server" AutoComplete="Off"></asp:DropDownList>
-                            </div>
-                        </div>
+                    </div>
 
+                    <div class="row">
+                        <asp:PlaceHolder ID="phDinamicControls" runat="server"></asp:PlaceHolder>
+                    </div>
 
-                        <div class="col-12 mt-4 text-center">
+                    <div class="row">
+                        <div class="col-12 mt-2 text-center">
                             <asp:LinkButton ID="btnConsultar" runat="server" class="btn btn-primary">Consultar</asp:LinkButton>
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="col-2 mt-2">
                             <h5>Resultados</h5>
                         </div>
@@ -127,7 +111,7 @@
                     </div>
                 </a>
 
-                <div class="collapse" id="collapseExample">
+                <div class="collapse show" id="collapseExample">
                     <div class="card card-body">
                         <div class="card-body">
                             <div class="row">
@@ -167,26 +151,26 @@
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Primer año</label>
-                                        <asp:TextBox ID="txtPriYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblPriYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtPriYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Segundo año</label>
-                                        <asp:TextBox ID="txtSegYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblSegYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtSegYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Tercer año</label>
-                                        <asp:TextBox ID="txtTercYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblTercYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtTercYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Cuarto año</label>
-                                        <asp:TextBox ID="txtCuartYear" class="form-control" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
+                                        <asp:Label ID="lblCuartYear" runat="server"></asp:Label>
+                                        <asp:TextBox ID="txtCuartYear" class="form-control mt-2" runat="server" AutoComplete="Off" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -233,16 +217,22 @@
                                 <asp:TextBox ID="txtValorFisico" class="form-control" runat="server" AutoComplete="Off" onkeyup="validarNumero(this)"></asp:TextBox>
                             </div>
                         </div>
-                        <div class="col-5 mt-4">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label>Quien reporta</label>
+                                <asp:DropDownList ID="cmbQuienReporta" CssClass="form-control" runat="server"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-4">
                             <asp:LinkButton ID="btnVisualizarHojaVida" runat="server" class="btn btn-primary">Visualizar hoja de vida</asp:LinkButton>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                        <div class="col-12 mt-4 text-center">
-                            <asp:LinkButton ID="btnGrabar" runat="server" class="btn btn-primary">Grabar y continuar</asp:LinkButton>
-                        </div>
+                    <div class="col-12 mt-4 text-center">
+                        <asp:LinkButton ID="btnGrabar" runat="server" class="btn btn-primary">Grabar y continuar</asp:LinkButton>
                     </div>
+                </div>
             </asp:Panel>
 
             <asp:Panel ID="pnlEvidencias" runat="server" class="card mb-4 py-3 border-bottom-info">
@@ -483,7 +473,7 @@
 
 
     <asp:Button ID="CargarArchivo" runat="server" class="d-none" />
-    <asp:Button ID="CaragrImagen" runat="server" class="d-none" />
+    <asp:Button ID="CargarImagen" runat="server" class="d-none" />
 
     <script>
         $(window).on('load', function () {
@@ -535,7 +525,7 @@
 
         document.getElementById('contenedor2_fuImagenes').addEventListener('change', function () {
             document.getElementById('contenedor2_txtImagen').value = this.value;
-            document.getElementById('contenedor2_CaragrImagen').click();
+            document.getElementById('contenedor2_CargarImagen').click();
         });
 
         window.onload = function () {
