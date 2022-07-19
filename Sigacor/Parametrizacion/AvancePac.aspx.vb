@@ -299,48 +299,7 @@ Public Class AvancePac
                                 porcentajeTwo = 0
                                 porcentajeThree = 0
                                 porcentajeFour = 0
-                            Else
-                                Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour As Double
 
-                                If Not IsDBNull(row2("progress_one_year")) Then
-                                    porcentajeOne = CDbl(row2("progress_one_year"))
-                                    If porcentajeOne > 100 Then
-                                        porcentajeOne = 100
-                                    End If
-                                End If
-                                If Not IsDBNull(row2("progress_two_year")) Then
-                                    porcentajeTwo = CDbl(row2("progress_two_year"))
-                                    If porcentajeTwo > 100 Then
-                                        porcentajeTwo = 100
-                                    End If
-                                End If
-                                If Not IsDBNull(row2("progress_three_year")) Then
-                                    porcentajeThree = CDbl(row2("progress_three_year"))
-                                    If porcentajeThree > 100 Then
-                                        porcentajeThree = 100
-                                    End If
-                                End If
-                                If Not IsDBNull(row2("progress_four_year")) Then
-                                    porcentajeFour = CDbl(row2("progress_four_year"))
-                                    If porcentajeFour > 100 Then
-                                        porcentajeFour = 100
-                                    End If
-                                End If
-
-                                Dim fechaOne As Date = New Date(filaPac("initial_year"), 12, 31).AddMonths(1)
-                                Dim fechaTwo As Date = New Date((CInt(filaPac("initial_year")) + 1), 12, 31).AddMonths(1)
-                                Dim fechaThree As Date = New Date((CInt(filaPac("final_year")) - 1), 12, 31).AddMonths(1)
-                                Dim fechaFour As Date = New Date(CInt(filaPac("final_year")), 12, 31).AddMonths(1)
-
-                                If Now <= fechaOne Then
-                                    progress = porcentajeOne
-                                ElseIf Now > fechaOne And Now <= fechaTwo Then
-                                    progress = porcentajeTwo
-                                ElseIf Now > fechaTwo And Now <= fechaThree Then
-                                    progress = porcentajeThree
-                                ElseIf Now > fechaThree And Now <= fechaFour Then
-                                    progress = porcentajeFour
-                                End If
                             End If
 
 
@@ -534,54 +493,10 @@ Public Class AvancePac
                             jerarquia = String.Empty
                             subLevel = String.Empty
 
-                            Dim filaPac As DataRow = parametrizacion.selectPac(cmbPac.SelectedValue)
-
-                            Dim porcentajeOne, porcentajeTwo, porcentajeThree, porcentajeFour, progress As Double
-
-                            If Not IsDBNull(row2("progress_one_year")) Then
-                                porcentajeOne = CDbl(row2("progress_one_year"))
-                                If porcentajeOne > 100 Then
-                                    porcentajeOne = 100
-                                End If
-                            End If
-                            If Not IsDBNull(row2("progress_two_year")) Then
-                                porcentajeTwo = CDbl(row2("progress_two_year"))
-                                If porcentajeTwo > 100 Then
-                                    porcentajeTwo = 100
-                                End If
-                            End If
-                            If Not IsDBNull(row2("progress_three_year")) Then
-                                porcentajeThree = CDbl(row2("progress_three_year"))
-                                If porcentajeThree > 100 Then
-                                    porcentajeThree = 100
-                                End If
-                            End If
-                            If Not IsDBNull(row2("progress_four_year")) Then
-                                porcentajeFour = CDbl(row2("progress_four_year"))
-                                If porcentajeFour > 100 Then
-                                    porcentajeFour = 100
-                                End If
-                            End If
-
-                            Dim fechaOne As Date = New Date(filaPac("initial_year"), 12, 31).AddMonths(1)
-                            Dim fechaTwo As Date = New Date((CInt(filaPac("initial_year")) + 1), 12, 31).AddMonths(1)
-                            Dim fechaThree As Date = New Date((CInt(filaPac("final_year")) - 1), 12, 31).AddMonths(1)
-                            Dim fechaFour As Date = New Date(CInt(filaPac("final_year")), 12, 31).AddMonths(1)
-
-                            If Now <= fechaOne Then
-                                progress = porcentajeOne
-                            ElseIf Now > fechaOne And Now <= fechaTwo Then
-                                progress = porcentajeTwo
-                            ElseIf Now > fechaTwo And Now <= fechaThree Then
-                                progress = porcentajeThree
-                            ElseIf Now > fechaThree And Now <= fechaFour Then
-                                progress = porcentajeFour
-                            End If
-
                             If arrayCode <> String.Empty Then
                                 pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(progress) & """>
+                                                                                       <div class=""card-header-report"" id=""headingOne"">
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
@@ -603,7 +518,7 @@ Public Class AvancePac
                                 If row("code") = row2("code") Then
                                     pnlResultados.Controls.Add(New LiteralControl("<div class=""col-1"">
                                                                                    <a class=""card-report-2 tip_trigger"" data-toggle=""collapse"" href=""#rptSub-" & i2 & """ role=""button"" style=""text-decoration: none;"">
-                                                                                       <div class=""card-header-report"" id=""headingOne"" style=""background:" & cargarColorConveciones(progress) & """>
+                                                                                       <div class=""card-header-report"" id=""headingOne"">
                                                                                            <div class=""row"" style=""justify-content: center;"">
                                                                                                <div class=""col-12 text-center"">                                                                                               
                                                                                                    <h7 class=""mb-0"">
