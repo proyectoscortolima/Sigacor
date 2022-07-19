@@ -202,3 +202,9 @@ ALTER TABLE SCRMET ADD progress_one_year decimal default 0;
 ALTER TABLE SCRMET ADD progress_two_year decimal default 0;
 ALTER TABLE SCRMET ADD progress_three_year decimal default 0;
 ALTER TABLE SCRMET ADD progress_four_year decimal default 0;
+
+
+ALTER TABLE SCRCONTND ADD progress_one_year decimal default 0;
+ALTER TABLE SCRCONTND ADD progress_two_year decimal default 0;
+ALTER TABLE SCRCONTND ADD progress_three_year decimal default 0;
+ALTER TABLE SCRCONTND ADD progress_four_year decimal default 0;

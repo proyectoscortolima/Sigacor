@@ -55,7 +55,8 @@ Public Class clReportPac
 
     Public Function selectContentsFiltroGeneral(ByVal pac_id As String, ByVal level_id As String, ByVal code As String) As DataTable
 
-        QRY = "select c.code, c.name, c.sublevel, l.name name_level, c.pac_id, '' as value_progress from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+        QRY = "select c.code, c.name, c.sublevel, l.name name_level, c.pac_id, '' as value_progress, progress_one_year, progress_two_year,
+               progress_three_year, progress_four_year from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and l.hierarchy = " & level_id & " and c.code like '" & code & "%' and c.state = 'A'   "
 
         Return Data.OpenData(QRY)
@@ -64,7 +65,8 @@ Public Class clReportPac
 
     Public Function selectContentsFiltro(ByVal pac_id As String, ByVal code As String, ByVal level_id As String) As DataTable
 
-        QRY = "select c.code, c.name, c.sublevel, l.name name_level from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
+        QRY = "select c.code, c.name, c.sublevel, l.name name_level, progress_one_year, progress_two_year,
+               progress_three_year, progress_four_year from SCRCONTND c join SCRNIVLS l on c.pac_id = l.pac_id and c.level_id = l.hierarchy where
                c.pac_id = " & pac_id & " and c.code like '" & code & "%' and c.level_id = " & level_id & " order by c.code"
 
         Return Data.OpenData(QRY)

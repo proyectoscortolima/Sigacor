@@ -1783,7 +1783,7 @@
         phDinamicControlsMeta.Controls.Clear()
         If QuantityDinamicControlsMeta.Rows.Count > 0 Then
             For Each row As DataRow In QuantityDinamicControlsMeta.Rows
-                Dim nuevoCmb As DropDownList = New DropDownList()
+                Dim nuevoCmbd As DropDownList = New DropDownList()
                 Dim nuevoPanel As Panel = New Panel()
                 DataT = Nothing
 
